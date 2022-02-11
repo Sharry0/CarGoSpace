@@ -2,12 +2,15 @@
 import './App.css';
 import "./Home"
 import Home from './Home';
+import Navbar from "./Navbar"
 
 
 function App() {
-  return (
-    Home
-  )
+  return <div>
+    <Navbar/>
+    <Home/>
+  </div>
+  
 }
 
 export default App;

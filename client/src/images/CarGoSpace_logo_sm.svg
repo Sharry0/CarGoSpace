@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 121 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+<svg width="100%" height="100%" viewBox="0 0 121 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" xmlSpace="preserve" xmlnsSerif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g transform="matrix(1,0,0,1,-14.5417,-4.71284)">
-        <g id="car-strokes" serif:id="car strokes" transform="matrix(0.798865,0.0505899,-0.0505899,0.798865,-600.938,-598.459)">
+        <g id="car-strokes" serifId="car strokes" transform="matrix(0.798865,0.0505899,-0.0505899,0.798865,-600.938,-598.459)">
             <g transform="matrix(1,0,0,1,-0.348047,0.479924)">
                 <path d="M846.395,755.373C848.807,756.263 852.022,756.753 855.077,756.952C857.023,757.079 858.878,757.079 860.389,757.039C862.515,756.982 863.941,756.822 863.941,756.822C864.386,756.764 864.768,756.477 864.947,756.065C864.947,756.065 865.485,754.924 865.986,753.765C866.488,752.607 866.952,751.433 866.952,751.433C867.125,751.035 867.083,750.577 866.84,750.218C866.597,749.859 866.188,749.649 865.755,749.662C865.755,749.662 862.813,749.856 859.141,750.079C857.024,750.208 854.686,750.362 852.511,750.441C850.258,750.523 848.217,750.549 846.817,750.409C848.566,750.875 851.397,751.282 854.377,751.572C856.762,751.804 859.211,751.966 861.241,752.062C862.225,752.108 863.107,752.138 863.828,752.157C863.746,752.34 863.662,752.528 863.579,752.716C863.308,753.333 863.048,753.955 862.864,754.4C861.988,754.531 860.405,754.757 858.495,754.987C856.92,755.176 855.141,755.383 853.331,755.505C850.868,755.67 848.407,755.718 846.395,755.373Z"/>
             </g>
