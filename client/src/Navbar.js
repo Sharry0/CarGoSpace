@@ -3,7 +3,7 @@ import smLogo from "./images/CarGoSpace_logo_sm.svg"
 
 export default function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid ">
                 <a className="navbar-brand" href="#">
                     <img style={{height: "40px" }} src={smLogo} alt="small Logo" />
