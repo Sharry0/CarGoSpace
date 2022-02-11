@@ -7,10 +7,10 @@ import Navbar from "./Navbar"
 
 function App() {
   return <div>
-    <Navbar/>
-    <Home/>
+    <Navbar />
+    <Home />
   </div>
-  
+
 }
 
 export default App;
