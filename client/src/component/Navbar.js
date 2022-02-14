@@ -15,7 +15,7 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse d-flex flex-row-reverse " id="navbarNavAltMarkup">
                     <div className="navbar-nav ">
                         <a className="nav-link navButton" href="#" style={{color: "rgb(33, 46, 68)"}}>Login</a>
-                        <a className="nav-link navButton" href="#" style={{color: "rgb(215, 86, 0)"}}>Sign up</a>
+                        <a className="nav-link navButton" href="/register" style={{color: "rgb(215, 86, 0)"}}>Sign up</a>
                     </div>
                 </div>
             </div>

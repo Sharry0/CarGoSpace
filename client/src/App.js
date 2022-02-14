@@ -1,12 +1,20 @@
 
 import './App.css';
-import Home from './pages/Home';
 import Navbar from "./component/Navbar"
+import Home from './pages/Home';
+import Register from "./pages/Register"
+import {  Routes, Route } from "react-router-dom";
 
 function App() {
   return <div>
-    <Navbar />
-    <Home />
+    
+      <Navbar />
+      <Routes>
+        <Route path="/register" element={<Register /> }/>
+        <Route path="/" element={<Home /> }/>
+        
+      </Routes>
+
   </div>
 
 }
