@@ -1,11 +1,12 @@
 import React from 'react'
-import smLogo from "./images/CarGoSpace_logo_sm.svg"
+import "../style/Navbar.css"
+import smLogo from "../images/CarGoSpace_logo_sm.svg"
 
 export default function Navbar() {
     return (
         <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid ">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                     <img style={{height: "40px" }} src={smLogo} alt="small Logo" />
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,8 +14,8 @@ export default function Navbar() {
                 </button>
                 <div className="collapse navbar-collapse d-flex flex-row-reverse " id="navbarNavAltMarkup">
                     <div className="navbar-nav ">
-                        <a className="nav-link" href="#">Login</a>
-                        <a className="nav-link" href="#">Sign up</a>
+                        <a className="nav-link navButton" href="#" style={{color: "rgb(33, 46, 68)"}}>Login</a>
+                        <a className="nav-link navButton" href="#" style={{color: "rgb(215, 86, 0)"}}>Sign up</a>
                     </div>
                 </div>
             </div>
