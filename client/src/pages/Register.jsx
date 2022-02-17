@@ -20,7 +20,7 @@ export default function Register() {
     //_______________Month Selection______________________________________
     const monthSelection = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-    //_______________useStates______________________________________
+    //_______________useStates & custom hooks______________________________________
     const [register, toggleRegister] = useToggleState(true);
     const [month, handleMonth] = useInputState(`${monthSelection[0]}`);
     const [day, handleDay] = useInputState(`${daySelection[0]}`);
