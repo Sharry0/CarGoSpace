@@ -1,0 +1,4 @@
+
+.check:focus{
+    box-shadow: 0 0 0 0.2rem rgb(215 86 0 / 25%);
+}
