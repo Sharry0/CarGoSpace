@@ -48,7 +48,7 @@ export default function RegisterForm() {
                     <div className="col mb-3">
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control form-control-sm"
                             placeholder="First name"
                             aria-label="First name"
                             value={firstName}
@@ -59,7 +59,7 @@ export default function RegisterForm() {
                     <div className="col mb-3">
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control form-control-sm"
                             placeholder="Last name"
                             aria-label="Last name"
                             value={lastName}
@@ -72,7 +72,7 @@ export default function RegisterForm() {
                     <div className="col">
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control form-control-sm"
                             placeholder="E-Mail address"
                             aria-label="E-Mail address"
                             value={email}
@@ -85,7 +85,7 @@ export default function RegisterForm() {
                     <div className="col">
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control form-control-sm"
                             placeholder="Password"
                             aria-label="Password"
                             value={pw}
@@ -99,7 +99,7 @@ export default function RegisterForm() {
                     {/* _______________Month selection______________________________________ */}
                     <div className="col-4">
                         <select
-                            className="form-select text-muted"
+                            className="form-select text-muted form-select-sm"
                             value={month}
                             onChange={handleMonth}
                             aria-label="Default select example"
@@ -112,7 +112,7 @@ export default function RegisterForm() {
                     {/* _______________Day selection______________________________________ */}
                     <div className="col-4">
                         <select
-                            className="form-select text-muted"
+                            className="form-select text-muted form-select-sm"
                             value={day}
                             onChange={handleDay}
                             aria-label="Default select example"
@@ -125,7 +125,7 @@ export default function RegisterForm() {
                     {/* _______________Year selection______________________________________ */}
                     <div className="col-4">
                         <select
-                            className="form-select text-muted"
+                            className="form-select text-muted form-select-sm"
                             value={year} onChange={handleYear}
                             aria-label="Default select example"
                         >
@@ -139,7 +139,7 @@ export default function RegisterForm() {
                 <p className='m-0  ms-2 text-start text-black-50 fw-bold smallText'>Gender</p>
                 <div className="col-4 pe-3 mb-3">
                     <select
-                        className="form-select text-muted"
+                        className="form-select text-muted form-select-sm"
                         value={gender}
                         onChange={handleGender}
                         aria-label="Default select example"

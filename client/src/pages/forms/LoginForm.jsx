@@ -31,7 +31,7 @@ export default function LoginForm() {
                     <div>
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control form-control-sm"
                             placeholder="E-Mail address"
                             aria-label="E-Mail address"
                             value={email}
@@ -44,7 +44,7 @@ export default function LoginForm() {
                     <div className='mb-1'>
                         <input
                             type="text"
-                            className="form-control"
+                            className="form-control form-control-sm"
                             placeholder="Password"
                             aria-label="Password"
                             value={pw}
