@@ -52,6 +52,7 @@ export default function Register() {
                     </li>
                 </ul>
             </div>
+            {/* _______________show Register or Login Form______________________________________ */}
             <div className="card-body">
                 {register ?
                     <RegisterForm />
