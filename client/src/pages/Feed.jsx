@@ -92,6 +92,7 @@ export default function Feed() {
                         {/* _______________Profil picture icon______________________________________ */}
                         <img src={emptyProfilImg} alt="" style={profileIconStyling} className="me-4" />
                         {/* _______________Create post input link______________________________________ */}
+                        {/* ____________add a link to creat page to this input */}
                         <input
                             className="form-control bg-secondary bg-opacity-25"
                             type="text"
@@ -107,7 +108,7 @@ export default function Feed() {
                                 <img src={emptyProfilImg} alt="" style={profileIconStyling} className="me-2" />
                                 <h6 className="card-subtitle text-muted">Some_Profilname</h6>
                             </div>
-                            <h5 className="card-title fw-bold">Post title</h5>
+                            <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">Post title</h5>
                             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                         <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row ">
