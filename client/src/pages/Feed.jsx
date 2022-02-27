@@ -1,6 +1,5 @@
 
 import React from 'react';
-import settingsIcon from "../images/icons/settings_icon.svg";
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
@@ -22,7 +21,7 @@ export default function Feed() {
             profilName: "Bobby Ranger",
             profilImg: "",
             postId: "2",
-            postTitle: "Great car",
+            postTitle: "best car",
             postText: " love this car.",
             commentsCount: 25,
             likesCount: 10
@@ -31,7 +30,7 @@ export default function Feed() {
             profilName: "Tedd_23",
             profilImg: "",
             postId: "3",
-            postTitle: "Great car",
+            postTitle: "Awesome",
             postText: " its very fast",
             commentsCount: 5,
             likesCount: 40
@@ -55,6 +54,7 @@ export default function Feed() {
 
             <main className='d-flex justify-content-center'>
                 {/* _______________Sidebar content______________________________________ */}
+                {/* _______________make sticky top______________________________________ */}
                 <div className="card col-2 shadow" style={{ fontSize: "0.8rem", height: "200px" }}>
                     <div
                         className="card-body d-flex flex-column justify-content-between"
@@ -111,33 +111,33 @@ export default function Feed() {
 
                     {posts.map(post => (
                         <div className="card col-12 shadow my-4" key={post.postId}>
-                        <div className="card-body">
-                            {/* _______________Post profile pic & name______________________________________ */}
-                            <div className='d-flex flex-row align-items-center '>
-                                <img src={post.profilImg ? post.profilImg : emptyProfilImg} alt="" style={profileIconStyling} className="me-2" />
-                                <h6 className="card-subtitle text-secondary text-opacity-75">{post.profilName}</h6>
+                            <div className="card-body">
+                                {/* _______________Post profile pic & name______________________________________ */}
+                                <div className='d-flex flex-row align-items-center '>
+                                    <img src={post.profilImg ? post.profilImg : emptyProfilImg} alt="" style={profileIconStyling} className="me-2" />
+                                    <h6 className="card-subtitle text-secondary text-opacity-75">{post.profilName}</h6>
+                                </div>
+                                {/* _______________Post title______________________________________ */}
+                                <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">{post.postTitle}</h5>
+                                {/* _______________Post text______________________________________ */}
+                                <p className="card-text text-dark text-opacity-75 ">{post.postText}</p>
                             </div>
-                            {/* _______________Post title______________________________________ */}
-                            <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">{post.postTitle}</h5>
-                            {/* _______________Post text______________________________________ */}
-                            <p className="card-text text-dark text-opacity-75 ">{post.postText}</p>
+                            {/* _______________Post footer______________________________________ */}
+                            <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem" }}>
+                                <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                    <img src={commentIcon} alt="" style={postFooterStyling} />
+                                    <p className='my-0 ms-1'>{`${post.commentsCount} Comments`}</p>
+                                </a>
+                                <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                    <img src={likeIcon} alt="" style={postFooterStyling} />
+                                    <p className='my-0 ms-1'>{`${post.likesCount} Likes`}</p>
+                                </a>
+                                <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                    <img src={editIcon} alt="" style={postFooterStyling} />
+                                    <p className='my-0 ms-1'>Edit</p>
+                                </a>
+                            </div>
                         </div>
-                        {/* _______________Post footer______________________________________ */}
-                        <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem" }}>
-                            <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                <img src={commentIcon} alt="" style={postFooterStyling} />
-                                <p className='my-0 ms-1'>{`${post.commentsCount} Comments`}</p>
-                            </a>
-                            <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                <img src={likeIcon} alt="" style={postFooterStyling} />
-                                <p className='my-0 ms-1'>{`${post.likesCount} Likes`}</p>
-                            </a>
-                            <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                <img src={editIcon} alt="" style={postFooterStyling} />
-                                <p className='my-0 ms-1'>Edit</p>
-                            </a>
-                        </div>
-                    </div>
                     ))}
 
 
