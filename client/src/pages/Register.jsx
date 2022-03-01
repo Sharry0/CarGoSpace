@@ -8,7 +8,7 @@ import "../style/Register.css"
 export default function Register() {
 
     //_______________useStates & custom hooks______________________________________
-    const [register, toggleRegister] = useToggleState(false);
+    const [register, toggleRegister] = useToggleState(true);
 
     //_______________Styling object______________________________________
     const tabStyling = {

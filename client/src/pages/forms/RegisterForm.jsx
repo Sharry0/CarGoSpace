@@ -2,6 +2,7 @@
 import React from 'react';
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
+import axios from "axios"
 
 export default function RegisterForm() {
 
@@ -29,8 +30,7 @@ export default function RegisterForm() {
     const [day, handleDay] = useInputState(`${daySelection[0]}`);
     const [year, handleYear] = useInputState(`${endYear}`)
     const [gender, handleGender] = useInputState(`${genderSelection[0]}`)
-    const [firstName, handleFirstName] = useInputState("");
-    const [lastName, handleLastname] = useInputState("");
+    const [username, handleUsername] = useInputState("");
     const [email, handleEmail] = useInputState("");
     const [pw, handlePw] = useInputState("");
 
@@ -39,34 +39,45 @@ export default function RegisterForm() {
         borderColor: "rgb(215, 86, 0)"
     };
 
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        console.log({ username, email, pw, month, day, year, gender });
+        axios.post("http://localhost:8080/newUser", {
+            username,
+            email,
+            hashedPassword: pw,
+            birthday: {
+                month,
+                day,
+                year,
+            },
+            gender
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     return (
         <>
             {/* _______________Register Form______________________________________ */}
-            <form>
-                <div className="row">
-                    {/* _______________First name input______________________________________ */}
-                    <div className="col mb-3">
-                        <input
-                            type="text"
-                            className="form-control form-control-sm"
-                            placeholder="First name"
-                            aria-label="First name"
-                            value={firstName}
-                            onChange={handleFirstName}
-                        />
-                    </div>
-                    {/* _______________Last name input______________________________________ */}
-                    <div className="col mb-3">
-                        <input
-                            type="text"
-                            className="form-control form-control-sm"
-                            placeholder="Last name"
-                            aria-label="Last name"
-                            value={lastName}
-                            onChange={handleLastname}
-                        />
-                    </div>
+            <form onSubmit={handleSubmit} method="POST">
+
+                {/* _______________Username input______________________________________ */}
+                <div className="col mb-3">
+                    <input
+                        type="text"
+                        className="form-control form-control-sm"
+                        placeholder="Username"
+                        aria-label="Username"
+                        value={username}
+                        onChange={handleUsername}
+                    />
                 </div>
+
                 {/* _______________E-Mail address input______________________________________ */}
                 <div className="row mb-3">
                     <div className="col">
