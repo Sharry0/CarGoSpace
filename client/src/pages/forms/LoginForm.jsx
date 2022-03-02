@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
 import "../../style/LoginForm.css"
+import axios from 'axios';
 
 export default function LoginForm() {
 
@@ -12,20 +13,47 @@ export default function LoginForm() {
     const [pw, handlePw] = useInputState("");
     const [rememberMe, toggleRememberMe] = useToggleState(false);
 
+    //_______________checkbox styling______________________________________
     const styling = {
         backgroundColor: "rgb(215, 86, 0)",
         borderColor: "rgb(215, 86, 0)"
     };
-
     const removeCheckStyling = {
         backgroundColor: "white",
         borderColor: "lightgray"
-    }
+    };
+
+    //_______________handle form submit______________________________________
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        // axios({
+        //     method: "post",
+        //     url: "http://localhost:8080/login",
+        //     // baseURL: "http://localhost:3000",
+        //     data: { email, pw, rememberMe },
+        //     // withCredentials: true
+        // })
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+        // console.log({email, pw, rememberMe});
+        axios.post("http://localhost:8080/login", { email, pw, rememberMe })
+            .then(function (response) {
+                console.log(response.data, "success");
+            })
+            .catch(function (error) {
+                console.log(error, "no success");
+            });
+    };
+
 
     return (
         <>
             {/* _______________Login Form______________________________________ */}
-            <form>
+            <form onSubmit={handleSubmit} method="GET">
                 {/* _______________E-Mail address input______________________________________ */}
                 <div className="row mb-3">
                     <div>

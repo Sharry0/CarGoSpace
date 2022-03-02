@@ -34,15 +34,16 @@ export default function RegisterForm() {
     const [email, handleEmail] = useInputState("");
     const [pw, handlePw] = useInputState("");
 
+    //_______________styling______________________________________
     const styling = {
         backgroundColor: "rgb(215, 86, 0)",
         borderColor: "rgb(215, 86, 0)"
     };
-
+    //_______________handle form submit______________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
         console.log({ username, email, pw, month, day, year, gender });
-        axios.post("http://localhost:8080/newUser", {
+        axios.post("http://localhost:8080/register", {
             username,
             email,
             hashedPassword: pw,
