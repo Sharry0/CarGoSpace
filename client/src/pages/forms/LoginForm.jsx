@@ -26,26 +26,14 @@ export default function LoginForm() {
     //_______________handle form submit______________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        // axios({
-        //     method: "post",
-        //     url: "http://localhost:8080/login",
-        //     // baseURL: "http://localhost:3000",
-        //     data: { email, pw, rememberMe },
-        //     // withCredentials: true
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-        // console.log({email, pw, rememberMe});
         axios.post("http://localhost:8080/login", { email, pw, rememberMe })
             .then(function (response) {
                 console.log(response.data, "success");
+                window.location.href = "http://localhost:3000/feed"
             })
             .catch(function (error) {
-                console.log(error, "no success");
+                console.log(error.response, "no success");
+                console.log(error.response.data);
             });
     };
 

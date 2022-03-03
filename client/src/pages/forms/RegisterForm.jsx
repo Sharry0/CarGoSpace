@@ -46,7 +46,7 @@ export default function RegisterForm() {
         axios.post("http://localhost:8080/register", {
             username,
             email,
-            hashedPassword: pw,
+            pw,
             birthday: {
                 month,
                 day,
@@ -55,7 +55,7 @@ export default function RegisterForm() {
             gender
         })
             .then(function (response) {
-                console.log(response);
+                console.log("______");
             })
             .catch(function (error) {
                 console.log(error);
