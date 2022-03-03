@@ -39,33 +39,40 @@ export default function RegisterForm() {
         backgroundColor: "rgb(215, 86, 0)",
         borderColor: "rgb(215, 86, 0)"
     };
+
+    const invalidPw = {
+        color: "rgb(215, 86, 0)"
+    }
+    const validPw = {
+        color: "rgb(86, 215, 0)"
+    }
     //_______________handle form submit______________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
         console.log({ username, email, pw, month, day, year, gender });
-        axios.post("http://localhost:8080/register", {
-            username,
-            email,
-            pw,
-            birthday: {
-                month,
-                day,
-                year,
-            },
-            gender
-        })
-            .then(function (response) {
-                console.log("______");
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // axios.post("http://localhost:8080/register", {
+        //     username,
+        //     email,
+        //     pw,
+        //     birthday: {
+        //         month,
+        //         day,
+        //         year,
+        //     },
+        //     gender
+        // })
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     }
 
     return (
         <>
             {/* _______________Register Form______________________________________ */}
-            <form onSubmit={handleSubmit} method="POST">
+            <form onSubmit={handleSubmit} >
 
                 {/* _______________Username input______________________________________ */}
                 <div className="col mb-3">
@@ -93,17 +100,32 @@ export default function RegisterForm() {
                     </div>
                 </div>
                 {/* _______________Password input______________________________________ */}
-                <div className="row mb-3">
+                <div className="row mb">
                     <div className="col">
                         <input
                             type="text"
-                            className="form-control form-control-sm"
+                            className="form-control form-control-sm "
                             placeholder="Password"
                             aria-label="Password"
                             value={pw}
                             onChange={handlePw}
                         />
+                        <div className='invalid-feedback'>
+                            uppercase
+                        </div>
                     </div>
+                </div>
+                {/* _______________Password conditions______________________________________ */}
+                <div className="ms-2 mb-3 d-flex justify-content-start">
+                    <div className="">
+                        <span className="text-start  fw-bold smallText" styling={{color: "green"}} >
+                            Uppercase
+                        </span>
+                    </div>
+                    <div className="">
+
+                    </div>
+
                 </div>
                 {/* _______________Birthday input______________________________________ */}
                 <div className="row mb-3">
