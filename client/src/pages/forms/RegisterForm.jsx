@@ -1,12 +1,12 @@
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
-import axios from "axios"
+import axios from "axios";
 
 export default function RegisterForm() {
 
-    //_______________Year Selection generator______________________________________
+    //_______________Year Selection generator__________________________________________________________________________
     const endYear = (new Date()).getFullYear();
     const startYear = endYear - 120;
     const yearSelection = [];
@@ -14,39 +14,107 @@ export default function RegisterForm() {
         yearSelection.push(i)
     };
 
-    //_______________Day Selection generator______________________________________
+    //_______________Day Selection generator__________________________________________________________________________
     const daySelection = []
     for (let i = 1; i <= 31; i++) {
         daySelection.push(i);
-    }
-    //_______________Month Selection______________________________________
+    };
+    //_______________Month Selection__________________________________________________________________________
     const monthSelection = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    //_______________Gender Selection______________________________________
+    //_______________Gender Selection__________________________________________________________________________
     const genderSelection = ["Female", "Male", "Other"];
 
-    //_______________useStates & custom hooks______________________________________
+    //_______________useStates & custom hooks__________________________________________________________________________
     const [month, handleMonth] = useInputState(`${monthSelection[0]}`);
     const [day, handleDay] = useInputState(`${daySelection[0]}`);
-    const [year, handleYear] = useInputState(`${endYear}`)
-    const [gender, handleGender] = useInputState(`${genderSelection[0]}`)
+    const [year, handleYear] = useInputState(`${endYear}`);
+    const [gender, handleGender] = useInputState(`${genderSelection[0]}`);
     const [username, handleUsername] = useInputState("");
     const [email, handleEmail] = useInputState("");
     const [pw, handlePw] = useInputState("");
+    //_______________password condition states__________________________________________________________________________
+    const [showPwConditions, setShowPwConditions] = useState(false);
+    const [hasUppercase, setHasUppercase] = useState(false);
+    const [hasLowercase, setHasLowercase] = useState(false);
+    const [hasEnoughCharacters, setHasEnoughCharcters] = useState(false);
+    const [hasNumber, setHasNumber] = useState(false);
+    const [hasSymbol, setHasSymbol] = useState(false);
 
-    //_______________styling______________________________________
+    //_______________check for password conditions & handle password input_______________________________________________
+    const handlePasswordInput = (evt) => {
+        handlePw(evt);
+        uppercaseCheck(evt);
+        lowercaseCheck(evt);
+        enoughtCharactersCheck(evt);
+        numberCheck(evt)
+        symbolCheck(evt)
+    };
+    //_______________check for uppercase_______________________________________________
+    const uppercaseCheck = (evt) => {
+        const check = /[A-Z]/.test(evt.target.value);
+        toggleCondition(check, setHasUppercase);
+    };
+    //_______________check for lowercase_______________________________________________
+    const lowercaseCheck = (evt) => {
+        const check = /[a-z]/.test(evt.target.value);
+        toggleCondition(check, setHasLowercase);
+    };
+    //_______________check for enough characters_______________________________________________
+    const enoughtCharactersCheck = (evt) => {
+        if (evt.target.value.length >= 8) {
+            toggleCondition(true, setHasEnoughCharcters);
+        } else {
+            toggleCondition(false, setHasEnoughCharcters);
+        };
+    }
+    //_______________check for number_______________________________________________
+    const numberCheck = (evt) => {
+        const check = /[0-9]/.test(evt.target.value);
+        toggleCondition(check, setHasNumber);
+    }
+    //_______________check for symbol_______________________________________________
+    const symbolCheck = (evt) => {
+        const check = /[\!\?\$\+\_\-]/.test(evt.target.value);
+        toggleCondition(check, setHasSymbol);
+    }
+
+    //_______________toggle conditions function_______________________________________________
+    const toggleCondition = (condition, checkFunction) => {
+        if (condition) {
+            checkFunction(true)
+        };
+        if (!condition) {
+            checkFunction(false)
+        };
+    }
+
+    //_______________toggle show Password conditions when focus on password input______________________________________
+    const pwConditionsRef = useRef(null);
+    const toggleShowPwConditions = (e) => {
+        if (e.target.ariaLabel === pwConditionsRef.current.ariaLabel) {
+            setShowPwConditions(true)
+        }
+        if (e.target.ariaLabel !== pwConditionsRef.current.ariaLabel) {
+            setShowPwConditions(false)
+        }
+    }
+
+    //_______________styling_____________________________________________________________________________________________
     const styling = {
         backgroundColor: "rgb(215, 86, 0)",
         borderColor: "rgb(215, 86, 0)"
     };
-
     const invalidPw = {
-        color: "rgb(215, 86, 0)"
+        color: "rgb(215, 86, 0)",
+        fontSize: "0.75rem"
     }
     const validPw = {
-        color: "rgb(86, 215, 0)"
+        color: "rgb(86, 215, 0)",
+        fontSize: "0.75rem"
     }
-    //_______________handle form submit______________________________________
+
+    //_______________handle form submit__________________________________________________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
         console.log({ username, email, pw, month, day, year, gender });
@@ -71,10 +139,13 @@ export default function RegisterForm() {
 
     return (
         <>
-            {/* _______________Register Form______________________________________ */}
-            <form onSubmit={handleSubmit} >
+            {/* _______________Register Form__________________________________________________________________________ */}
+            <form
+                onSubmit={handleSubmit}
+                onFocus={toggleShowPwConditions}
+            >
 
-                {/* _______________Username input______________________________________ */}
+                {/* _______________Username input__________________________________________________________________________ */}
                 <div className="col mb-3">
                     <input
                         type="text"
@@ -86,7 +157,7 @@ export default function RegisterForm() {
                     />
                 </div>
 
-                {/* _______________E-Mail address input______________________________________ */}
+                {/* _______________E-Mail address input__________________________________________________________________________ */}
                 <div className="row mb-3">
                     <div className="col">
                         <input
@@ -99,8 +170,8 @@ export default function RegisterForm() {
                         />
                     </div>
                 </div>
-                {/* _______________Password input______________________________________ */}
-                <div className="row mb">
+                {/* _______________Password input__________________________________________________________________________ */}
+                <div className="row mb-1">
                     <div className="col">
                         <input
                             type="text"
@@ -108,29 +179,40 @@ export default function RegisterForm() {
                             placeholder="Password"
                             aria-label="Password"
                             value={pw}
-                            onChange={handlePw}
+                            onChange={handlePasswordInput}
+                            ref={pwConditionsRef}
                         />
                         <div className='invalid-feedback'>
                             uppercase
                         </div>
                     </div>
                 </div>
-                {/* _______________Password conditions______________________________________ */}
-                <div className="ms-2 mb-3 d-flex justify-content-start">
-                    <div className="">
-                        <span className="text-start  fw-bold smallText" styling={{color: "green"}} >
-                            Uppercase
+                {/* _______________show Password conditions__________________________________________________________________________ */}
+                {showPwConditions && <div className="ms-2 mb-3 d-flex justify-content-start">
+                    <div className="row col-5">
+                        <span className="mb-1 text-start fw-bold" style={hasUppercase ? validPw : invalidPw} >
+                            atleast 1 uppercase letter
+                        </span>
+                        <span className="mb-1 text-start fw-bold" style={hasLowercase ? validPw : invalidPw} >
+                            atleast 1 lowercase letter
+                        </span>
+                        <span className="text-start fw-bold" style={hasEnoughCharacters ? validPw : invalidPw} >
+                            atleast 8 characters
                         </span>
                     </div>
-                    <div className="">
-
+                    <div className="d-flex flex-column">
+                        <span className="mb-1 text-start fw-bold" style={hasNumber ? validPw : invalidPw} >
+                            atleast 1 number
+                        </span><span className="text-start fw-bold " style={hasSymbol ? validPw : invalidPw} >
+                            atleast 1 symbol (! ? $ + _ -)
+                        </span>
                     </div>
 
-                </div>
-                {/* _______________Birthday input______________________________________ */}
+                </div>}
+                {/* _______________Birthday input__________________________________________________________________________ */}
                 <div className="row mb-3">
                     <p className='m-0 ms-2 text-start text-black-50 fw-bold smallText' >Birthday</p>
-                    {/* _______________Month selection______________________________________ */}
+                    {/* _______________Month selection__________________________________________________________________________ */}
                     <div className="col-4">
                         <select
                             className="form-select text-muted form-select-sm"
@@ -143,7 +225,7 @@ export default function RegisterForm() {
                             )}
                         </select>
                     </div>
-                    {/* _______________Day selection______________________________________ */}
+                    {/* _______________Day selection__________________________________________________________________________ */}
                     <div className="col-4">
                         <select
                             className="form-select text-muted form-select-sm"
@@ -156,7 +238,7 @@ export default function RegisterForm() {
                             )}
                         </select>
                     </div>
-                    {/* _______________Year selection______________________________________ */}
+                    {/* _______________Year selection__________________________________________________________________________ */}
                     <div className="col-4">
                         <select
                             className="form-select text-muted form-select-sm"
@@ -169,7 +251,7 @@ export default function RegisterForm() {
                         </select>
                     </div>
                 </div>
-                {/* _______________Gender selection______________________________________ */}
+                {/* _______________Gender selection__________________________________________________________________________ */}
                 <p className='m-0  ms-2 text-start text-black-50 fw-bold smallText'>Gender</p>
                 <div className="col-4 pe-3 mb-3">
                     <select
@@ -183,7 +265,7 @@ export default function RegisterForm() {
                         )}
                     </select>
                 </div>
-                {/* _______________Form Button______________________________________ */}
+                {/* _______________Form Button__________________________________________________________________________ */}
                 <button
                     type="submit"
                     className="btn btn-danger d-flex justify-content-start fw-bold"
