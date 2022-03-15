@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
+import { toast } from 'react-toastify';
 import axios from "axios";
 
 export default function RegisterForm() {
@@ -117,24 +118,53 @@ export default function RegisterForm() {
     //_______________handle form submit__________________________________________________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        console.log({ username, email, pw, month, day, year, gender });
-        // axios.post("http://localhost:8080/register", {
-        //     username,
-        //     email,
-        //     pw,
-        //     birthday: {
-        //         month,
-        //         day,
-        //         year,
-        //     },
-        //     gender
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+        axios.post("http://localhost:8080/register", {
+            username,
+            email,
+            pw,
+            birthday: {
+                month,
+                day,
+                year,
+            },
+            gender
+        })
+            .then(function (response) {
+                toast.success(response.data, {
+                    position: "top-center",
+                    autoClose: 7500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            })
+            .catch(function (error) {
+                toast.error(error.response.data, {
+                    position: "top-center",
+                    autoClose: 7500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            });
+        // if (hasUppercase && hasLowercase && hasSymbol && hasNumber && hasEnoughCharacters) {
+        //     console.log({ username, email, pw, month, day, year, gender });
+        // } else {
+        //     toast.error("someting went wong", {
+        //         position: "top-center",
+        //         autoClose: 7500,
+        //         hideProgressBar: false,
+        //         closeOnClick: true,
+        //         pauseOnHover: true,
+        //         draggable: true,
+        //         progress: undefined,
+        //         });
+        // }
+
     }
 
     return (

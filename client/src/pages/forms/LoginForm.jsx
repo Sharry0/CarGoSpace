@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
-import "../../style/LoginForm.css"
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 export default function LoginForm() {
@@ -29,11 +29,29 @@ export default function LoginForm() {
         axios.post("http://localhost:8080/login", { email, pw, rememberMe })
             .then(function (response) {
                 console.log(response.data, "success");
-                window.location.href = "http://localhost:3000/feed"
+                toast.success(' Wow so easy! 🚘', {
+                    position: "top-center",
+                    autoClose: 7500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                // window.location.href = "http://localhost:3000/feed"
             })
             .catch(function (error) {
-                console.log(error.response, "no success");
-                console.log(error.response.data);
+                toast.error(error.response.data, {
+                    position: "top-center",
+                    autoClose: 7500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                // console.log(error.response, "no success");
+                // console.log(error.response.data);
             });
     };
 
@@ -95,7 +113,7 @@ export default function LoginForm() {
                     Login
                 </button>
             </form>
-
+            
         </>
     )
 }

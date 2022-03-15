@@ -38,24 +38,42 @@ app.get("/", (req, res) => {
 //__________________________Create new User____________________________________
 //__________________________Take pw from frontend, hash it (bcrypt), and put it back into object____________________________________
 app.post("/register", async (req, res) => {
-    const {username, email, pw, birthday, gender} = req.body;
+    const { username, email, pw, birthday, gender } = req.body;
+    //___ if form is filled out, then check if pw conditions are met. ____
+    if (username && email && pw && birthday && gender) {
+        //___ if pw meets conditions, save new user ___
+        if (/[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length >= 8 && /[\!\?\$\+\_\-]/.test(pw)) {
+            const hashedPassword = await bcrypt.hash(pw, 13);
+            const newUser = new User({ username, email, hashedPassword, birthday, gender });
+            await newUser.save();
+            res.send("Success 🏆")
+        } else {
+            res.status(400).send("🚧 Password invalid 🚧")
+        }
+    } else {
+        res.status(400).send("Please fill out the form")
+    }
+    // console.log(/[A-Z]/.test(pw))
     // console.log(req.body, "This req.body");
-    const hashedPassword = await bcrypt.hash(pw, 13);
-    const newUser = new User({username, email, hashedPassword, birthday, gender});
-    await newUser.save();
 });
 
 //__________________________Create new User____________________________________
 app.post("/login", async (req, res) => {
     const { email, pw, rememberMe } = req.body;
-    const foundUser = await User.findOne({ email });
-    const checkPw = await bcrypt.compare(pw, foundUser.hashedPassword)
-    if (foundUser && checkPw) {
-        console.log("found user success")
-        res.send("ypu made it")
+    //___ if form is filled out, go check if user exist ___
+    if (email && pw) {
+        const foundUser = await User.findOne({ email });
+        const checkPw = foundUser && bcrypt.compare(pw, foundUser.hashedPassword)
+        if (foundUser && checkPw) {
+            console.log("found user success")
+            res.send("ypu made it")
+        } else {
+            res.status(418).send("wrong car, please check if you have the right key 🔑")
+        }
     } else {
-        res.status(418).send("sorry we couldn't find your teapot")
+        res.status(400).send("Please fill out the form 🤖")
     }
+
     // console.log(foundUser, "found user")
     // console.log(req.body, "_______");
 })
