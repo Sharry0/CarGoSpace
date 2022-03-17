@@ -63,7 +63,8 @@ app.post("/login", async (req, res) => {
     //___ if form is filled out, go check if user exist ___
     if (email && pw) {
         const foundUser = await User.findOne({ email });
-        const checkPw = foundUser && bcrypt.compare(pw, foundUser.hashedPassword)
+        const checkPw = foundUser && await bcrypt.compare(pw, foundUser.hashedPassword)
+        console.log(checkPw, "hehehe")
         if (foundUser && checkPw) {
             console.log("found user success")
             res.send("ypu made it")
