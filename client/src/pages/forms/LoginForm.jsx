@@ -26,7 +26,7 @@ export default function LoginForm() {
     //_______________handle form submit______________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        axios.post("http://localhost:8080/login", { email, pw, rememberMe })
+        axios.post("http://localhost:8080/login", { email, pw, rememberMe }, {withCredentials: true})
             .then(function (response) {
                 console.log(response.data, "success");
                 toast.success(' Wow so easy! 🚘', {
