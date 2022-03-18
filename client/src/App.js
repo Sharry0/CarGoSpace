@@ -6,6 +6,8 @@ import Register from "./pages/Register"
 import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return <div className='mt-5'>
@@ -19,6 +21,19 @@ function App() {
 
     </Routes>
 
+  {/* _______________ toastify pop up______________________________________ */}
+  <ToastContainer
+            position="top-center"
+            autoClose={7500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme='dark'
+        />
   </div>
 
 }

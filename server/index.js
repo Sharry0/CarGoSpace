@@ -64,27 +64,23 @@ app.post("/register", async (req, res) => {
 //__________________________Create new User____________________________________
 app.post("/login", async (req, res) => {
     const { email, pw, rememberMe } = req.body;
-    const token = jwt.sign({food: "bananas"}, process.env.JWT_SECRET, {expiresIn: "1h"});
-    res.cookie("token", token, ({expiresIn: "1h"}));
-    res.send(token);
-
     //___ if form is filled out, go check if user exist ___
-    // if (email && pw) {
-    //     const foundUser = await User.findOne({ email });
-    //     const checkPw = foundUser && await bcrypt.compare(pw, foundUser.hashedPassword)
-    //     // console.log(checkPw, "hehehe")
-    //     if (foundUser && checkPw) {
-    //         console.log("found user success")
-    //         res.send("ypu made it")
-    //     } else {
-    //         res.status(418).send("wrong car, please check if you have the right key 🔑")
-    //     }
-    // } else {
-    //     res.status(400).send("Please fill out the form 🤖")
-    // }
-
-    // console.log(foundUser, "found user")
-    // console.log(req.body, "_______");
+    if (email && pw) {
+        const foundUser = await User.findOne({ email });
+        const checkPw = foundUser && await bcrypt.compare(pw, foundUser.hashedPassword);
+        //___  if user and input pw matches then create token/cookie, else clear token/cookies  ___
+        if (foundUser && checkPw) {
+            let tokenExpire = rememberMe ? "7d" : "1h";
+            const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: tokenExpire});
+            res.cookie("token", token);
+            res.send("ypu made it");
+        } else {
+            res.clearCookie("token");
+            res.status(418).send("wrong car, please check if you have the right key 🔑")
+        }
+    } else {
+        res.status(400).send("Please fill out the form 🤖")
+    }
 })
 
 

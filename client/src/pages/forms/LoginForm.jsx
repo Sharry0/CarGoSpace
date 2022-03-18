@@ -1,6 +1,7 @@
 
 
 import React, { useState } from 'react'
+// import {history} from "react-router-dom"
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
 import { toast } from 'react-toastify';
@@ -23,22 +24,22 @@ export default function LoginForm() {
         borderColor: "lightgray"
     };
 
+
     //_______________handle form submit______________________________________
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
-        axios.post("http://localhost:8080/login", { email, pw, rememberMe }, {withCredentials: true})
+        axios.post("http://localhost:8080/login", { email, pw, rememberMe }, { withCredentials: true })
             .then(function (response) {
-                console.log(response.data, "success");
                 toast.success(' Wow so easy! 🚘', {
                     position: "top-center",
-                    autoClose: 7500,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
-                // window.location.href = "http://localhost:3000/feed"
+                });
+                setTimeout(()=>{ window.location.href = "http://localhost:3000/feed" }, 2500);
             })
             .catch(function (error) {
                 toast.error(error.response.data, {
@@ -49,9 +50,7 @@ export default function LoginForm() {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
-                // console.log(error.response, "no success");
-                // console.log(error.response.data);
+                });
             });
     };
 
@@ -113,7 +112,7 @@ export default function LoginForm() {
                     Login
                 </button>
             </form>
-            
+
         </>
     )
 }

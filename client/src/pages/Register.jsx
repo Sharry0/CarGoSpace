@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import useToggleState from "../hooks/useToggleState"
 import useInputState from '../hooks/useInputState';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import RegisterForm from './forms/RegisterForm';
 import LoginForm from './forms/LoginForm';
 import "../style/Register.css"
@@ -64,19 +62,7 @@ export default function Register() {
             </div>
         </div>
 
-        {/* _______________ toastify pop up______________________________________ */}
-        <ToastContainer
-            position="top-center"
-            autoClose={7500}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme='dark'
-        />
+        
 
 
 
