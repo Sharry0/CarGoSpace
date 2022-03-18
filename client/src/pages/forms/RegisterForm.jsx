@@ -128,17 +128,18 @@ export default function RegisterForm() {
                 year,
             },
             gender
-        })
+        }, { withCredentials: true })
             .then(function (response) {
                 toast.success(response.data, {
                     position: "top-center",
-                    autoClose: 7500,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
+                });
+                setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 2500);
             })
             .catch(function (error) {
                 toast.error(error.response.data, {
@@ -149,7 +150,7 @@ export default function RegisterForm() {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
+                });
             });
         // if (hasUppercase && hasLowercase && hasSymbol && hasNumber && hasEnoughCharacters) {
         //     console.log({ username, email, pw, month, day, year, gender });

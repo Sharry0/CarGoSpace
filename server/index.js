@@ -43,22 +43,33 @@ app.get("/", (req, res) => {
 //__________________________Take pw from frontend, hash it (bcrypt), and put it back into object____________________________________
 app.post("/register", async (req, res) => {
     const { username, email, pw, birthday, gender } = req.body;
+    const duplicateEmail = await User.findOne({ email });
+    if (duplicateEmail) {
+        res.clearCookie("token");
+        return res.status(400).send("E-mail already used")
+    } ;
     //___ if form is filled out, then check if pw conditions are met. ____
+    console.log(req.body)
     if (username && email && pw && birthday && gender) {
-        //___ if pw meets conditions, save new user ___
+        //___ if pw meets conditions, save new user. Else send 400 Error ___
         if (/[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length >= 8 && /[\!\?\$\+\_\-]/.test(pw)) {
+            //___ create token/cookie 🍪 ___
+            const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "1h"});
+            res.cookie("token", token);
+            //___ create & save new user ___
             const hashedPassword = await bcrypt.hash(pw, 13);
             const newUser = new User({ username, email, hashedPassword, birthday, gender });
             await newUser.save();
             res.send("Success 🏆")
         } else {
+            //___ send password invalid allert & clear cookies ___
+            res.clearCookie("token");
             res.status(400).send("🚧 Password invalid 🚧")
         }
     } else {
+        res.clearCookie("token");
         res.status(400).send("Please fill out the form")
     }
-    // console.log(/[A-Z]/.test(pw))
-    // console.log(req.body, "This req.body");
 });
 
 //__________________________Create new User____________________________________
