@@ -55,12 +55,12 @@ export default function Feed() {
         maxWidth: "35px",
         borderRadius: "50%",
         objectFit: "cover"
-    }
+    };
 
     const postFooterStyling = {
         height: "15px",
         width: "15px"
-    }
+    };
 
     return (
         <div className='container pt-5'>

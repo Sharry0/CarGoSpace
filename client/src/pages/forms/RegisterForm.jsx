@@ -2,6 +2,8 @@
 import React, { useRef, useState } from 'react';
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
+import headlightOffIcon from "../../images/icons/Headlights_off.svg";
+import headlightOnIcon from "../../images/icons/Headlights_on.svg";
 import { toast } from 'react-toastify';
 import axios from "axios";
 
@@ -34,6 +36,7 @@ export default function RegisterForm() {
     const [username, handleUsername] = useInputState("");
     const [email, handleEmail] = useInputState("");
     const [pw, handlePw] = useInputState("");
+    const [showPw, toggleShowPw] = useToggleState(false);
     //_______________password condition states__________________________________________________________________________
     const [showPwConditions, setShowPwConditions] = useState(false);
     const [hasUppercase, setHasUppercase] = useState(false);
@@ -113,7 +116,16 @@ export default function RegisterForm() {
     const validPw = {
         color: "rgb(86, 215, 0)",
         fontSize: "0.75rem"
-    }
+    };
+
+    //_______________show password styling______________________________________
+    const headlightStyle = {
+        height: "15px",
+        position: "absolute",
+        right: "5%",
+        top: "30%",
+        cursor: "pointer"
+    };
 
     //_______________handle form submit__________________________________________________________________________
     const handleSubmit = (evt) => {
@@ -203,9 +215,9 @@ export default function RegisterForm() {
                 </div>
                 {/* _______________Password input__________________________________________________________________________ */}
                 <div className="row mb-1">
-                    <div className="col">
+                    <div className="col" style={{position: "relative"}}>
                         <input
-                            type="text"
+                            type={showPw ? "text" : "password"}
                             className="form-control form-control-sm "
                             placeholder="Password"
                             aria-label="Password"
@@ -213,9 +225,7 @@ export default function RegisterForm() {
                             onChange={handlePasswordInput}
                             ref={pwConditionsRef}
                         />
-                        <div className='invalid-feedback'>
-                            uppercase
-                        </div>
+                        <img src={showPw ? headlightOnIcon : headlightOffIcon} style={headlightStyle} onClick={toggleShowPw} />
                     </div>
                 </div>
                 {/* _______________show Password conditions__________________________________________________________________________ */}

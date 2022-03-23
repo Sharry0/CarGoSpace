@@ -5,6 +5,8 @@ import React, { useState } from 'react'
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
 import { toast } from 'react-toastify';
+import headlightOffIcon from "../../images/icons/Headlights_off.svg";
+import headlightOnIcon from "../../images/icons/Headlights_on.svg";
 import axios from 'axios';
 
 export default function LoginForm() {
@@ -13,6 +15,7 @@ export default function LoginForm() {
     const [email, handleEmail] = useInputState("");
     const [pw, handlePw] = useInputState("");
     const [rememberMe, toggleRememberMe] = useToggleState(false);
+    const [showPw, toggleShowPw] = useToggleState(false)
 
     //_______________checkbox styling______________________________________
     const styling = {
@@ -24,6 +27,14 @@ export default function LoginForm() {
         borderColor: "lightgray"
     };
 
+    //_______________show password styling______________________________________
+    const headlightStyle = {
+        height: "15px",
+        position: "absolute",
+        right: "5%",
+        top: "30%",
+        cursor: "pointer"
+    }
 
     //_______________handle form submit______________________________________
     const handleSubmit = async (evt) => {
@@ -32,14 +43,14 @@ export default function LoginForm() {
             .then(function (response) {
                 toast.success(' Wow so easy! 🚘', {
                     position: "top-center",
-                    autoClose: 1000,
+                    autoClose: 1800,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
                 });
-                setTimeout(()=>{ window.location.href = "http://localhost:3000/feed" }, 2500);
+                setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 3000);
             })
             .catch(function (error) {
                 toast.error(error.response.data, {
@@ -74,15 +85,16 @@ export default function LoginForm() {
                 </div>
                 {/* _______________Password input______________________________________ */}
                 <div className="row ">
-                    <div className='mb-1'>
+                    <div className='mb-1' style={{position: "relative"}}>
                         <input
-                            type="text"
+                            type={showPw ? "text" : "password"}
                             className="form-control form-control-sm"
                             placeholder="Password"
                             aria-label="Password"
                             value={pw}
                             onChange={handlePw}
                         />
+                        <img src={showPw ? headlightOnIcon : headlightOffIcon} style={headlightStyle} onClick={toggleShowPw} />
                     </div>
                 </div>
                 {/* _______________Remember Me checkbox______________________________________ */}
