@@ -24,7 +24,8 @@ mongoose.connect(process.env.DB_URI)
 const corsOptions = {
     origin: ["http://localhost:3000", "http://localhost:8080"],
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-    credentials: true
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
 };
 //__________________________Middleware____________________________________
 // app.use(urlencoded({extended: false}));
@@ -55,7 +56,7 @@ app.post("/register", async (req, res) => {
         if (/[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length >= 8 && /[\!\?\$\+\_\-]/.test(pw)) {
             //___ create token/cookie 🍪 ___
             const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "1h"});
-            res.cookie("token", token);
+            res.cookie("jwt", token, {httpOnly: true});
             //___ create & save new user ___
             const hashedPassword = await bcrypt.hash(pw, 13);
             const newUser = new User({ username, email, hashedPassword, birthday, gender });
@@ -83,7 +84,7 @@ app.post("/login", async (req, res) => {
         if (foundUser && checkPw) {
             let tokenExpire = rememberMe ? "7d" : "1h";
             const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: tokenExpire});
-            res.cookie("token", token);
+            res.cookie("jwt", token, {httpOnly: true});
             res.send("ypu made it");
         } else {
             res.clearCookie("token");
@@ -92,7 +93,16 @@ app.post("/login", async (req, res) => {
     } else {
         res.status(400).send("Please fill out the form 🤖")
     }
-})
+});
+
+//__________________________Authentication Middleware____________________________________
+app.get("/getCookie", (req, res)=>{
+    const cookie = req.cookies.jwt;
+    const decode = jwt.verify(cookie, process.env.JWT_SECRET)
+    console.log("cookiiiiees", cookie);
+    console.log(decode.email);
+    res.send(cookie)
+});
 
 
 
