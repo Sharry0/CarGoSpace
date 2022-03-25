@@ -30,7 +30,7 @@ const corsOptions = {
 //__________________________Middleware____________________________________
 // app.use(urlencoded({extended: false}));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
 app.use(cookieParser())
@@ -48,15 +48,15 @@ app.post("/register", async (req, res) => {
     if (duplicateEmail) {
         res.clearCookie("token");
         return res.status(400).send("E-mail already used")
-    } ;
+    };
     //___ if form is filled out, then check if pw conditions are met. ____
     console.log(req.body)
     if (username && email && pw && birthday && gender) {
         //___ if pw meets conditions, save new user. Else send 400 Error ___
         if (/[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length >= 8 && /[\!\?\$\+\_\-]/.test(pw)) {
             //___ create token/cookie 🍪 ___
-            const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "1h"});
-            res.cookie("jwt", token, {httpOnly: true});
+            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+            res.cookie("jwt", token, { httpOnly: true });
             //___ create & save new user ___
             const hashedPassword = await bcrypt.hash(pw, 13);
             const newUser = new User({ username, email, hashedPassword, birthday, gender });
@@ -83,8 +83,8 @@ app.post("/login", async (req, res) => {
         //___  if user and input pw matches then create token/cookie, else clear token/cookies  ___
         if (foundUser && checkPw) {
             let tokenExpire = rememberMe ? "7d" : "1h";
-            const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: tokenExpire});
-            res.cookie("jwt", token, {httpOnly: true});
+            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: tokenExpire });
+            res.cookie("jwt", token, { httpOnly: true });
             res.send("ypu made it");
         } else {
             res.clearCookie("token");
@@ -96,7 +96,7 @@ app.post("/login", async (req, res) => {
 });
 
 //__________________________Authentication Middleware____________________________________
-app.get("/getCookie", (req, res)=>{
+app.get("/getCookie", (req, res) => {
     const cookie = req.cookies.jwt;
     const decode = jwt.verify(cookie, process.env.JWT_SECRET)
     console.log("cookiiiiees", cookie);

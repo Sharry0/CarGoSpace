@@ -10,15 +10,15 @@ import NewPost from './pages/NewPost';
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { SomeContext } from './context/userContext';
-import {getCookie} from "./API/getCookie"
+import { getCookie } from "./API/getCookie"
 
 
 function App() {
-const [cookie, setCookie] = useState(null);
+  const [cookie, setCookie] = useState(null);
 
-useEffect(()=>{
-  getCookie();
-})
+  useEffect(() => {
+    getCookie();
+  })
 
   return <div className='mt-5'>
     <SomeContext.Provider value={"fish"}>

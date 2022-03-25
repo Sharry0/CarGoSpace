@@ -20,7 +20,7 @@ export default function Register() {
         backgroundColor: "rgb(248, 249, 250)",
         borderBottomColor: "rgb(248, 249, 250)"
     };
-    
+
     return <div className='container pt-5 '>
         <div className="card bg-light text-center mt-5 col-6 offset-3">
             <div className="card-header">
@@ -66,7 +66,7 @@ export default function Register() {
             </div>
         </div>
 
-        
+
 
 
 
