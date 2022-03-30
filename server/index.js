@@ -97,10 +97,11 @@ app.post("/login", async (req, res) => {
 //__________________________Authentication Middleware____________________________________
 app.get("/getCookie", (req, res) => {
     const cookie = req.cookies.jwt;
-    const decode = jwt.verify(cookie, process.env.JWT_SECRET)
+    if (!cookie) return res.status(400).send("Please log in first");
+    const decode = jwt.verify(cookie, process.env.JWT_SECRET);
     console.log("cookiiiiees", cookie);
     console.log(decode.email);
-    res.send(cookie)
+    res.send(cookie);
 });
 
 

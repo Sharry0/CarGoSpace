@@ -85,7 +85,7 @@ export default function LoginForm() {
                 </div>
                 {/* _______________Password input______________________________________ */}
                 <div className="row ">
-                    <div className='mb-1' style={{position: "relative"}}>
+                    <div className='mb-1' style={{ position: "relative" }}>
                         <input
                             type={showPw ? "text" : "password"}
                             className="form-control form-control-sm"

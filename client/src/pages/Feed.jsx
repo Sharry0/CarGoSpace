@@ -63,8 +63,8 @@ export default function Feed() {
     };
 
     //________ dont need cookies here, check in BE for cookies and redirect___________
-    // const color = useContext(CookieContext);
-    // console.log(color, "feed.jrs")
+    const cookie = useContext(CookieContext);
+    console.log(cookie, "feed.jrs")
 
     return (
         <div className='container pt-5'>
@@ -162,7 +162,7 @@ export default function Feed() {
 
                 </div>
             </main>
-                        
+
         </div>
     )
 }

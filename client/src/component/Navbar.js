@@ -1,7 +1,8 @@
-import React from 'react'
-import "../style/Navbar.css"
-import { Link } from "react-router-dom"
-import smLogo from "../images/CarGoSpace_logo_sm.svg"
+import React from 'react';
+import "../style/Navbar.css";
+import { Link } from "react-router-dom";
+import smLogo from "../images/CarGoSpace_logo_sm.svg";
+import { CookieContext } from '../context/userContext';
 
 export default function Navbar() {
     return (

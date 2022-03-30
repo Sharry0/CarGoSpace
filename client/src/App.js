@@ -20,10 +20,10 @@ function App() {
     const token = async () => {
       const result = await getCookie();
       setCookie(result.data)
-      console.log(result.data, "the respo");
-    }
+      console.log(result, "the respo");
+    };
     token();
-  },[]);
+  }, []);
 
   return <div className='mt-5'>
     <CookieContext.Provider value={cookie}>
