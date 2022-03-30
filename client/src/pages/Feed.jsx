@@ -1,10 +1,10 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
 import editIcon from "../images/icons/edit_icon.svg";
-import { toast } from 'react-toastify';
+import { CookieContext } from '../context/userContext';
 
 
 export default function Feed() {
@@ -61,6 +61,10 @@ export default function Feed() {
         height: "15px",
         width: "15px"
     };
+
+    //________ dont need cookies here, check in BE for cookies and redirect___________
+    // const color = useContext(CookieContext);
+    // console.log(color, "feed.jrs")
 
     return (
         <div className='container pt-5'>
@@ -137,16 +141,16 @@ export default function Feed() {
                                 <p className="card-text text-dark text-opacity-75 ">{post.postText}</p>
                             </div>
                             {/* _______________Post footer______________________________________ */}
-                            <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem" }}>
-                                <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                            <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem", backgroundColor: "red" }}>
+                                <a href="" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                     <img src={commentIcon} alt="" style={postFooterStyling} />
                                     <p className='my-0 ms-1'>{`${post.commentsCount} Comments`}</p>
                                 </a>
-                                <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                <a href="" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                     <img src={likeIcon} alt="" style={postFooterStyling} />
                                     <p className='my-0 ms-1'>{`${post.likesCount} Likes`}</p>
                                 </a>
-                                <a href="/" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                <a href="" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                     <img src={editIcon} alt="" style={postFooterStyling} />
                                     <p className='my-0 ms-1'>Edit</p>
                                 </a>

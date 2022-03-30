@@ -1,14 +1,14 @@
 
 const axios = require("axios")
 
-export const getCookie = async () => {
+export const getCookie =  () => {
 
-    axios.get("http://localhost:8080/getCookie", { withCredentials: true })
+   return axios.get("http://localhost:8080/getCookie", { withCredentials: true })
         .then((response) => {
-            console.log(response)
+            return response
         })
         .catch((err) => {
-            console.log(err)
+            return err
         })
 
 };

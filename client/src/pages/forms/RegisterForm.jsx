@@ -130,53 +130,52 @@ export default function RegisterForm() {
     //_______________handle form submit__________________________________________________________________________
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        axios.post("http://localhost:8080/register", {
-            username,
-            email,
-            pw,
-            birthday: {
-                month,
-                day,
-                year,
-            },
-            gender
-        }, { withCredentials: true })
-            .then(function (response) {
-                toast.success(response.data, {
-                    position: "top-center",
-                    autoClose: 1000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
+        if (hasUppercase && hasLowercase && hasSymbol && hasNumber && hasEnoughCharacters) {
+            axios.post("http://localhost:8080/register", {
+                username,
+                email,
+                pw,
+                birthday: {
+                    month,
+                    day,
+                    year,
+                },
+                gender
+            }, { withCredentials: true })
+                .then(function (response) {
+                    toast.success(response.data, {
+                        position: "top-center",
+                        autoClose: 1000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 2500);
+                })
+                .catch(function (error) {
+                    toast.error(error.response.data, {
+                        position: "top-center",
+                        autoClose: 7500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
                 });
-                setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 2500);
-            })
-            .catch(function (error) {
-                toast.error(error.response.data, {
-                    position: "top-center",
-                    autoClose: 7500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+        } else {
+            toast.error("someting went wong", {
+                position: "top-center",
+                autoClose: 7500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
             });
-        // if (hasUppercase && hasLowercase && hasSymbol && hasNumber && hasEnoughCharacters) {
-        //     console.log({ username, email, pw, month, day, year, gender });
-        // } else {
-        //     toast.error("someting went wong", {
-        //         position: "top-center",
-        //         autoClose: 7500,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         });
-        // }
+        }
 
     }
 
@@ -215,7 +214,7 @@ export default function RegisterForm() {
                 </div>
                 {/* _______________Password input__________________________________________________________________________ */}
                 <div className="row mb-1">
-                    <div className="col" style={{position: "relative"}}>
+                    <div className="col" style={{ position: "relative" }}>
                         <input
                             type={showPw ? "text" : "password"}
                             className="form-control form-control-sm "
@@ -312,7 +311,7 @@ export default function RegisterForm() {
                     className="btn btn-danger d-flex justify-content-start fw-bold"
                     style={styling}
                 >
-                    Sign in
+                    Sign up
                 </button>
             </form>
 

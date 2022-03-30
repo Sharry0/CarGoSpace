@@ -1,6 +1,6 @@
 
 import React from "react"
 
-export const SomeContext = React.createContext();
+export const CookieContext = React.createContext();
 
 

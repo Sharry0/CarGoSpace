@@ -50,7 +50,6 @@ app.post("/register", async (req, res) => {
         return res.status(400).send("E-mail already used")
     };
     //___ if form is filled out, then check if pw conditions are met. ____
-    console.log(req.body)
     if (username && email && pw && birthday && gender) {
         //___ if pw meets conditions, save new user. Else send 400 Error ___
         if (/[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length >= 8 && /[\!\?\$\+\_\-]/.test(pw)) {

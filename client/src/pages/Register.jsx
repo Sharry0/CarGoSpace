@@ -1,16 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import useToggleState from "../hooks/useToggleState"
 // import useInputState from '../hooks/useInputState';
 import RegisterForm from './forms/RegisterForm';
 import LoginForm from './forms/LoginForm';
 import "../style/Register.css"
-import { SomeContext } from '../context/userContext';
+
 
 
 
 export default function Register() {
 
-    const color = useContext(SomeContext);
     //_______________useStates & custom hooks______________________________________
     const [register, toggleRegister] = useToggleState(true);
 
@@ -22,7 +21,7 @@ export default function Register() {
     };
 
     return <div className='container pt-5 '>
-        <div className="card bg-light text-center mt-5 col-6 offset-3">
+        <div className="card bg-light text-center mt-5 col-6 offset-3 shadow">
             <div className="card-header">
                 {/* _______________Register & Login Tabs______________________________________ */}
                 <ul className="nav nav-tabs card-header-tabs">

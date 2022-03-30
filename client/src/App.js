@@ -9,7 +9,7 @@ import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
-import { SomeContext } from './context/userContext';
+import { CookieContext } from './context/userContext';
 import { getCookie } from "./API/getCookie"
 
 
@@ -17,11 +17,16 @@ function App() {
   const [cookie, setCookie] = useState(null);
 
   useEffect(() => {
-    getCookie();
-  })
+    const token = async () => {
+      const result = await getCookie();
+      setCookie(result.data)
+      console.log(result.data, "the respo");
+    }
+    token();
+  },[]);
 
   return <div className='mt-5'>
-    <SomeContext.Provider value={"fish"}>
+    <CookieContext.Provider value={cookie}>
 
       {/* _______________ Navbar ______________________________________ */}
       <Navbar />
@@ -47,7 +52,7 @@ function App() {
         pauseOnHover
       // theme='dark'
       />
-    </SomeContext.Provider>
+    </CookieContext.Provider>
   </div>
 
 }
