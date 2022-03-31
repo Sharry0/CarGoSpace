@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
         const checkPw = foundUser && await bcrypt.compare(pw, foundUser.hashedPassword);
         //___  if user and input pw matches then create token/cookie, else clear token/cookies  ___
         if (foundUser && checkPw) {
-            let tokenExpire = rememberMe ? "7d" : "1h";
+            let tokenExpire = rememberMe ? "7d" : "1m";
             const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: tokenExpire });
             res.cookie("jwt", token, { httpOnly: true });
             res.send("ypu made it");
@@ -98,10 +98,15 @@ app.post("/login", async (req, res) => {
 app.get("/getCookie", (req, res) => {
     const cookie = req.cookies.jwt;
     if (!cookie) return res.status(400).send("Please log in first");
-    const decode = jwt.verify(cookie, process.env.JWT_SECRET);
-    console.log("cookiiiiees", cookie);
-    console.log(decode.email);
-    res.send(cookie);
+    const decode = jwt.verify(cookie, process.env.JWT_SECRET,
+        (err, decoded) => {
+            if (err) return err;
+            if (decoded) return decoded;
+        });
+    // if (decode) console.log("decode true")
+    // console.log("cookiiiiees__________________________", cookie);
+    // console.log(decode);
+    res.send(decode);
 });
 
 

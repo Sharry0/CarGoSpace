@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React from 'react'
 // import {history} from "react-router-dom"
 import useToggleState from "../../hooks/useToggleState";
 import useInputState from '../../hooks/useInputState';
@@ -94,7 +94,7 @@ export default function LoginForm() {
                             value={pw}
                             onChange={handlePw}
                         />
-                        <img src={showPw ? headlightOnIcon : headlightOffIcon} style={headlightStyle} onClick={toggleShowPw} />
+                        <img src={showPw ? headlightOnIcon : headlightOffIcon} style={headlightStyle} onClick={toggleShowPw} alt=""/>
                     </div>
                 </div>
                 {/* _______________Remember Me checkbox______________________________________ */}

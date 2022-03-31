@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
@@ -8,6 +8,7 @@ import { CookieContext } from '../context/userContext';
 
 
 export default function Feed() {
+    const [initialRender, setInitialRender] = useState(true)
     const posts = [
         {
             profilName: "John_1978",
@@ -61,10 +62,10 @@ export default function Feed() {
         height: "15px",
         width: "15px"
     };
-
-    //________ dont need cookies here, check in BE for cookies and redirect___________
+    
     const cookie = useContext(CookieContext);
     console.log(cookie, "feed.jrs")
+    
 
     return (
         <div className='container pt-5'>
@@ -80,19 +81,19 @@ export default function Feed() {
                         {/* _______________Links______________________________________ */}
                         <div className='d-flex flex-column'>
                             <a
-                                href="#"
+                                href="/SOMEWHERE"
                                 className="card-link text-reset text-decoration-none"
                             >
                                 About
                             </a>
                             <a
-                                href="#"
+                                href="/SOMEWHERE"
                                 className="card-link m-0 text-reset text-decoration-none"
                             >
                                 Careers
                             </a>
                             <a
-                                href="#"
+                                href="/SOMEWHERE"
                                 className="card-link m-0 text-reset text-decoration-none"
                             >
                                 Policies
@@ -142,15 +143,15 @@ export default function Feed() {
                             </div>
                             {/* _______________Post footer______________________________________ */}
                             <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem", backgroundColor: "red" }}>
-                                <a href="" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                     <img src={commentIcon} alt="" style={postFooterStyling} />
                                     <p className='my-0 ms-1'>{`${post.commentsCount} Comments`}</p>
                                 </a>
-                                <a href="" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                     <img src={likeIcon} alt="" style={postFooterStyling} />
                                     <p className='my-0 ms-1'>{`${post.likesCount} Likes`}</p>
                                 </a>
-                                <a href="" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                     <img src={editIcon} alt="" style={postFooterStyling} />
                                     <p className='my-0 ms-1'>Edit</p>
                                 </a>
