@@ -97,7 +97,7 @@ app.post("/login", async (req, res) => {
 //__________________________Authentication Middleware____________________________________
 app.get("/getCookie", (req, res) => {
     const cookie = req.cookies.jwt;
-    if (!cookie) return res.status(400).send("Please log in first");
+    if (!cookie) return res.status(400).send("No cookies found");
     const decode = jwt.verify(cookie, process.env.JWT_SECRET,
         (err, decoded) => {
             if (err) return err;

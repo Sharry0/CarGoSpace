@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
@@ -8,7 +8,6 @@ import { CookieContext } from '../context/userContext';
 
 
 export default function Feed() {
-    const [initialRender, setInitialRender] = useState(true)
     const posts = [
         {
             profilName: "John_1978",

@@ -20,20 +20,25 @@ import { getCookie } from "./API/getCookie"
 
 function App() {
   const [cookie, setCookie] = useState("empty");
+  // const [someState, setSomeState] = useState(false)
 
   useEffect(() => {
     const token = async () => {
-      const result = await getCookie()
-      setTimeout(()=>{
-
-        setCookie(result.data)
-      }, 3000)
-      // console.log(result.data, "the respo");
+      //____________ doing it wrong, check react router dom redirect for auth/proteced paths __________
+      await getCookie()
+        .then((response) => {
+          if (response.data.email) {
+            setCookie(response.data)
+          } else {
+            setCookie("register")
+          };
+        });
     };
     token();
   }, []);
 
   return <div className='mt-5'>
+    {/* <button onClick={()=>{setSomeState(true)}}>some buttong</button> */}
     <CookieContext.Provider value={cookie}>
 
       {/* _______________ Navbar ______________________________________ */}
@@ -41,12 +46,13 @@ function App() {
       {/* _______________ routes to the pages ______________________________________ */}
       <Routes>
         <Route path="/register" element={<Register />} />
-        {cookie !== "empty" && <Route path="/feed" element={<Feed />} />}
+        {(cookie !== "empty" || cookie !== "register") && <Route path="/feed" element={<Feed />} />}
         <Route path="/new" element={<NewPost />} />
         <Route path="/" element={<Home />} />
 
       </Routes>
-      {cookie === "empty" && <Loading/>}
+      {cookie === "empty" && <Loading />}
+
       {/* _______________ toastify pop up______________________________________ */}
       <ToastContainer
         position="top-center"
