@@ -63,11 +63,11 @@ app.post("/register", async (req, res) => {
             res.send("Success 🏆")
         } else {
             //___ send password invalid allert & clear cookies ___
-            res.clearCookie("token");
+            res.clearCookie("jwt");
             res.status(400).send("🚧 Password invalid 🚧")
         }
     } else {
-        res.clearCookie("token");
+        res.clearCookie("jwt");
         res.status(400).send("Please fill out the form")
     }
 });
@@ -86,7 +86,7 @@ app.post("/login", async (req, res) => {
             res.cookie("jwt", token, { httpOnly: true });
             res.send("ypu made it");
         } else {
-            res.clearCookie("token");
+            res.clearCookie("jwt");
             res.status(418).send("wrong car, please check if you have the right key 🔑")
         }
     } else {
@@ -109,7 +109,10 @@ app.get("/getCookie", (req, res) => {
     res.send(decode);
 });
 
-
+app.get("/logout", (req, res)=>{
+    res.clearCookie("jwt");
+    res.send("Logout successful")
+})
 
 
 app.listen(8080, (req, res) => {
