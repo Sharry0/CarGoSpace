@@ -6,6 +6,8 @@ import { getCookie } from "../API/getCookie";
 export const CookieContext = React.createContext();
 
 export function CookieProvider({ children }) {
+
+    //_________________ DONE USE useEffect ______________________ rewritte this_____ams______
     const [cookie, setCookie] = useState("empty");
 
     useEffect(() => {

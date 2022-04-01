@@ -30,8 +30,9 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/feed" element={
-
-          <Feed />
+          <IsAuth>
+            <Feed />
+          </IsAuth>
 
         } />
         <Route path="/new" element={<NewPost />} />
