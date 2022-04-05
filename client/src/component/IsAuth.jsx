@@ -2,17 +2,22 @@
 import React, { useContext, useState } from 'react';
 import { CookieContext } from '../context/userContext';
 import Loading from '../pages/Loading';
+import { Navigate } from 'react-router-dom';
 
 export default function IsAuth({ children }) {
-    const [isLogged, setIsLogged] = useState(false);
     const cookie = useContext(CookieContext);
-   
     console.log(cookie, "is AUTHED")
-    // if (cookie.cookie) setIsLogged(true)
-    if (!cookie.isLoading) return <>{children}</>
+
+    if (!cookie.isLoading) return (
+        <>
+            {
+                cookie.cookie ? <>{children} </> : <Navigate to="/register" />
+            }
+        </>
+    )
     return (
         <>
-            <Loading/>
+            <Loading />
         </>
     )
 }

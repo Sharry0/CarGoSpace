@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
         const checkPw = foundUser && await bcrypt.compare(pw, foundUser.hashedPassword);
         //___  if user and input pw matches then create token/cookie, else clear token/cookies  ___
         if (foundUser && checkPw) {
-            let tokenExpire = rememberMe ? "7d" : "1m";
+            let tokenExpire = rememberMe ? "7d" : "1h";
             const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: tokenExpire });
             res.cookie("jwt", token, { httpOnly: true });
             res.send("ypu made it");
@@ -103,9 +103,7 @@ app.get("/getCookie", (req, res) => {
             if (err) return err;
             if (decoded) return decoded;
         });
-    // if (decode) console.log("decode true")
-    // console.log("cookiiiiees__________________________", cookie);
-    // console.log(decode);
+        setTimeout()
     res.send(decode);
 });
 

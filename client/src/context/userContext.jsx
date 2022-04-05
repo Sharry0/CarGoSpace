@@ -8,20 +8,17 @@ export const CookieContext = React.createContext();
 
 export function CookieProvider({ children }) {
 
-    const [cookie, setCookie] = useState(null);
-    const [isLoading, setIsLoading]=useState(true)
+    const [cookie, setCookie] = useState(false);
+    const [isLoading, setIsLoading] = useState(true)
 
     const token = async () => {
         await getCookie()
             .then((response) => {
-                // console.log(response)
-                setTimeout(()=>{
-
+                setTimeout(() => {
                     if (response.data.email) {
                         setCookie(response.data)
                         setIsLoading(false)
                     } else {
-                        setCookie("register")
                         setIsLoading(false)
                     };
                 }, 2000)
@@ -29,9 +26,8 @@ export function CookieProvider({ children }) {
     };
     if (!cookie) token();
 
-
     return (
-        <CookieContext.Provider value={{cookie, isLoading}}>
+        <CookieContext.Provider value={{ cookie, isLoading }}>
             {children}
         </CookieContext.Provider>
     )

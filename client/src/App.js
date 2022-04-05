@@ -13,17 +13,15 @@ import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
 import Loading from './pages/Loading';
 //__________________________ Package & API ______________________________________________
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { CookieProvider } from './context/userContext';
 
 
 function App() {
-
   return <div className='mt-5'>
 
     <CookieProvider>
-
       {/* _______________ Navbar ______________________________________ */}
       <Navbar />
       {/* _______________ routes to the pages ______________________________________ */}
@@ -33,13 +31,10 @@ function App() {
           <IsAuth>
             <Feed />
           </IsAuth>
-
         } />
         <Route path="/new" element={<NewPost />} />
         <Route path="/" element={<Home />} />
-
       </Routes>
-      {/* {cookie === "empty" && <Loading />} */}
 
       {/* _______________ toastify pop up______________________________________ */}
       <ToastContainer

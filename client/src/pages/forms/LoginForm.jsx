@@ -43,14 +43,14 @@ export default function LoginForm() {
             .then(function (response) {
                 toast.success(' Wow so easy! 🚘', {
                     position: "top-center",
-                    autoClose: 1800,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
                 });
-                setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 3000);
+                setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 2000);
             })
             .catch(function (error) {
                 toast.error(error.response.data, {
