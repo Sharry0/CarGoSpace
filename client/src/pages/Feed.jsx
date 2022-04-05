@@ -38,18 +38,6 @@ export default function Feed() {
         }
     ]
 
-    // const toastAlert = () =>{
-    //     toast.success(' Wow so easy! 🚘', {
-    //         position: "top-center",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //     });
-    // }
-
     const profileIconStyling = {
         height: "35px",
         maxWidth: "35px",
@@ -68,8 +56,6 @@ export default function Feed() {
 
     return (
         <div className='container pt-5'>
-            {/* <button onClick={toastAlert}></button> */}
-
             <main className='d-flex justify-content-center'>
                 {/* _______________Sidebar content______________________________________ */}
                 {/* _______________make sticky top______________________________________ */}

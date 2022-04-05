@@ -1,6 +1,5 @@
 
-import React, { useState, useEffect } from "react"
-import axios from "axios";
+import React, { useState } from "react"
 import { getCookie } from "../API/getCookie";
 
 
@@ -10,7 +9,7 @@ export function CookieProvider({ children }) {
 
     const [cookie, setCookie] = useState(false);
     const [isLoading, setIsLoading] = useState(true)
-
+//________ GET request to check if jwt exist, if true safe jwt in cookie state___________ 
     const token = async () => {
         await getCookie()
             .then((response) => {
@@ -24,7 +23,7 @@ export function CookieProvider({ children }) {
                 }, 2000)
             });
     };
-    if (!cookie) token();
+    if (isLoading) token();
 
     return (
         <CookieContext.Provider value={{ cookie, isLoading }}>

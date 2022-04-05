@@ -1,5 +1,4 @@
 
-import { useState, useEffect } from 'react';
 //__________________________ Stylesheets ______________________________________________
 import './App.css'; // currently empty___________________________
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,9 +10,8 @@ import Home from './pages/Home';
 import Register from "./pages/Register"
 import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
-import Loading from './pages/Loading';
 //__________________________ Package & API ______________________________________________
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { CookieProvider } from './context/userContext';
 

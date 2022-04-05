@@ -103,7 +103,6 @@ app.get("/getCookie", (req, res) => {
             if (err) return err;
             if (decoded) return decoded;
         });
-        setTimeout()
     res.send(decode);
 });
 
