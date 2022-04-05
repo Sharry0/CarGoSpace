@@ -8,6 +8,8 @@ import { CookieContext } from '../context/userContext';
 
 
 export default function Feed() {
+    const cookie = useContext(CookieContext); 
+    
     const posts = [
         {
             profilName: "John_1978",
@@ -50,9 +52,7 @@ export default function Feed() {
         width: "15px"
     };
     
-    const cookie = useContext(CookieContext);
-    console.log(cookie, "feed.jrs")
-    
+   
 
     return (
         <div className='container pt-5'>
