@@ -1,12 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import "../style/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import smLogo from "../images/CarGoSpace_logo_sm.svg";
 import { CookieContext } from '../context/userContext';
+import { logout } from '../API/apiRequests';
 
 export default function Navbar() {
     const cookie = useContext(CookieContext);
-    console.log(cookie, "NavBar");
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+        await logout();
+        cookie.updateContext()
+        navigate("/", {replace: true})
+    };
+
     return (
         <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid ">
@@ -28,7 +35,7 @@ export default function Navbar() {
                     <div className="navbar-nav ">
                         {
                             cookie.cookie ?
-                                <input type="submit" onClick={() => console.log("logging out")} value="Logout" />
+                                <input type="submit" onClick={handleLogout} value="Logout" />
                                 :
                                 <>
                                     <Link className="nav-link navButton" to="/register" style={{ color: "rgb(33, 46, 68)" }}>Login</Link>

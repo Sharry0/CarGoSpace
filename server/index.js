@@ -106,7 +106,7 @@ app.get("/getCookie", (req, res) => {
     res.send(decode);
 });
 
-app.get("/logout", (req, res)=>{
+app.get("/logout", (req, res) => {
     res.clearCookie("jwt");
     res.send("Logout successful")
 })
