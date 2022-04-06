@@ -6,6 +6,7 @@ import { CookieContext } from '../context/userContext';
 import { logout } from '../API/apiRequests';
 
 export default function Navbar() {
+
     // ________ get isLogged (boolean value) & updateContext (function) from CookieContext ________________
     const { isLogged, updateContext } = useContext(CookieContext);
     const navigate = useNavigate();
@@ -16,15 +17,6 @@ export default function Navbar() {
         updateContext();
         navigate("/", { replace: true });
     };
-
-    //_________ Logout button styling _____________________________________________________________________
-    const logouBtnStyle = {
-        backgroundColor: "transparent",
-        border: "none",
-        color: "rgb(33, 46, 68)",
-        fontWeight: "bolder",
-        padding: "8px"
-    }
 
     return (
         <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
@@ -59,8 +51,23 @@ export default function Navbar() {
                                 </>
                                 :
                                 <>
-                                    <Link className="nav-link navButton login" to="/register" style={{ color: "rgb(33, 46, 68)" }}>Login</Link>
-                                    <Link className="nav-link navButton singUp" to="/register" style={{ color: "rgb(215, 86, 0)" }}>Sign up</Link>
+                                    <Link
+                                        className="nav-link navButton login"
+                                        to="/register"
+                                        state={{register: false}}
+                                        style={{ color: "rgb(33, 46, 68)" }}
+                                    >
+                                        Login
+                                    </Link>
+
+                                    <Link
+                                        className="nav-link navButton singUp"
+                                        to="/register"
+                                        state={{register: true}}
+                                        style={{ color: "rgb(215, 86, 0)" }}
+                                    >
+                                        Sign up
+                                    </Link>
                                 </>
                         }
                     </div>

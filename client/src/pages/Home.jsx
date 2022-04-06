@@ -24,7 +24,7 @@ export default function Home() {
                     <h1 id='title'>We love cars.</h1>
                     <h2 id='subtitle'>Social Network for <br /> Car enthusiasts.</h2>
                     <p id='subtext'>A place where you can connect with new people <br /> and share you stories, experience and <br /> love for cars.</p>
-                    <Link className='button' to="/register" style={styling} >Join the Family</Link>
+                    <Link className='button' to="/register" state={{register: true}} style={styling} >Join the Family</Link>
                 </div>
 
                 <img className='col-6 logo pe-5' src={logo} alt="CarGoSpace Logo" />

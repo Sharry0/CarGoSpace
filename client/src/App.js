@@ -11,13 +11,15 @@ import Register from "./pages/Register"
 import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
 //__________________________ Package & API ______________________________________________
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { CookieProvider } from './context/userContext';
 
 // ______________ TODO: Adjust Everything for small / medium screen size _____________________________
 
 function App() {
+  // const location = useLocation();
+  // console.log("location in app", location)
   return <div className='mt-5'>
 
     <CookieProvider>

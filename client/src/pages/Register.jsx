@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useToggleState from "../hooks/useToggleState"
-// import useInputState from '../hooks/useInputState';
+import { useLocation, useParams } from 'react-router-dom';
 import RegisterForm from './forms/RegisterForm';
 import LoginForm from './forms/LoginForm';
 import "../style/Register.css"
@@ -9,6 +9,9 @@ import "../style/Register.css"
 
 
 export default function Register() {
+    const location = useLocation();
+    console.log(location.state.register)
+    
 
     //_______________useStates & custom hooks______________________________________
     const [register, toggleRegister] = useToggleState(true);
@@ -57,7 +60,7 @@ export default function Register() {
             </div>
             {/* _______________show Register or Login Form______________________________________ */}
             <div className="card-body">
-                {register ?
+                {location.state.register ?
                     <RegisterForm />
                     :
                     <LoginForm />
