@@ -15,6 +15,7 @@ import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { CookieProvider } from './context/userContext';
 
+// ______________ TODO: Adjust Everything for small / medium screen size _____________________________
 
 function App() {
   return <div className='mt-5'>
@@ -53,3 +54,5 @@ function App() {
 }
 
 export default App;
+
+

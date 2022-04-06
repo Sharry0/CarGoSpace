@@ -6,20 +6,28 @@ import { CookieContext } from '../context/userContext';
 import { logout } from '../API/apiRequests';
 
 export default function Navbar() {
-    const cookie = useContext(CookieContext);
+    // ________ get isLogged (boolean value) & updateContext (function) from CookieContext _____________
+    const {isLogged, updateContext} = useContext(CookieContext);
     const navigate = useNavigate();
+
+    //_________ on Logout click, clear cookies, update the cookie context & redirect to homepage________
     const handleLogout = async () => {
         await logout();
-        cookie.updateContext()
-        navigate("/", {replace: true})
+        updateContext();
+        navigate("/", {replace: true});
     };
 
     return (
         <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid ">
+
+                {/* _________ Navbar CarGoSpace Icon (Link to homepage if clicked) ________________________ */}
                 <Link className="navbar-brand" to="/">
                     <img style={{ height: "40px" }} src={smLogo} alt="small Logo" />
                 </Link>
+
+                {/* _________ On small screen hamburger menu button _______________________________________ */}
+                {/* _________ BUG: Links are always showing, never collapsed ______________________ */}
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -31,10 +39,12 @@ export default function Navbar() {
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
+
+                {/* _________ show Navlinks depending on if user is logged in ______________________________ */}
                 <div className="collapse navbar-collapse d-flex flex-row-reverse " id="navbarNavAltMarkup">
                     <div className="navbar-nav ">
                         {
-                            cookie.cookie ?
+                            isLogged ?
                                 <input type="submit" onClick={handleLogout} value="Logout" />
                                 :
                                 <>

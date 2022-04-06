@@ -8,7 +8,8 @@ export const CookieContext = React.createContext();
 export function CookieProvider({ children }) {
 
     const [cookie, setCookie] = useState(false);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLogged, setIsLogged] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
 //________ GET request to check if jwt exist, if true safe jwt in cookie state___________ 
     const token = async (delay = 2000) => {
@@ -16,22 +17,24 @@ export function CookieProvider({ children }) {
             .then((response) => {
                 setTimeout(() => {
                     if (response.data.email) {
-                        setCookie(response.data)
-                        setIsLoading(false)
+                        setCookie(response.data);
+                        setIsLogged(true);
+                        setIsLoading(false);
                     } else {
-                        setCookie(false)
-                        setIsLoading(false)
+                        setCookie(false);
+                        setIsLogged(false);
+                        setIsLoading(false);
                     };
-                }, delay)
+                }, delay);
             });
     };
     if (isLoading) token();
 
     const updateContext = async ()=>{
-        await token(1);
+        await token(10);
     }
     return (
-        <CookieContext.Provider value={{ cookie, isLoading, updateContext }}>
+        <CookieContext.Provider value={{ cookie, isLoading, updateContext, isLogged }}>
             {children}
         </CookieContext.Provider>
     )

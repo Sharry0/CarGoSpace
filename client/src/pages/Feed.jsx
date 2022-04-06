@@ -8,8 +8,8 @@ import { CookieContext } from '../context/userContext';
 
 
 export default function Feed() {
-    const cookie = useContext(CookieContext); 
-    
+    const {isLogged} = useContext(CookieContext); 
+
     const posts = [
         {
             profilName: "John_1978",
