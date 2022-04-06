@@ -6,16 +6,25 @@ import { CookieContext } from '../context/userContext';
 import { logout } from '../API/apiRequests';
 
 export default function Navbar() {
-    // ________ get isLogged (boolean value) & updateContext (function) from CookieContext _____________
-    const {isLogged, updateContext} = useContext(CookieContext);
+    // ________ get isLogged (boolean value) & updateContext (function) from CookieContext ________________
+    const { isLogged, updateContext } = useContext(CookieContext);
     const navigate = useNavigate();
 
-    //_________ on Logout click, clear cookies, update the cookie context & redirect to homepage________
+    //_________ on Logout click, clear cookies, update the cookie context & redirect to homepage___________
     const handleLogout = async () => {
         await logout();
         updateContext();
-        navigate("/", {replace: true});
+        navigate("/", { replace: true });
     };
+
+    //_________ Logout button styling _____________________________________________________________________
+    const logouBtnStyle = {
+        backgroundColor: "transparent",
+        border: "none",
+        color: "rgb(33, 46, 68)",
+        fontWeight: "bolder",
+        padding: "8px"
+    }
 
     return (
         <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
@@ -27,7 +36,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* _________ On small screen hamburger menu button _______________________________________ */}
-                {/* _________ BUG: Links are always showing, never collapsed ______________________ */}
+                {/* _________ BUG: Navlinks are always showing, never collapsed __________ */}
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -45,11 +54,13 @@ export default function Navbar() {
                     <div className="navbar-nav ">
                         {
                             isLogged ?
-                                <input type="submit" onClick={handleLogout} value="Logout" />
+                                <>
+                                    <input className='nav-link navButton logout' type="submit" onClick={handleLogout} value="Logout" style={{ color: "rgb(33, 46, 68)" }} />
+                                </>
                                 :
                                 <>
-                                    <Link className="nav-link navButton" to="/register" style={{ color: "rgb(33, 46, 68)" }}>Login</Link>
-                                    <Link className="nav-link navButton" to="/register" style={{ color: "rgb(215, 86, 0)" }}>Sign up</Link>
+                                    <Link className="nav-link navButton login" to="/register" style={{ color: "rgb(33, 46, 68)" }}>Login</Link>
+                                    <Link className="nav-link navButton singUp" to="/register" style={{ color: "rgb(215, 86, 0)" }}>Sign up</Link>
                                 </>
                         }
                     </div>
