@@ -1,6 +1,6 @@
 
 const mongoose = require("mongoose");
-
+const postSchema = require("./postSchema")
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -49,5 +49,5 @@ const userSchema = new mongoose.Schema({
 );
 
 
-module.exports = mongoose.model("User", userSchema)
+module.exports = mongoose.model("User", userSchema);
 

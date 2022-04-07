@@ -10,14 +10,12 @@ import "../style/Register.css"
 
 export default function Register() {
     const location = useLocation();
-    console.log(location)
-    
     useEffect(()=>{
-        if(location.state.register !== register) toggleRegister()
+        if(location.state && location.state.register !== register) toggleRegister()
     }, [location])
 
     //_______________useStates & custom hooks______________________________________
-    const [register, toggleRegister] = useToggleState(false);
+    const [register, toggleRegister] = useToggleState(true);
 
     //_______________Styling object______________________________________
     const tabStyling = {

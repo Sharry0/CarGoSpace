@@ -5,10 +5,12 @@ import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
 import editIcon from "../images/icons/edit_icon.svg";
 import { CookieContext } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Feed() {
     const {isLogged} = useContext(CookieContext); 
+    const navigate = useNavigate();
 
     const posts = [
         {
@@ -109,7 +111,9 @@ export default function Feed() {
                             defaultValue="Create a post"
                             aria-label="readonly input example"
                             readOnly
+                            onClick={()=> navigate("/new")}
                         />
+                        
                     </div>
                     {/* _______________Show feed content______________________________________ */}
 
