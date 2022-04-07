@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import useToggleState from "../hooks/useToggleState"
 import { useLocation, useParams } from 'react-router-dom';
 import RegisterForm from './forms/RegisterForm';
@@ -10,11 +10,14 @@ import "../style/Register.css"
 
 export default function Register() {
     const location = useLocation();
-    console.log(location.state.register)
+    console.log(location)
     
+    useEffect(()=>{
+        if(location.state.register !== register) toggleRegister()
+    }, [location])
 
     //_______________useStates & custom hooks______________________________________
-    const [register, toggleRegister] = useToggleState(true);
+    const [register, toggleRegister] = useToggleState(false);
 
     //_______________Styling object______________________________________
     const tabStyling = {
@@ -60,7 +63,7 @@ export default function Register() {
             </div>
             {/* _______________show Register or Login Form______________________________________ */}
             <div className="card-body">
-                {location.state.register ?
+                {register?
                     <RegisterForm />
                     :
                     <LoginForm />
