@@ -104,11 +104,11 @@ export default function RegisterForm() {
         }
     }
 
-    //_______________styling_____________________________________________________________________________________________
+    //_______________ button styling_____________________________________________________________________________________________
     const styling = {
         backgroundColor: "rgb(215, 86, 0)",
         borderColor: "rgb(215, 86, 0)"
-    };
+    }
     const invalidPw = {
         color: "rgb(215, 86, 0)",
         fontSize: "0.75rem"

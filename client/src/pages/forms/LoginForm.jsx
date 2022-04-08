@@ -17,7 +17,7 @@ export default function LoginForm() {
     const [rememberMe, toggleRememberMe] = useToggleState(false);
     const [showPw, toggleShowPw] = useToggleState(false)
 
-    //_______________checkbox styling______________________________________
+    //_______________checkbox & button styling______________________________________
     const styling = {
         backgroundColor: "rgb(215, 86, 0)",
         borderColor: "rgb(215, 86, 0)"
