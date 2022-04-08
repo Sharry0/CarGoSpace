@@ -1,10 +1,13 @@
 
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import { CookieContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
+import axios from "axios"
 
 export default function NewPost() {
+  const {cookie} = useContext(CookieContext)
   const navigate = useNavigate()
   const [title, handleTitle, resetTitle] = useInputState("");
   const [textarea, handleTextarea, resetTextarea] = useInputState("");
@@ -12,8 +15,15 @@ export default function NewPost() {
   //_______ on Submit create the new post & on Discard clear all inputs and redirect to feed page ______
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const newPost = { title, textarea }
+    const newPost = { title, textarea, email: cookie.email }
     console.log(newPost)
+    axios.post("http://localhost:8080/post/create", newPost)
+      .then(response => {
+        console.log(response.data, "respo newp")
+      })
+      .catch(err => {
+        console.log(err, "err newp")
+      })
   };
 
   const handleDiscard = (evt) => {
