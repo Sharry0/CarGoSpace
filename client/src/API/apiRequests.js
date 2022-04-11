@@ -23,3 +23,14 @@ export const logout = () =>{
     })
 };
 
+
+export const getPosts = () =>{
+    return axios.get("http://localhost:8080/feed", { withCredentials: true })
+    .then((response) => {
+        return response
+    })
+    .catch((err) => {
+        return err.response
+    })
+}
+

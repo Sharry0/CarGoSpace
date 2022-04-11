@@ -40,6 +40,13 @@ app.get("/", (req, res) => {
 //__________________________ User routes ____________________________________
 app.use("/", userRoutes)
 
+app.get("/feed", async (req, res)=>{
+    const posts = await Post.find()
+    const populatedPosts = await Post.find().populate("creator", "username userImage email")
+    // const populatedEmail = await Post.find().populate("creator", "userimage")
+
+    res.send(populatedPosts)
+});
 
 app.post("/post/create", async (req, res) => {
     
@@ -58,7 +65,9 @@ app.post("/post/create", async (req, res) => {
         await foundUser.save()
         console.log(newPost)
         res.send(foundUser)
-    };
+    } else{
+        res.status(400).send("Something went wrong, please try again later...")
+    }
 });
 
 

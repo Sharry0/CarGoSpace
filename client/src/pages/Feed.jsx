@@ -1,16 +1,19 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
 import editIcon from "../images/icons/edit_icon.svg";
 import { CookieContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
+import { getPosts } from '../API/apiRequests';
 
 
 export default function Feed() {
-    const {isLogged} = useContext(CookieContext); 
+    const { isLogged } = useContext(CookieContext);
     const navigate = useNavigate();
+
+    const [post, setPosts] = useState()
 
     const posts = [
         {
@@ -42,6 +45,14 @@ export default function Feed() {
         }
     ]
 
+    useEffect(() => {
+        getPosts()
+            .then( response => console.log(response.data))
+            .catch(err => console.log(err,"this a error"))
+    },[])
+
+
+
     const profileIconStyling = {
         height: "35px",
         maxWidth: "35px",
@@ -53,8 +64,8 @@ export default function Feed() {
         height: "15px",
         width: "15px"
     };
-    
-   
+
+
 
     return (
         <div className='container pt-5'>
@@ -111,9 +122,9 @@ export default function Feed() {
                             defaultValue="Create a post"
                             aria-label="readonly input example"
                             readOnly
-                            onClick={()=> navigate("/new")}
+                            onClick={() => navigate("/new")}
                         />
-                        
+
                     </div>
                     {/* _______________Show feed content______________________________________ */}
 

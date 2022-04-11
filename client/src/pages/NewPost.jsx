@@ -4,10 +4,11 @@ import { CookieContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import useInputState from '../hooks/useInputState';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
-import axios from "axios"
+import axios from "axios";
+import { toast } from 'react-toastify';
 
 export default function NewPost() {
-  const {cookie} = useContext(CookieContext)
+  const { cookie } = useContext(CookieContext)
   const navigate = useNavigate()
   const [title, handleTitle, resetTitle] = useInputState("");
   const [textarea, handleTextarea, resetTextarea] = useInputState("");
@@ -20,9 +21,20 @@ export default function NewPost() {
     axios.post("http://localhost:8080/post/create", newPost)
       .then(response => {
         console.log(response.data, "respo newp")
+        resetTitle();
+        resetTextarea();
+        navigate("/feed")
       })
       .catch(err => {
-        console.log(err, "err newp")
+        toast.error(err.response.data, {
+          position: "top-center",
+          autoClose: 7500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
   };
 
@@ -32,7 +44,6 @@ export default function NewPost() {
     resetTextarea();
     navigate("/feed")
   };
-
 
   //________ button styling ____________________________________________________________________________
   const styling = {
