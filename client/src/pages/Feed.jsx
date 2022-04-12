@@ -13,43 +13,15 @@ export default function Feed() {
     const { isLogged } = useContext(CookieContext);
     const navigate = useNavigate();
 
-    const [post, setPosts] = useState()
+    const [posts, setPosts] = useState(null)
 
-    const posts = [
-        {
-            profilName: "John_1978",
-            profilImg: "https://assets.cdn.moviepilot.de/files/6e4bc29be481dad6d2fd2b3011df1409083166f3e22a97bdae27a428dfff/fill/1200/576/Yoshi.jpg",
-            postId: "1",
-            postTitle: "Great car",
-            postText: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi temporibus maiores debitis, eveniet enim aliquid ex delectus, quo quisquam vero quod optio fuga accusantium, libero tenetur ea dolor quis corrupti?",
-            commentsCount: 15,
-            likesCount: 70
-        },
-        {
-            profilName: "Bobby Ranger",
-            profilImg: "",
-            postId: "2",
-            postTitle: "best car",
-            postText: " love this car.",
-            commentsCount: 25,
-            likesCount: 10
-        },
-        {
-            profilName: "Tedd_23",
-            profilImg: "",
-            postId: "3",
-            postTitle: "Awesome",
-            postText: " its very fast",
-            commentsCount: 5,
-            likesCount: 40
-        }
-    ]
+
 
     useEffect(() => {
         getPosts()
-            .then( response => console.log(response.data))
-            .catch(err => console.log(err,"this a error"))
-    },[])
+            .then(response => setPosts(response.data))
+            .catch(err => console.log(err, "this a error"))
+    }, [])
 
 
 
@@ -64,8 +36,7 @@ export default function Feed() {
         height: "15px",
         width: "15px"
     };
-
-
+console.log(posts)
 
     return (
         <div className='container pt-5'>
@@ -128,36 +99,44 @@ export default function Feed() {
                     </div>
                     {/* _______________Show feed content______________________________________ */}
 
-                    {posts.map(post => (
-                        <div className="card col-12 shadow my-4" key={post.postId}>
-                            <div className="card-body">
-                                {/* _______________Post profile pic & name______________________________________ */}
-                                <div className='d-flex flex-row align-items-center '>
-                                    <img src={post.profilImg ? post.profilImg : emptyProfilImg} alt="" style={profileIconStyling} className="me-2" />
-                                    <h6 className="card-subtitle text-secondary text-opacity-75">{post.profilName}</h6>
-                                </div>
-                                {/* _______________Post title______________________________________ */}
-                                <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">{post.postTitle}</h5>
-                                {/* _______________Post text______________________________________ */}
-                                <p className="card-text text-dark text-opacity-75 ">{post.postText}</p>
-                            </div>
-                            {/* _______________Post footer______________________________________ */}
-                            <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem", backgroundColor: "red" }}>
-                                <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                    <img src={commentIcon} alt="" style={postFooterStyling} />
-                                    <p className='my-0 ms-1'>{`${post.commentsCount} Comments`}</p>
-                                </a>
-                                <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                    <img src={likeIcon} alt="" style={postFooterStyling} />
-                                    <p className='my-0 ms-1'>{`${post.likesCount} Likes`}</p>
-                                </a>
-                                <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                    <img src={editIcon} alt="" style={postFooterStyling} />
-                                    <p className='my-0 ms-1'>Edit</p>
-                                </a>
-                            </div>
+                    {!posts ?
+                        <div className='d-flex flex-column align-items-center'>
+                            <p className='fw-bold fs-5'>Something went wrong,  please try again later.</p>
+                            <img src="https://c.tenor.com/DtOHYAtvTaoAAAAM/fail-mini-car.gif" alt="Something went wrong" className='col-6'/>
                         </div>
-                    ))}
+                        :
+                        posts.map(post => (
+                            <div className="card col-12 shadow my-4" key={post._id}>
+                                <div className="card-body">
+                                    {/* _______________Post profile pic & name______________________________________ */}
+                                    <div className='d-flex flex-row align-items-center '>
+                                        <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
+                                            alt="" style={profileIconStyling} className="me-2"
+                                        />
+                                        <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">{post.creator.username}</h6>
+                                    </div>
+                                    {/* _______________Post title______________________________________ */}
+                                    <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">{post.title}</h5>
+                                    {/* _______________Post text______________________________________ */}
+                                    <p className="card-text text-dark text-opacity-75 ">{post.text}</p>
+                                </div>
+                                {/* _______________Post footer______________________________________ */}
+                                <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem", backgroundColor: "red" }}>
+                                    <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                        <img src={commentIcon} alt="" style={postFooterStyling} />
+                                        <p className='my-0 ms-1'>{`${post.comments} Comments`}</p>
+                                    </a>
+                                    <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                        <img src={likeIcon} alt="" style={postFooterStyling} />
+                                        <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
+                                    </a>
+                                    <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                                        <img src={editIcon} alt="" style={postFooterStyling} />
+                                        <p className='my-0 ms-1'>Edit</p>
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
 
 
 

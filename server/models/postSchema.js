@@ -16,8 +16,9 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    likes: {
-        type: Number
+    
+    commentsCount: {
+        type: Number,
 
     },
     likersIds: [],

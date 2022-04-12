@@ -40,34 +40,34 @@ app.get("/", (req, res) => {
 //__________________________ User routes ____________________________________
 app.use("/", userRoutes)
 
-app.get("/feed", async (req, res)=>{
-    const posts = await Post.find()
+app.get("/feed", async (req, res) => {
     const populatedPosts = await Post.find().populate("creator", "username userImage email")
-    // const populatedEmail = await Post.find().populate("creator", "userimage")
+    console.log(populatedPosts[0].likersIds.length)
 
     res.send(populatedPosts)
 });
 
 app.post("/post/create", async (req, res) => {
-    
-    const {title, textarea, email} = req.body
-    const foundUser = await User.findOne({ email });
-    if (foundUser){
 
+    const { title, textarea, email } = req.body
+    const foundUser = await User.findOne({ email });
+    try {
         const newPost = new Post({
             creator: foundUser,
             title,
             text: textarea,
         });
         foundUser.postIds.push(newPost)
-        
         await newPost.save();
-        await foundUser.save()
-        console.log(newPost)
-        res.send(foundUser)
-    } else{
+        await foundUser.save();
+        res.send(foundUser);
+    } catch (error) {
+        console.log(error)
         res.status(400).send("Something went wrong, please try again later...")
     }
+    // console.log(newPost);
+
+
 });
 
 
