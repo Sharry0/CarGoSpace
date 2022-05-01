@@ -41,8 +41,11 @@ app.get("/", (req, res) => {
 app.use("/", userRoutes)
 
 app.get("/feed", async (req, res) => {
-    const populatedPosts = await Post.find().populate("creator", "username userImage email")
-    console.log(populatedPosts[0].likersIds.length)
+    // ______ error handling where? _________
+    const populatedPosts = await Post
+        .find()
+        .populate("creator", "username userImage email")
+        .sort({ createdAt: -1 })
 
     res.send(populatedPosts)
 });

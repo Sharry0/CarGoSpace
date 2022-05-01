@@ -17,7 +17,13 @@ import { CookieProvider } from './context/userContext';
 
 // ______________ TODO: Adjust Everything for small / medium screen size _____________________________
 // ______________ TODO: Loading page kinda annyoing __________________________________________________
- 
+// ______________ TODO: limit feed to 20 post, scroll to bottom to load more _________________________
+// ______________ TODO: limit post height for to long text, hide overflow & "read more" btn __________
+// ______________ TODO: if logged in, restrict access to /register ___________________________________
+// ______________ TODO: add /post/:id route __________________________________________________________
+// ______________ TODO: left footer card, sticky top _________________________________________________
+// ______________ TODO: show how many comments a post has ____________________________________________
+
 function App() {
   return <div className='mt-5'>
 
@@ -32,7 +38,11 @@ function App() {
             <Feed />
           </IsAuth>
         } />
-        <Route path="/new" element={<NewPost />} />
+        <Route path="/new" element={
+          <IsAuth>
+            <NewPost />
+          </IsAuth>
+        } />
         <Route path="/" element={<Home />} />
       </Routes>
 

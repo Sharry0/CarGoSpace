@@ -15,7 +15,7 @@ export default function Feed() {
 
     const [posts, setPosts] = useState(null)
 
-
+    
 
     useEffect(() => {
         getPosts()
@@ -36,7 +36,7 @@ export default function Feed() {
         height: "15px",
         width: "15px"
     };
-console.log(posts)
+// console.log(posts)
 
     return (
         <div className='container pt-5'>
