@@ -15,16 +15,18 @@ export default function Feed() {
 
     const [posts, setPosts] = useState(null)
 
-    
-
+    // ______________ Call API to get all Posts and save them in posts state _____________________________
     useEffect(() => {
         getPosts()
             .then(response => setPosts(response.data))
             .catch(err => console.log(err, "this a error"))
     }, [])
 
+    const handlePostClick = (id) => {
+        navigate(`/post/${id}`)
+    }
 
-
+    // ___________________ styling ____________________________
     const profileIconStyling = {
         height: "35px",
         maxWidth: "35px",
@@ -36,7 +38,8 @@ export default function Feed() {
         height: "15px",
         width: "15px"
     };
-// console.log(posts)
+
+    posts && console.log(posts[0]._id)
 
     return (
         <div className='container pt-5'>
@@ -102,7 +105,7 @@ export default function Feed() {
                     {!posts ?
                         <div className='d-flex flex-column align-items-center'>
                             <p className='fw-bold fs-5'>Something went wrong,  please try again later.</p>
-                            <img src="https://c.tenor.com/DtOHYAtvTaoAAAAM/fail-mini-car.gif" alt="Something went wrong" className='col-6'/>
+                            <img src="https://c.tenor.com/DtOHYAtvTaoAAAAM/fail-mini-car.gif" alt="Something went wrong" className='col-6' />
                         </div>
                         :
                         posts.map(post => (
@@ -124,7 +127,7 @@ export default function Feed() {
                                 <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem", backgroundColor: "red" }}>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                         <img src={commentIcon} alt="" style={postFooterStyling} />
-                                        <p className='my-0 ms-1'>{`${post.comments} Comments`}</p>
+                                        <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                                         <img src={likeIcon} alt="" style={postFooterStyling} />

@@ -17,12 +17,8 @@ const postSchema = new Schema({
         required: true
     },
     
-    commentsCount: {
-        type: Number,
-
-    },
     likersIds: [],
-    commenterIds: []
+    commentIds: []
 
 
 

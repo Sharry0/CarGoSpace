@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Register from "./pages/Register"
 import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
+import Post from './pages/Post';
 //__________________________ Package & API ______________________________________________
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
@@ -22,7 +23,10 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: if logged in, restrict access to /register ___________________________________
 // ______________ TODO: add /post/:id route __________________________________________________________
 // ______________ TODO: left footer card, sticky top _________________________________________________
-// ______________ TODO: show how many comments a post has ____________________________________________
+// ______________ TODO: Profil editing page __________________________________________________________
+// ______________ TODO: Add creation date to posts ___________________________________________________
+// ______________ TODO: Edit button only for users own post visible __________________________________
+// ______________ TODO: wrapping isAuth around almost every path, looks stupid _______________________
 
 function App() {
   return <div className='mt-5'>
@@ -31,18 +35,13 @@ function App() {
       {/* _______________ Navbar ______________________________________ */}
       <Navbar />
       {/* _______________ routes to the pages ______________________________________ */}
+      
       <Routes>
         <Route path="/register" element={<Register />} />
-        <Route path="/feed" element={
-          <IsAuth>
-            <Feed />
-          </IsAuth>
-        } />
-        <Route path="/new" element={
-          <IsAuth>
-            <NewPost />
-          </IsAuth>
-        } />
+        <Route path="/feed" element={<IsAuth> <Feed /> </IsAuth>} />
+        <Route path="/new" element={<IsAuth> <NewPost /> </IsAuth>} />
+        <Route path="/post/:id" element={<IsAuth> <Post /> </IsAuth>} />
+        
         <Route path="/" element={<Home />} />
       </Routes>
 

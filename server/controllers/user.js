@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
     const duplicateEmail = await User.findOne({ email });
     if (duplicateEmail) {
         res.clearCookie("token");
-        return res.status(400).send("E-mail already used")
+        return res.status(400).send("E-mail already taken")
     };
     //___ if form is filled out, then check if pw conditions are met. ____
     if (username && email && pw && birthday && gender) {

@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 //__________________________ User routes ____________________________________
 app.use("/", userRoutes)
 
-app.get("/feed", async (req, res) => {
+app.get("/post", async (req, res) => {
     // ______ error handling where? _________
     const populatedPosts = await Post
         .find()
@@ -72,6 +72,18 @@ app.post("/post/create", async (req, res) => {
 
 
 });
+
+app.get("/post/:id", async (req,res)=>{
+    const {id} = req.params;
+    try {
+        const foundPost = await Post.findById(id)
+        .populate("creator", "username userImage")
+        res.send(foundPost)
+    } catch (error) {
+        res.send(error)
+    }
+    // if (foundPost) res.send(foundPost)
+})
 
 
 app.listen(8080, (req, res) => {
