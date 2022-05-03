@@ -34,11 +34,6 @@ export default function Feed() {
         objectFit: "cover"
     };
 
-    const postFooterStyling = {
-        height: "15px",
-        width: "15px"
-    };
-
     posts && console.log(posts[0]._id)
 
     return (
@@ -124,17 +119,17 @@ export default function Feed() {
                                     <p className="card-text text-dark text-opacity-75 ">{post.text}</p>
                                 </div>
                                 {/* _______________Post footer______________________________________ */}
-                                <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem", backgroundColor: "red" }}>
+                                <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem" }}>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={commentIcon} alt="" style={postFooterStyling} />
+                                        <img src={commentIcon} alt="" style={{height: "15px", width: "15px"}} />
                                         <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={likeIcon} alt="" style={postFooterStyling} />
+                                        <img src={likeIcon} alt="" style={{height: "15px", width: "15px"}} />
                                         <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={editIcon} alt="" style={postFooterStyling} />
+                                        <img src={editIcon} alt="" style={{height: "15px", width: "15px"}} />
                                         <p className='my-0 ms-1'>Edit</p>
                                     </a>
                                 </div>

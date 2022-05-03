@@ -80,7 +80,7 @@ app.get("/post/:id", async (req,res)=>{
         .populate("creator", "username userImage")
         res.send(foundPost)
     } catch (error) {
-        res.send(error)
+        res.status(404).send(error)
     }
     // if (foundPost) res.send(foundPost)
 })

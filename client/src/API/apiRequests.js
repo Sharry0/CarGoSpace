@@ -42,6 +42,6 @@ export const getPost = (id) => {
         return response
     })
     .catch((err) => {
-        return err.response
+        throw "Post couldn't be found"
     })
 }
