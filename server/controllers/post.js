@@ -28,8 +28,8 @@ exports.createPost = async (req, res) => {
         await foundUser.save();
         res.send(foundUser);
     } catch (error) {
-        console.log(error)
-        res.status(400).send("Something went wrong, please try again later...")
+        console.log(error);
+        res.status(400).send("Something went wrong, please try again later...");
     }
 };
 

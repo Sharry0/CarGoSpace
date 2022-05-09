@@ -1,18 +1,31 @@
 
 import { useContext } from "react";
+import { useParams } from 'react-router-dom';
 import { CookieContext } from "../../context/userContext";
 import useInputState from "../../hooks/useInputState"
+import axios from "axios";
 
 export default function CommentForm() {
-    const { cookie } = useContext(CookieContext)
+    const { cookie } = useContext(CookieContext);
+    const params = useParams();
 
-    const [textarea, setTextarea, resetTextarea] = useInputState("");
+    const [comment, setComment, resetComment] = useInputState("");
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        console.log(textarea);
-        console.log(cookie);
-        resetTextarea();
+        axios.post("http://localhost:8080/comment/create",
+            { email: cookie.email, comment, postId: params.id },
+            { withCredentials: true }
+        )
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        // console.log(comment);
+        // console.log(params.id);
+        resetComment();
     }
 
     return (
@@ -23,8 +36,8 @@ export default function CommentForm() {
                     placeholder="Leave a comment here"
                     id="floatingTextarea2"
                     style={{ height: "100px" }}
-                    value={textarea}
-                    onChange={setTextarea}
+                    value={comment}
+                    onChange={setComment}
                 >
                 </textarea>
                 <label htmlFor="floatingTextarea2">Add your comment</label>

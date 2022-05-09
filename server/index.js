@@ -11,6 +11,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const User = require("./models/userSchema");
 const Post = require("./models/postSchema");
+const Comment = require("./models/commentSchema")
 const mongoose = require("mongoose");
 
 // ________________________routes____________________________________________
@@ -44,6 +45,31 @@ app.get("/", (req, res) => {
 app.use("/", userRoutes);
 app.use("/post", postRoutes);
 
+app.post("/comment/create", async (req, res) => {
+    console.log(req.body)
+    const { email, comment, postId } = req.body;
+    const foundUser = await User.findOne({ email });
+    const foundPost = await Post.findById(postId);
+    try {
+        const newComment = new Comment({
+            postId: foundPost,
+            creator: foundUser,
+            comment
+        });
+    
+        foundPost.commentIds.push(newComment);
+        foundUser.commentIds.push(newComment);
+    
+        await foundUser.save();
+        await foundPost.save();
+        await newComment.save();
+        res.send(newComment);
+        
+    } catch (error) {
+        console.log(error);
+        res.status(400).send("Something went wrong, please try again later...");
+    };
+});
 
 
 
