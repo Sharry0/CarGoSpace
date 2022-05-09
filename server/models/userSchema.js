@@ -1,6 +1,6 @@
 
 const mongoose = require("mongoose");
-const { Schema } = mongoose
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
     username: {
@@ -43,7 +43,7 @@ const userSchema = new Schema({
     //     required: true
     // },
     postIds: [{ type: Schema.Types.ObjectId, ref: "Post", required: true }],
-    commentIds: []
+    commentIds: [{ type: Schema.Types.ObjectId, ref: "Comment", required: true }]
 },
     { timestamps: true }
 );

@@ -17,10 +17,8 @@ export default function NewPost() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const newPost = { title, textarea, email: cookie.email }
-    console.log(newPost)
     axios.post("http://localhost:8080/post/create", newPost)
       .then(response => {
-        console.log(response.data, "respo newp")
         resetTitle();
         resetTextarea();
         navigate("/feed")

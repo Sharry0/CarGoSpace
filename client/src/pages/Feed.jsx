@@ -13,6 +13,7 @@ export default function Feed() {
     const { isLogged } = useContext(CookieContext);
     const navigate = useNavigate();
 
+
     const [posts, setPosts] = useState(null)
 
     // ______________ Call API to get all Posts and save them in posts state _____________________________
@@ -34,7 +35,6 @@ export default function Feed() {
         objectFit: "cover"
     };
 
-    posts && console.log(posts[0]._id)
 
     return (
         <div className='container pt-5'>
@@ -74,6 +74,7 @@ export default function Feed() {
                             <p className="card-text text-muted justify-self-end">
                                 All rights reserved.
                             </p>
+
                         </div>
                     </div>
                 </div>
@@ -105,31 +106,35 @@ export default function Feed() {
                         :
                         posts.map(post => (
                             <div className="card col-12 shadow my-4" key={post._id}>
-                                <div className="card-body">
+                                <div className="card-body" >
                                     {/* _______________Post profile pic & name______________________________________ */}
-                                    <div className='d-flex flex-row align-items-center '>
+                                    <div className='d-flex flex-row align-items-center'>
                                         <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
                                             alt="" style={profileIconStyling} className="me-2"
+                                            onClick={() => console.log("clicked profile")}
+                                            role="button"
                                         />
                                         <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">{post.creator.username}</h6>
                                     </div>
-                                    {/* _______________Post title______________________________________ */}
-                                    <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">{post.title}</h5>
-                                    {/* _______________Post text______________________________________ */}
-                                    <p className="card-text text-dark text-opacity-75 ">{post.text}</p>
+                                    <div role="button" onClick={()=> handlePostClick(post._id)}>
+                                        {/* _______________Post title______________________________________ */}
+                                        <h5 className="card-title fw-bold fs-3 pt-2 text-dark text-opacity-75">{post.title}</h5>
+                                        {/* _______________Post text______________________________________ */}
+                                        <p className="card-text text-dark text-opacity-75 ">{post.text}</p>
+                                    </div>
                                 </div>
                                 {/* _______________Post footer______________________________________ */}
                                 <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem" }}>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={commentIcon} alt="" style={{height: "15px", width: "15px"}} />
+                                        <img src={commentIcon} alt="" style={{ height: "15px", width: "15px" }} />
                                         <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={likeIcon} alt="" style={{height: "15px", width: "15px"}} />
+                                        <img src={likeIcon} alt="" style={{ height: "15px", width: "15px" }} />
                                         <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={editIcon} alt="" style={{height: "15px", width: "15px"}} />
+                                        <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
                                         <p className='my-0 ms-1'>Edit</p>
                                     </a>
                                 </div>

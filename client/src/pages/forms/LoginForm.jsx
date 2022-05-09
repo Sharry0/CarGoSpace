@@ -69,7 +69,7 @@ export default function LoginForm() {
     return (
         <>
             {/* _______________Login Form______________________________________ */}
-            <form onSubmit={handleSubmit} method="GET">
+            <form onSubmit={handleSubmit} >
                 {/* _______________E-Mail address input______________________________________ */}
                 <div className="row mb-3">
                     <div>
