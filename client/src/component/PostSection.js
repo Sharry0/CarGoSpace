@@ -5,7 +5,7 @@ import commentIcon from "../images/icons/comment_icon.svg";
 import likeIcon from "../images/icons/like_icon.svg";
 import editIcon from "../images/icons/edit_icon.svg";
 
-export default function PostSection({post}) {
+export default function PostSection({ post }) {
 
     // ___________________ styling ____________________________
     const profileIconStyling = {
@@ -42,6 +42,7 @@ export default function PostSection({post}) {
                         <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                             <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
                             <p className='my-0 ms-1'>Edit</p>
+                            
                         </a>
                     </div>
                 </div>

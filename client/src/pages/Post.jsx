@@ -7,13 +7,13 @@ import CommentForm from './forms/CommentForm';
 import CommentSection from '../component/CommentSection';
 
 // ____________ API import _______________________________
-import { getPost } from '../API/apiRequests'
+import { getPost, getPostComments } from '../API/apiRequests'
 
 export default function Post() {
 
   const params = useParams();
 
-  const [post, setPost] = useState(null)
+  const [post, setPost] = useState(null);
 
   useEffect(() => {
     getPost(params.id)
@@ -23,7 +23,7 @@ export default function Post() {
   }, [])
 
   
-  // console.log(post)
+  console.log(post)
   return (
     <div className='container pt-5'>
       {
@@ -39,8 +39,8 @@ export default function Post() {
             </div>
 
             {/* _____________ see all comments section __________________ */}
-            <div className='col-4 card'>
-              <h4>no comments</h4>
+            <div className='col-4'>
+              <CommentSection comments={post.commentIds}/>
             </div>
           </div>
           : <h2>Sorry we couldn't find this post</h2>

@@ -1,5 +1,6 @@
 
 const Post = require("../models/postSchema");
+const { populate } = require("../models/userSchema");
 const User = require("../models/userSchema");
 
 
@@ -38,6 +39,16 @@ exports.showPost = async (req,res)=>{
     try {
         const foundPost = await Post.findById(id)
         .populate("creator", "username userImage")
+        // .populate("commentIds", "comment")
+        .populate({
+            path: "commentIds",
+            select: "comment",
+            populate: {
+                path: "creator",
+                select: "username userImage"
+            }
+        })
+        
         res.send(foundPost)
     } catch (error) {
         res.status(404).send(error)

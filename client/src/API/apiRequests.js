@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getCookie = () => {
 
-// ________ get cookies from browser _________________________________________________________
+    // ________ get cookies from browser _________________________________________________________
     return axios.get("http://localhost:8080/getCookie", { withCredentials: true })
         .then((response) => {
             return response
@@ -33,15 +33,17 @@ export const getPosts = () => {
         .catch((err) => {
             return err.response
         })
-}
+};
 
 // ________ get single Post with id for /post/:id __________________________________________
 export const getPost = (id) => {
     return axios.get(`http://localhost:8080/post/${id}`, { withCredentials: true })
-    .then((response) => {
-        return response
-    })
-    .catch((err) => {
-        throw "Post couldn't be found"
-    })
-}
+        .then((response) => {
+            return response
+        })
+        .catch((err) => {
+            throw "Post couldn't be found"
+        })
+};
+
+
