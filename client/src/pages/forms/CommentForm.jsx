@@ -5,7 +5,7 @@ import { CookieContext } from "../../context/userContext";
 import useInputState from "../../hooks/useInputState"
 import axios from "axios";
 
-export default function CommentForm() {
+export default function CommentForm({setUpdateComSec}) {
     const { cookie } = useContext(CookieContext);
     const params = useParams();
 
@@ -21,10 +21,11 @@ export default function CommentForm() {
                 console.log(response)
             })
             .catch(err => {
-                console.log(err)
+                console.log(err, "ERRORRR")
             })
         // console.log(comment);
         // console.log(params.id);
+        setUpdateComSec(true)
         resetComment();
     }
 

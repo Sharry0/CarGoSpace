@@ -42,11 +42,12 @@ exports.showPost = async (req,res)=>{
         // .populate("commentIds", "comment")
         .populate({
             path: "commentIds",
-            select: "comment",
+            select: "comment createdAt",
             populate: {
                 path: "creator",
-                select: "username userImage"
-            }
+                select: "username userImage",
+            },
+            options:{sort: { createdAt: -1}}
         })
         
         res.send(foundPost)

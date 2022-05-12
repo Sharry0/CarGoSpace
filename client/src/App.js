@@ -28,6 +28,8 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: Edit button only for users own post visible __________________________________
 // ______________ TODO: wrapping isAuth around almost every path, looks stupid _______________________
 // ______________ TODO: add like, comment, edit functions ____________________________________________
+// ______________ TODO: "RangeError: Maximum call stack size exceeded" on first comments under posts _
+// ______________ TODO: comment submit with empty input error handler ________________________________
 
 function App() {
   return <div className='mt-5'>

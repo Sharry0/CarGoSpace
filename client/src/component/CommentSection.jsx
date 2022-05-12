@@ -1,7 +1,12 @@
 
+import { useEffect } from "react";
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 
 export default function CommentSection({ comments }) {
+
+  // useEffect(()=>{
+  //   console.log("this is commentsection")
+  // },[comments])
 
   // ___________________ styling ____________________________
   const profileIconStyling = {
@@ -10,14 +15,14 @@ export default function CommentSection({ comments }) {
     borderRadius: "50%",
     objectFit: "cover"
   };
-  console.log(comments)
+  // console.log(comments)
   return (
     <>
       {
         comments.length >= 1 ?
           <>
             {
-              comments.reverse().map(comment => (
+              comments.map(comment => (
                 <div className="card mb-3" key={comment._id}>
                   {/* _____________  Profil pic section __________________ */}
                   <div className="card-body">
