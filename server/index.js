@@ -46,7 +46,6 @@ app.use("/", userRoutes);
 app.use("/post", postRoutes);
 
 app.post("/comment/create", async (req, res) => {
-    console.log(req.body)
     const { email, comment, postId } = req.body;
     const foundUser = await User.findOne({ email });
     const foundPost = await Post.findById(postId);

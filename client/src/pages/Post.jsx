@@ -18,16 +18,20 @@ export default function Post() {
   const [updateComSec, setUpdateComSec] = useState(false)
 
   useEffect(() => {
-    getPost(params.id)
+    const fetchPosts = async () => {
+
+      getPost(params.id)
       .then(response => {
         setPost(response.data);
         setUpdateComSec(false);
-        console.log(response.data);
+        console.log("inside useEffect")
       })
       .catch(err => {
         console.log(err, "this a error");
         setUpdateComSec(false);
       })
+    };
+    fetchPosts();
   }, [updateComSec])
 
   // console.log(post)
@@ -40,14 +44,14 @@ export default function Post() {
             <div className='col-7 me-4'>
               {/* _____________  Post section __________________ */}
               <PostSection post={post} />
-              
+
               {/* _____________ Create comment section __________________ */}
-              <CommentForm setUpdateComSec={setUpdateComSec}/>
+              <CommentForm setUpdateComSec={setUpdateComSec} />
             </div>
 
             {/* _____________ see all comments section __________________ */}
             <div className='col-4'>
-              <CommentSection comments={post.commentIds}/>
+              <CommentSection comments={post.commentIds} />
             </div>
           </div>
           : <h2>Sorry we couldn't find this post</h2>

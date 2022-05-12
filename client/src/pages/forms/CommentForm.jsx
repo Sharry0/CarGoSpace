@@ -25,6 +25,7 @@ export default function CommentForm({setUpdateComSec}) {
             })
         // console.log(comment);
         // console.log(params.id);
+        console.log("handlesubmit")
         setUpdateComSec(true)
         resetComment();
     }

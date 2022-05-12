@@ -30,6 +30,7 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: add like, comment, edit functions ____________________________________________
 // ______________ TODO: "RangeError: Maximum call stack size exceeded" on first comments under posts _
 // ______________ TODO: comment submit with empty input error handler ________________________________
+// ______________ TODO: comment submit sometimes cant see your comment after _________________________
 
 function App() {
   return <div className='mt-5'>
