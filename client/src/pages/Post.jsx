@@ -1,6 +1,7 @@
 // ____________ Framwork & library import ________________
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import useToggleState from '../hooks/useToggleState';
 
 
 import PostSection from '../component/PostSection';
@@ -15,20 +16,20 @@ export default function Post() {
   const params = useParams();
 
   const [post, setPost] = useState(null);
-  const [updateComSec, setUpdateComSec] = useState(false)
+  const [updateComSec, setUpdateComSec] = useToggleState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
 
-      getPost(params.id)
+      await getPost(params.id)
       .then(response => {
         setPost(response.data);
-        setUpdateComSec(false);
+        setUpdateComSec();
         console.log("inside useEffect")
       })
       .catch(err => {
         console.log(err, "this a error");
-        setUpdateComSec(false);
+        setUpdateComSec();
       })
     };
     fetchPosts();
