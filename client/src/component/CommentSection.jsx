@@ -1,5 +1,4 @@
 
-import { useEffect } from "react";
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 
 export default function CommentSection({ comments }) {

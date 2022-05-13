@@ -16,7 +16,7 @@ export default function Post() {
   const params = useParams();
 
   const [post, setPost] = useState(null);
-  const [updateComSec, setUpdateComSec] = useToggleState(false)
+  const [updateComSec, setUpdateComSec] = useState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -24,15 +24,14 @@ export default function Post() {
       await getPost(params.id)
       .then(response => {
         setPost(response.data);
-        setUpdateComSec();
         console.log("inside useEffect")
       })
       .catch(err => {
         console.log(err, "this a error");
-        setUpdateComSec();
       })
     };
     fetchPosts();
+    setUpdateComSec(false);
   }, [updateComSec])
 
   // console.log(post)

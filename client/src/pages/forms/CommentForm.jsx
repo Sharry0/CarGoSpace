@@ -11,9 +11,9 @@ export default function CommentForm({setUpdateComSec}) {
 
     const [comment, setComment, resetComment] = useInputState("");
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
-        axios.post("http://localhost:8080/comment/create",
+        await axios.post("http://localhost:8080/comment/create",
             { email: cookie.email, comment, postId: params.id },
             { withCredentials: true }
         )
@@ -26,7 +26,7 @@ export default function CommentForm({setUpdateComSec}) {
         // console.log(comment);
         // console.log(params.id);
         console.log("handlesubmit")
-        setUpdateComSec()
+        setUpdateComSec(true)
         resetComment();
     }
 
