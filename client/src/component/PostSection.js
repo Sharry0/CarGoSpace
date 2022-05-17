@@ -10,12 +10,11 @@ import useToggleState from "../hooks/useToggleState";
 import useInputState from "../hooks/useInputState";
 import { CookieContext } from "../context/userContext";
 
-import { updatePost } from "../API/apiRequests";
+import { updatePost, likePost } from "../API/apiRequests";
 
 export default function PostSection({ post, setRunEffect }) {
-    const { cookie } = useContext(CookieContext)
+    const { cookie } = useContext(CookieContext);
 
-    
     const [editMode, toggleEditMode] = useToggleState(false);
     const [updatedTitle, setUpdatedTitle, resetUpdatedTitle] = useInputState(post.title);
     const [updatedText, setUpdatedText, resetUpdatedText] = useInputState(post.text);
@@ -26,8 +25,12 @@ export default function PostSection({ post, setRunEffect }) {
         toggleEditMode();
         setRunEffect(true);
         console.log(post.title, "titleeee")
-    }
-    console.log(cookie)
+    };
+
+    const handleLikeClick = () =>{
+        likePost({userId: cookie.id, postId: post._id});
+        setRunEffect(true);
+    };
 
     // ___________________ styling ____________________________
     const profileIconStyling = {
@@ -36,10 +39,6 @@ export default function PostSection({ post, setRunEffect }) {
         borderRadius: "50%",
         objectFit: "cover"
     };
-    const editBtnStyle = {
-        border: "none",
-        background: "transparent"
-    }
 
     return (
         <>
@@ -47,29 +46,35 @@ export default function PostSection({ post, setRunEffect }) {
                 !editMode ?
                 <div className="card">
                     <div className="card-body">
-                        {/* _____________  Profil pic section __________________ */}
+                        {/* _____________  Profil pic section ______________________________________ */}
                         <div className='d-flex flex-row align-items-center mb-2'>
                             <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
                                 alt="" style={profileIconStyling} className="me-2"
                             />
                             <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">{post.creator.username}</h6>
                         </div>
-                        {/* _____________  Post title & text section __________________ */}
+                        {/* _____________  Post title & text section ______________________________________ */}
                         <h5 className="card-title fw-bold fs-3 mt-2 text-dark text-opacity-75">{post.title}</h5>
                         <p className="card-text text-dark text-opacity-75">{post.text}</p>
                     </div>
                     <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row" style={{ fontSize: "0.8rem" }}>
-                        <div href="/SOMEWHERE" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                        {/* _____________  Show how many comments this post has  ___________________________ */}
+                        <div className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                             <img src={commentIcon} alt="" style={{ height: "15px", width: "15px" }} />
                             <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
                         </div>
-                        <button className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
+                        {/* _____________  Like button  ____________________________________________________ */}
+                        <button 
+                        className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                        onClick={handleLikeClick}
+                        >
                             <img src={likeIcon} alt="" style={{ height: "15px", width: "15px" }} />
                             <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
                         </button>
+                        {/* _____________  Edit button  ____________________________________________________ */}
                         <button
                             className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                            style={editBtnStyle}
+                            style={{border: "none", background: "transparent"}}
                             onClick={toggleEditMode}
                         >
                             <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />

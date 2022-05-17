@@ -45,14 +45,24 @@ export const getPost = (id) => {
         })
 };
 
-export const updatePost = (updatedPost) =>{
+export const updatePost = (updatedPost) => {
     return axios.patch(`http://localhost:8080/post/update`, updatedPost, { withCredentials: true })
-    .then((response) => {
-        return response
-    })
-    .catch((err) => {
-        throw "Post couldn't be found"
-    })
+        .then((response) => {
+            return response
+        })
+        .catch((err) => {
+            throw "Couldn't update post"
+        })
+}
+
+export const likePost = (ids) => {
+    return axios.patch(`http://localhost:8080/post/like`, ids, { withCredentials: true })
+        .then((response) => {
+            return response
+        })
+        .catch((err) => {
+            throw "Couldn't like this post"
+        })
 }
 
 

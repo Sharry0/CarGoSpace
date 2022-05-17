@@ -64,5 +64,17 @@ exports.updatePost = async (req, res) => {
 }
 
 exports.likePost = async (req, res) => {
-    console.log(req.body)
+    const {userId, postId} = req.body;
+    try {
+        const foundUser = await User.findById(userId);
+        const foundPost = await Post.findById(postId);
+        // console.log(foundUser)
+        // console.log(foundPost)
+        foundPost.likersIds.push(foundUser)
+        await foundPost.save()
+        res.send("Post was liked")
+    } catch (error) {
+        console.log("ERRRORR")
+        console.log(error)
+    }
 }
