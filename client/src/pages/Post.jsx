@@ -16,7 +16,7 @@ export default function Post() {
   const params = useParams();
 
   const [post, setPost] = useState(null);
-  const [updateComSec, setUpdateComSec] = useState(false)
+  const [runEffect, setRunEffect] = useState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,8 +31,8 @@ export default function Post() {
       })
     };
     fetchPosts();
-    setUpdateComSec(false);
-  }, [updateComSec])
+    setRunEffect(false);
+  }, [runEffect])
 
   // console.log(post)
   return (
@@ -42,11 +42,12 @@ export default function Post() {
           ? <div className='d-flex '>
             {/* _____________ See main post & create comment section __________________ */}
             <div className='col-7 me-4'>
+              
               {/* _____________  Post section __________________ */}
-              <PostSection post={post} />
+              <PostSection post={post} setRunEffect={setRunEffect}/>
 
               {/* _____________ Create comment section __________________ */}
-              <CommentForm setUpdateComSec={setUpdateComSec} />
+              <CommentForm setRunEffect={setRunEffect} />
             </div>
 
             {/* _____________ see all comments section __________________ */}

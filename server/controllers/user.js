@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
         //___  if user and input pw matches then create token/cookie, else clear token/cookies  ___
         if (foundUser && checkPw) {
             let tokenExpire = rememberMe ? "7d" : "1h";
-            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: tokenExpire });
+            const token = jwt.sign({ email, id: foundUser._id }, process.env.JWT_SECRET, { expiresIn: tokenExpire });
             res.cookie("jwt", token, { httpOnly: true });
             res.send("ypu made it");
         } else {

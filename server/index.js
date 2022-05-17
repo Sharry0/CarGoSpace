@@ -59,7 +59,7 @@ app.post("/comment/create", async (req, res) => {
         foundPost.commentIds.push(newComment);
         foundUser.commentIds.push(newComment);
         
-        console.log("before saves")
+        // console.log("before saves")
         await foundUser.save();
         await foundPost.save();
         await newComment.save();
@@ -71,6 +71,7 @@ app.post("/comment/create", async (req, res) => {
         res.status(400).send(error);
     };
 });
+
 
 
 

@@ -30,7 +30,9 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: add like, comment, edit functions ____________________________________________
 // ______________ TODO: "RangeError: Maximum call stack size exceeded" on first comments under posts _
 // ______________ TODO: comment submit with empty input error handler ________________________________
-// ______________ TODO: comment submit sometimes cant see your comment after _________________________
+// ______________ TODO: api calls add async/await clean up ___________________________________________
+// ______________ TODO: api in hook umwandeln ________________________________________________________
+// ______________ TODO: clean up code, APIs everywhere _______________________________________________
 
 function App() {
   return <div className='mt-5'>
@@ -39,13 +41,13 @@ function App() {
       {/* _______________ Navbar ______________________________________ */}
       <Navbar />
       {/* _______________ routes to the pages ______________________________________ */}
-      
+
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/feed" element={<IsAuth> <Feed /> </IsAuth>} />
         <Route path="/new" element={<IsAuth> <NewPost /> </IsAuth>} />
         <Route path="/post/:id" element={<IsAuth> <Post /> </IsAuth>} />
-        
+
         <Route path="/" element={<Home />} />
       </Routes>
 

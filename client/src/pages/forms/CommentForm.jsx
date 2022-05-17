@@ -5,7 +5,7 @@ import { CookieContext } from "../../context/userContext";
 import useInputState from "../../hooks/useInputState"
 import axios from "axios";
 
-export default function CommentForm({setUpdateComSec}) {
+export default function CommentForm({setRunEffect}) {
     const { cookie } = useContext(CookieContext);
     const params = useParams();
 
@@ -26,7 +26,7 @@ export default function CommentForm({setUpdateComSec}) {
         // console.log(comment);
         // console.log(params.id);
         console.log("handlesubmit")
-        setUpdateComSec(true)
+        setRunEffect(true);
         resetComment();
     }
 

@@ -6,8 +6,6 @@ import LoginForm from './forms/LoginForm';
 import "../style/Register.css"
 
 
-
-
 export default function Register() {
     const location = useLocation();
     useEffect(()=>{

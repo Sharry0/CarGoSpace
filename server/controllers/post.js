@@ -34,24 +34,35 @@ exports.createPost = async (req, res) => {
     }
 };
 
-exports.showPost = async (req,res)=>{
-    const {id} = req.params;
+exports.showPost = async (req, res) => {
+    const { id } = req.params;
     try {
         const foundPost = await Post.findById(id)
-        .populate("creator", "username userImage")
-        // .populate("commentIds", "comment")
-        .populate({
-            path: "commentIds",
-            select: "comment createdAt",
-            populate: {
-                path: "creator",
-                select: "username userImage",
-            },
-            options:{sort: { createdAt: -1}}
-        })
-        
+            .populate("creator", "username userImage")
+            // .populate("commentIds", "comment")
+            .populate({
+                path: "commentIds",
+                select: "comment createdAt",
+                populate: {
+                    path: "creator",
+                    select: "username userImage",
+                },
+                options: { sort: { createdAt: -1 } }
+            })
+
         res.send(foundPost)
     } catch (error) {
         res.status(404).send(error)
     }
 };
+
+exports.updatePost = async (req, res) => {
+    const { updatedTitle, updatedText, id } = req.body;
+    const updatedPost = await Post.findByIdAndUpdate(id, { title: updatedTitle, text: updatedText });
+    updatedPost.save();
+    res.send("update successful")
+}
+
+exports.likePost = async (req, res) => {
+    console.log(req.body)
+}

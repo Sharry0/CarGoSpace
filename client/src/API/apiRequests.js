@@ -1,9 +1,8 @@
 
 import axios from "axios";
 
+// ________ get cookies from browser _________________________________________________________
 export const getCookie = () => {
-
-    // ________ get cookies from browser _________________________________________________________
     return axios.get("http://localhost:8080/getCookie", { withCredentials: true })
         .then((response) => {
             return response
@@ -45,5 +44,15 @@ export const getPost = (id) => {
             throw "Post couldn't be found"
         })
 };
+
+export const updatePost = (updatedPost) =>{
+    return axios.patch(`http://localhost:8080/post/update`, updatedPost, { withCredentials: true })
+    .then((response) => {
+        return response
+    })
+    .catch((err) => {
+        throw "Post couldn't be found"
+    })
+}
 
 
