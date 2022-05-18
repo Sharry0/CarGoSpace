@@ -61,15 +61,13 @@ exports.updatePost = async (req, res) => {
     const updatedPost = await Post.findByIdAndUpdate(id, { title: updatedTitle, text: updatedText });
     updatedPost.save();
     res.send("update successful")
-}
+};
 
 exports.likePost = async (req, res) => {
     const {userId, postId} = req.body;
     try {
         const foundUser = await User.findById(userId);
         const foundPost = await Post.findById(postId);
-        // console.log(foundUser)
-        // console.log(foundPost)
         foundPost.likersIds.push(foundUser)
         await foundPost.save()
         res.send("Post was liked")
@@ -77,4 +75,25 @@ exports.likePost = async (req, res) => {
         console.log("ERRRORR")
         console.log(error)
     }
-}
+};
+
+exports.unlikePost = async (req, res) => {
+    const {userId, postId} = req.body;
+    try {
+        const foundUser = await User.findById(userId);
+        const foundPost = await Post.findById(postId);
+        foundPost.likersIds.filter(likeId => {
+            console.log(likeId === foundUser._id)
+            console.log(likeId)
+            console.log(userId)
+            likeId !== userId
+        })
+        // console.log(foundPost)
+        // console.log(userId)
+        await foundPost.save()
+        res.send("Post was unliked")
+    } catch (error) {
+        console.log("ERRRORR")
+        console.log(error)
+    }
+};

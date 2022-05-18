@@ -3,14 +3,15 @@ import { useContext } from "react";
 // ____________ Icon & images import _____________________
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
-import likeIcon from "../images/icons/like_icon.svg";
+import likeIconEmpty from "../images/icons/like_icon.svg";
+import likeIconFull from "../images/icons/like_icon_full.svg"
 import editIcon from "../images/icons/edit_icon.svg";
 // ____________ Costum hooks & context ___________________
 import useToggleState from "../hooks/useToggleState";
 import useInputState from "../hooks/useInputState";
 import { CookieContext } from "../context/userContext";
 
-import { updatePost, likePost } from "../API/apiRequests";
+import { updatePost, likePost, unlikePost } from "../API/apiRequests";
 
 export default function PostSection({ post, setRunEffect }) {
     const { cookie } = useContext(CookieContext);
@@ -21,17 +22,27 @@ export default function PostSection({ post, setRunEffect }) {
 
     const handleEditSubmit = (evt) => {
         evt.preventDefault();
-        updatePost({updatedTitle, updatedText, id: post._id});
+        updatePost({ updatedTitle, updatedText, id: post._id });
         toggleEditMode();
         setRunEffect(true);
         console.log(post.title, "titleeee")
     };
+    
+    // __________ check if current user id is in likes array from Post, __________
+    // __________ return true if so and false if not _____________________________
+    const hasLiked = post.likersIds.some(element => element === cookie.id);
 
-    const handleLikeClick = () =>{
-        likePost({userId: cookie.id, postId: post._id});
+
+    const handleLikeClick = () => {
+        if(hasLiked){
+            unlikePost({ userId: cookie.id, postId: post._id });
+        }
+        if(!hasLiked){
+            likePost({ userId: cookie.id, postId: post._id });
+        };
         setRunEffect(true);
     };
-
+    
     // ___________________ styling ____________________________
     const profileIconStyling = {
         height: "35px",
@@ -64,18 +75,22 @@ export default function PostSection({ post, setRunEffect }) {
                             <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
                         </div>
                         {/* _____________  Like button  ____________________________________________________ */}
-                        <button 
-                        className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                        onClick={handleLikeClick}
+                        <button
+                            className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                            onClick={handleLikeClick}
+                            style={{ border: "none", background: "transparent" }}
                         >
-                            <img src={likeIcon} alt="" style={{ height: "15px", width: "15px" }} />
+                            <img src={hasLiked ? likeIconFull : likeIconEmpty}
+                                alt="" style={{ height: "15px", width: "15px" }}
+                            />
                             <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
                         </button>
                         {/* _____________  Edit button  ____________________________________________________ */}
                         <button
                             className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                            style={{border: "none", background: "transparent"}}
+                            style={{ border: "none", background: "transparent" }}
                             onClick={toggleEditMode}
+                            
                         >
                             <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
                             <p className='my-0 ms-1'>Edit</p>

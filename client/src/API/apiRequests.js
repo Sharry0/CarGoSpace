@@ -53,7 +53,7 @@ export const updatePost = (updatedPost) => {
         .catch((err) => {
             throw "Couldn't update post"
         })
-}
+};
 
 export const likePost = (ids) => {
     return axios.patch(`http://localhost:8080/post/like`, ids, { withCredentials: true })
@@ -63,6 +63,16 @@ export const likePost = (ids) => {
         .catch((err) => {
             throw "Couldn't like this post"
         })
-}
+};
+
+export const unlikePost = (ids) => {
+    return axios.patch(`http://localhost:8080/post/unlike`, ids, { withCredentials: true })
+        .then((response) => {
+            return response
+        })
+        .catch((err) => {
+            throw "Couldn't like this post"
+        })
+};
 
 

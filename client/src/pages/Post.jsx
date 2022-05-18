@@ -24,7 +24,7 @@ export default function Post() {
       await getPost(params.id)
       .then(response => {
         setPost(response.data);
-        console.log("inside useEffect")
+        // console.log("inside useEffect")
       })
       .catch(err => {
         console.log(err, "this a error");
