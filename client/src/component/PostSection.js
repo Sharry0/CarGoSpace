@@ -20,19 +20,22 @@ export default function PostSection({ post, setRunEffect }) {
     const [updatedTitle, setUpdatedTitle, resetUpdatedTitle] = useInputState(post.title);
     const [updatedText, setUpdatedText, resetUpdatedText] = useInputState(post.text);
 
+    // ________ on submit when in edit more, run updatePost API call ______________
+    // ________ toggle out of edit mode and run useEffect to show updated post ____
     const handleEditSubmit = (evt) => {
         evt.preventDefault();
         updatePost({ updatedTitle, updatedText, id: post._id });
         toggleEditMode();
         setRunEffect(true);
-        console.log(post.title, "titleeee")
     };
     
     // __________ check if current user id is in likes array from Post, __________
     // __________ return true if so and false if not _____________________________
     const hasLiked = post.likersIds.some(element => element === cookie.id);
-
-
+    
+    
+    // __________ depending on if current user has liked this post, _______________
+    // __________ run like API call or unlike API call on click of btn ____________
     const handleLikeClick = () => {
         if(hasLiked){
             unlikePost({ userId: cookie.id, postId: post._id });
@@ -83,7 +86,7 @@ export default function PostSection({ post, setRunEffect }) {
                             <img src={hasLiked ? likeIconFull : likeIconEmpty}
                                 alt="" style={{ height: "15px", width: "15px" }}
                             />
-                            <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
+                            <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s": ""}`}</p>
                         </button>
                         {/* _____________  Edit button  ____________________________________________________ */}
                         <button

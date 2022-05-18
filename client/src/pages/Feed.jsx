@@ -2,7 +2,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
-import likeIcon from "../images/icons/like_icon.svg";
+import likeIconEmpty from "../images/icons/like_icon.svg";
+import likeIconFull from "../images/icons/like_icon_full.svg"
 import editIcon from "../images/icons/edit_icon.svg";
 import { CookieContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
@@ -10,23 +11,28 @@ import { getPosts } from '../API/apiRequests';
 
 
 export default function Feed() {
-    const { isLogged } = useContext(CookieContext);
+    const { cookie } = useContext(CookieContext);
     const navigate = useNavigate();
 
-
-    const [posts, setPosts] = useState(null)
+    const [posts, setPosts] = useState(null);
 
     // ______________ Call API to get all Posts and save them in posts state _____________________________
     useEffect(() => {
         getPosts()
             .then(response => setPosts(response.data))
             .catch(err => console.log(err, "this a error"))
-    }, [])
+    }, []);
 
     const handlePostClick = (id) => {
         navigate(`/post/${id}`)
-    }
+    };
 
+    // __________ check if current user id is in likes array from Post, __________
+    // __________ return true if so and false if not _____________________________
+    const checkIfUserLiked = (post) =>{
+        return post.likersIds.some(element => element === cookie.id);
+    }
+    
     // ___________________ styling ____________________________
     const profileIconStyling = {
         height: "35px",
@@ -94,7 +100,6 @@ export default function Feed() {
                             readOnly
                             onClick={() => navigate("/new")}
                         />
-
                     </div>
                     {/* _______________Show feed content______________________________________ */}
 
@@ -116,7 +121,7 @@ export default function Feed() {
                                         />
                                         <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">{post.creator.username}</h6>
                                     </div>
-                                    <div role="button" onClick={()=> handlePostClick(post._id)}>
+                                    <div role="button" onClick={() => handlePostClick(post._id)}>
                                         {/* _______________Post title______________________________________ */}
                                         <h5 className="card-title fw-bold fs-3 pt-2 text-dark text-opacity-75">{post.title}</h5>
                                         {/* _______________Post text______________________________________ */}
@@ -130,7 +135,7 @@ export default function Feed() {
                                         <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={likeIcon} alt="" style={{ height: "15px", width: "15px" }} />
+                                        <img src={checkIfUserLiked(post) ? likeIconFull : likeIconEmpty} alt="" style={{ height: "15px", width: "15px" }} />
                                         <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
                                     </a>
                                     <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
@@ -140,12 +145,8 @@ export default function Feed() {
                                 </div>
                             </div>
                         ))}
-
-
-
                 </div>
             </main>
-
         </div>
     )
 }

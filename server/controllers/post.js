@@ -64,7 +64,7 @@ exports.updatePost = async (req, res) => {
 };
 
 exports.likePost = async (req, res) => {
-    const {userId, postId} = req.body;
+    const { userId, postId } = req.body;
     try {
         const foundUser = await User.findById(userId);
         const foundPost = await Post.findById(postId);
@@ -78,18 +78,11 @@ exports.likePost = async (req, res) => {
 };
 
 exports.unlikePost = async (req, res) => {
-    const {userId, postId} = req.body;
+    const { userId, postId } = req.body;
     try {
-        const foundUser = await User.findById(userId);
-        const foundPost = await Post.findById(postId);
-        foundPost.likersIds.filter(likeId => {
-            console.log(likeId === foundUser._id)
-            console.log(likeId)
-            console.log(userId)
-            likeId !== userId
-        })
-        // console.log(foundPost)
-        // console.log(userId)
+        const foundPost = await Post.findByIdAndUpdate(postId, {
+            $pull: {likersIds: userId}
+        });
         await foundPost.save()
         res.send("Post was unliked")
     } catch (error) {

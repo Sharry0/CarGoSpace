@@ -25,7 +25,6 @@ export default function CommentForm({setRunEffect}) {
             })
         // console.log(comment);
         // console.log(params.id);
-        console.log("handlesubmit")
         setRunEffect(true);
         resetComment();
     }

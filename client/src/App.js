@@ -21,18 +21,16 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: limit feed to 20 post, scroll to bottom to load more _________________________
 // ______________ TODO: limit post height for to long text, hide overflow & "read more" btn __________
 // ______________ TODO: if logged in, restrict access to /register ___________________________________
-// ______________ TODO: add /post/:id route __________________________________________________________
 // ______________ TODO: left footer card (about, poilcy,...), sticky top _____________________________
 // ______________ TODO: Profil editing page __________________________________________________________
 // ______________ TODO: Add creation date to posts ___________________________________________________
 // ______________ TODO: Edit button only for users own post visible __________________________________
 // ______________ TODO: wrapping isAuth around almost every path, looks stupid _______________________
 // ______________ TODO: add like, comment, edit functions ____________________________________________
-// ______________ TODO: "RangeError: Maximum call stack size exceeded" on first comments under posts _
 // ______________ TODO: comment submit with empty input error handler ________________________________
 // ______________ TODO: api calls add async/await clean up ___________________________________________
 // ______________ TODO: api in hook umwandeln ________________________________________________________
-// ______________ TODO: clean up code, APIs everywhere _______________________________________________
+// ______________ TODO: clean up code, APIs everywhere, console.log() ________________________________
 
 function App() {
   return <div className='mt-5'>
