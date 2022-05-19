@@ -5,7 +5,7 @@ import { CookieContext } from "../../context/userContext";
 import useInputState from "../../hooks/useInputState"
 import axios from "axios";
 
-export default function CommentForm({setRunEffect}) {
+export default function CommentForm({ setRunEffect }) {
     const { cookie } = useContext(CookieContext);
     const params = useParams();
 
@@ -18,7 +18,7 @@ export default function CommentForm({setRunEffect}) {
             { withCredentials: true }
         )
             .then(response => {
-                console.log(response)
+                console.log(response.data)
             })
             .catch(err => {
                 console.log(err, "ERRORRR")

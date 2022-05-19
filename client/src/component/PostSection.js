@@ -24,28 +24,31 @@ export default function PostSection({ post, setRunEffect }) {
     // ________ toggle out of edit mode and run useEffect to show updated post ____
     const handleEditSubmit = (evt) => {
         evt.preventDefault();
-        updatePost({ updatedTitle, updatedText, id: post._id });
+        updatePost({ updatedTitle, updatedText, postId: post._id, currUserId: cookie.id });
         toggleEditMode();
         setRunEffect(true);
     };
-    
+
     // __________ check if current user id is in likes array from Post, __________
     // __________ return true if so and false if not _____________________________
     const hasLiked = post.likersIds.some(element => element === cookie.id);
-    
-    
+
+
     // __________ depending on if current user has liked this post, _______________
     // __________ run like API call or unlike API call on click of btn ____________
     const handleLikeClick = () => {
-        if(hasLiked){
+        if (hasLiked) {
             unlikePost({ userId: cookie.id, postId: post._id });
         }
-        if(!hasLiked){
+        if (!hasLiked) {
             likePost({ userId: cookie.id, postId: post._id });
         };
         setRunEffect(true);
     };
-    
+
+    // _____ check if post creator id and current user (cookie id) is the same  ______
+    const showEditBtn = post.creator._id === cookie.id;
+
     // ___________________ styling ____________________________
     const profileIconStyling = {
         height: "35px",
@@ -75,7 +78,7 @@ export default function PostSection({ post, setRunEffect }) {
                         {/* _____________  Show how many comments this post has  ___________________________ */}
                         <div className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
                             <img src={commentIcon} alt="" style={{ height: "15px", width: "15px" }} />
-                            <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
+                            <p className='my-0 ms-1'>{`${post.commentIds.length} Comment${post.commentIds.length !== 1 ? "s" : ""}`}</p>
                         </div>
                         {/* _____________  Like button  ____________________________________________________ */}
                         <button
@@ -86,18 +89,20 @@ export default function PostSection({ post, setRunEffect }) {
                             <img src={hasLiked ? likeIconFull : likeIconEmpty}
                                 alt="" style={{ height: "15px", width: "15px" }}
                             />
-                            <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s": ""}`}</p>
+                            <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
                         </button>
                         {/* _____________  Edit button  ____________________________________________________ */}
-                        <button
-                            className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                            style={{ border: "none", background: "transparent" }}
-                            onClick={toggleEditMode}
-                            
-                        >
-                            <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
-                            <p className='my-0 ms-1'>Edit</p>
-                        </button>
+                        {
+                            showEditBtn &&
+                            <button
+                                className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                style={{ border: "none", background: "transparent" }}
+                                onClick={toggleEditMode}
+                            >
+                                <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
+                                <p className='my-0 ms-1'>Edit</p>
+                            </button>
+                        }
                     </div>
                 </div>
                 :

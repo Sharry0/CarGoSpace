@@ -1,8 +1,6 @@
 
 const Post = require("../models/postSchema");
-const { populate } = require("../models/userSchema");
 const User = require("../models/userSchema");
-
 
 exports.allPosts = async (req, res) => {
     // ______ error handling where? _________
@@ -57,10 +55,17 @@ exports.showPost = async (req, res) => {
 };
 
 exports.updatePost = async (req, res) => {
-    const { updatedTitle, updatedText, id } = req.body;
-    const updatedPost = await Post.findByIdAndUpdate(id, { title: updatedTitle, text: updatedText });
-    updatedPost.save();
-    res.send("update successful")
+    const { updatedTitle, updatedText, postId, currUserId } = req.body;
+    const foundPost = await Post.findById(postId)
+    if (foundPost.creator._id == currUserId) {
+        const updatePost = await Post.findByIdAndUpdate(postId, { title: updatedTitle, text: updatedText });
+        await updatePost.save();
+        console.log("____________line___________")
+        res.send("update successful")
+    } else {
+        console.log("You are not the creator of this post")
+        res.send("You are not the creator of this post")
+    }
 };
 
 exports.likePost = async (req, res) => {
@@ -81,7 +86,7 @@ exports.unlikePost = async (req, res) => {
     const { userId, postId } = req.body;
     try {
         const foundPost = await Post.findByIdAndUpdate(postId, {
-            $pull: {likersIds: userId}
+            $pull: { likersIds: userId }
         });
         await foundPost.save()
         res.send("Post was unliked")
