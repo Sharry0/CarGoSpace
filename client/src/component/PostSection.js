@@ -13,6 +13,8 @@ import useToggleState from "../hooks/useToggleState";
 import useInputState from "../hooks/useInputState";
 import { CookieContext } from "../context/userContext";
 
+import DeletePopup from "./DeletePopup";
+
 import { updatePost, likePost, unlikePost } from "../API/apiRequests";
 
 export default function PostSection({ post, setRunEffect }) {
@@ -22,7 +24,7 @@ export default function PostSection({ post, setRunEffect }) {
     const [editMode, toggleEditMode] = useToggleState(false);
     const [updatedTitle, setUpdatedTitle] = useInputState(post.title);
     const [updatedText, setUpdatedText] = useInputState(post.text);
-    const [deletePopup, setDeletePopup] = useToggleState(false);
+    const [deletePopup, toggleDeletePopup] = useToggleState(false);
 
     useEffect(() => {
         if (location.state && location.state.editMode !== editMode) toggleEditMode();
@@ -61,8 +63,10 @@ export default function PostSection({ post, setRunEffect }) {
     };
 
     // ____ 
-    const handleDeleteClick = () =>{
-        
+    const handleDeleteClick = (command) => {
+        if (command === "delete") console.log("pressed delete");
+        if (command === "cancel") console.log("pressed cancel");
+        if (deletePopup) toggleDeletePopup();
     };
 
     // _____ check if post creator id and current user (cookie id) is the same  ______
@@ -78,6 +82,10 @@ export default function PostSection({ post, setRunEffect }) {
 
     return (
         <>
+            {
+                deletePopup &&
+                <DeletePopup handleDeleteClick={handleDeleteClick} />
+            }
             {post &&
                 !editMode ?
                 <div className="card">
@@ -112,7 +120,7 @@ export default function PostSection({ post, setRunEffect }) {
                             />
                             <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
                         </button>
-                        {/* _____________  Edit button  ____________________________________________________ */}
+                        {/* _____________  Edit & Delete button  ____________________________________________________ */}
                         {
                             showEditAndDelBtn &&
                             <>
@@ -127,7 +135,7 @@ export default function PostSection({ post, setRunEffect }) {
                                 <button
                                     className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
                                     style={{ border: "none", background: "transparent" }}
-                                    onClick={handleDeleteClick}
+                                    onClick={toggleDeletePopup}
                                 >
                                     <img src={deleteIcon} style={{ height: "15px", width: "15px" }} alt="Edit icon" />
                                     <p className='my-0 ms-1'>Edit</p>
