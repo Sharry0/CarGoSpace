@@ -16,15 +16,7 @@ export default function CommentForm({ setRunEffect }) {
         await axios.post("http://localhost:8080/comment/create",
             { email: cookie.email, comment, postId: params.id },
             { withCredentials: true }
-        )
-            .then(response => {
-                console.log(response.data)
-            })
-            .catch(err => {
-                console.log(err, "ERRORRR")
-            })
-        // console.log(comment);
-        // console.log(params.id);
+        );
         setRunEffect(true);
         resetComment();
     }

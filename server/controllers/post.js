@@ -9,11 +9,14 @@ exports.allPosts = async (req, res) => {
         .populate("creator", "username userImage email")
         .sort({ createdAt: -1 })
 
-    res.send(populatedPosts)
+        if(populatedPosts){
+            res.send(populatedPosts)
+        } else{
+            res.status(400).send("Something went wrong")
+        }
 };
 
 exports.createPost = async (req, res) => {
-
     const { title, textarea, email } = req.body
     const foundUser = await User.findOne({ email });
     try {
@@ -62,7 +65,6 @@ exports.updatePost = async (req, res) => {
         await updatePost.save();
         res.send("update successful")
     } else {
-        console.log("You are not the creator of this post")
         res.send("You are not the creator of this post")
     }
 };
@@ -76,8 +78,7 @@ exports.likePost = async (req, res) => {
         await foundPost.save()
         res.send("Post was liked")
     } catch (error) {
-        console.log("ERRRORR")
-        console.log(error)
+        res.send("Please try again later")
     }
 };
 
@@ -90,7 +91,6 @@ exports.unlikePost = async (req, res) => {
         await foundPost.save()
         res.send("Post was unliked")
     } catch (error) {
-        console.log("ERRRORR")
-        console.log(error)
+        res.send("Please try again later")
     }
 };

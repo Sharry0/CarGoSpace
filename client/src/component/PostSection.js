@@ -7,6 +7,7 @@ import commentIcon from "../images/icons/comment_icon.svg";
 import likeIconEmpty from "../images/icons/like_icon.svg";
 import likeIconFull from "../images/icons/like_icon_full.svg"
 import editIcon from "../images/icons/edit_icon.svg";
+import deleteIcon from "../images/icons/delete_icon.svg"
 // ____________ Costum hooks & context ___________________
 import useToggleState from "../hooks/useToggleState";
 import useInputState from "../hooks/useInputState";
@@ -19,12 +20,14 @@ export default function PostSection({ post, setRunEffect }) {
     const location = useLocation();
 
     const [editMode, toggleEditMode] = useToggleState(false);
-    const [updatedTitle, setUpdatedTitle, resetUpdatedTitle] = useInputState(post.title);
-    const [updatedText, setUpdatedText, resetUpdatedText] = useInputState(post.text);
+    const [updatedTitle, setUpdatedTitle] = useInputState(post.title);
+    const [updatedText, setUpdatedText] = useInputState(post.text);
+    const [deletePopup, setDeletePopup] = useToggleState(false);
 
-    useEffect(()=>{
-        if(location.state && location.state.editMode !== editMode) toggleEditMode()
-    }, [location])
+    useEffect(() => {
+        if (location.state && location.state.editMode !== editMode) toggleEditMode();
+        console.log("fish effect")
+    })
 
     // ________ on submit when in edit more, run updatePost API call ______________
     // ________ toggle out of edit mode and run useEffect to show updated post ____
@@ -52,13 +55,18 @@ export default function PostSection({ post, setRunEffect }) {
     };
 
     // ____ if User cancels editing process, reset inputs and turn of editmode _____
-    const cancelEditMode = (evt) =>{
+    const cancelEditMode = (evt) => {
         evt.preventDefault();
         toggleEditMode();
-    }
+    };
+
+    // ____ 
+    const handleDeleteClick = () =>{
+        
+    };
 
     // _____ check if post creator id and current user (cookie id) is the same  ______
-    const showEditBtn = post.creator._id === cookie.id;
+    const showEditAndDelBtn = post.creator._id === cookie.id;
 
     // ___________________ styling ____________________________
     const profileIconStyling = {
@@ -77,7 +85,8 @@ export default function PostSection({ post, setRunEffect }) {
                         {/* _____________  Profil pic section ______________________________________ */}
                         <div className='d-flex flex-row align-items-center mb-2'>
                             <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
-                             style={profileIconStyling} className="me-2"
+                                style={profileIconStyling} className="me-2"
+                                alt="Profile icon"
                             />
                             <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">{post.creator.username}</h6>
                         </div>
@@ -88,7 +97,7 @@ export default function PostSection({ post, setRunEffect }) {
                     <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row" style={{ fontSize: "0.8rem" }}>
                         {/* _____________  Show how many comments this post has  ___________________________ */}
                         <div className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                            <img src={commentIcon} style={{ height: "15px", width: "15px" }} />
+                            <img src={commentIcon} style={{ height: "15px", width: "15px" }} alt="Comment icon" />
                             <p className='my-0 ms-1'>{`${post.commentIds.length} Comment${post.commentIds.length !== 1 ? "s" : ""}`}</p>
                         </div>
                         {/* _____________  Like button  ____________________________________________________ */}
@@ -98,21 +107,32 @@ export default function PostSection({ post, setRunEffect }) {
                             style={{ border: "none", background: "transparent" }}
                         >
                             <img src={hasLiked ? likeIconFull : likeIconEmpty}
-                             style={{ height: "15px", width: "15px" }}
+                                style={{ height: "15px", width: "15px" }}
+                                alt="Like icon"
                             />
                             <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
                         </button>
                         {/* _____________  Edit button  ____________________________________________________ */}
                         {
-                            showEditBtn &&
-                            <button
-                                className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                                style={{ border: "none", background: "transparent" }}
-                                onClick={toggleEditMode}
-                            >
-                                <img src={editIcon} style={{ height: "15px", width: "15px" }} />
-                                <p className='my-0 ms-1'>Edit</p>
-                            </button>
+                            showEditAndDelBtn &&
+                            <>
+                                <button
+                                    className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                    style={{ border: "none", background: "transparent" }}
+                                    onClick={toggleEditMode}
+                                >
+                                    <img src={editIcon} style={{ height: "15px", width: "15px" }} alt="Edit icon" />
+                                    <p className='my-0 ms-1'>Edit</p>
+                                </button>
+                                <button
+                                    className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                    style={{ border: "none", background: "transparent" }}
+                                    onClick={handleDeleteClick}
+                                >
+                                    <img src={deleteIcon} style={{ height: "15px", width: "15px" }} alt="Edit icon" />
+                                    <p className='my-0 ms-1'>Edit</p>
+                                </button>
+                            </>
                         }
                     </div>
                 </div>
@@ -124,7 +144,8 @@ export default function PostSection({ post, setRunEffect }) {
                             {/* _____________  Profil pic section __________________ */}
                             <div className='d-flex flex-row align-items-center mb-2'>
                                 <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
-                                 style={profileIconStyling} className="me-2"
+                                    style={profileIconStyling} className="me-2"
+                                    alt="Profile icon"
                                 />
                                 <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">
                                     {post.creator.username}

@@ -30,6 +30,7 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: api calls add async/await clean up ___________________________________________
 // ______________ TODO: api in hook umwandeln ________________________________________________________
 // ______________ TODO: clean up code, APIs everywhere, console.log() ________________________________
+// ______________ TODO: Darkmode / lightmode _________________________________________________________
 
 function App() {
   return <div className='mt-5'>

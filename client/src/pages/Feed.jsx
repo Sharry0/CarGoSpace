@@ -5,6 +5,7 @@ import commentIcon from "../images/icons/comment_icon.svg";
 import likeIconEmpty from "../images/icons/like_icon.svg";
 import likeIconFull from "../images/icons/like_icon_full.svg"
 import editIcon from "../images/icons/edit_icon.svg";
+import deleteIcon from "../images/icons/delete_icon.svg";
 import { CookieContext } from '../context/userContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { getPosts, likePost, unlikePost } from '../API/apiRequests';
@@ -22,7 +23,7 @@ export default function Feed() {
         getPosts()
             .then(response => setPosts(response.data))
             .catch(err => console.log(err, "this a error"))
-            setRunEffect(false)
+        setRunEffect(false)
     }, [runEffect]);
 
     const handlePostClick = (id) => {
@@ -34,7 +35,7 @@ export default function Feed() {
     const checkIfUserLiked = (post) => {
         return post.likersIds.some(element => element === cookie.id);
     }
-    
+
     // __________ depending on if current user has liked this post, _______________
     // __________ run like API call or unlike API call on click of btn ____________
     const handleLikeClick = (post) => {
@@ -107,7 +108,7 @@ export default function Feed() {
                     {/* _______________Create post______________________________________ */}
                     <div className='card p-3 d-flex flex-row mb-3 shadow'>
                         {/* _______________Profil picture icon______________________________________ */}
-                        <img src={emptyProfilImg} style={profileIconStyling} className="me-4" />
+                        <img src={emptyProfilImg} style={profileIconStyling} className="me-4" alt="Profil image"/>
                         {/* _______________Create post input link______________________________________ */}
                         {/* ____________add a link to creat page to this input */}
                         <input
@@ -133,7 +134,8 @@ export default function Feed() {
                                     {/* _______________Post profile pic & name______________________________________ */}
                                     <div className='d-flex flex-row align-items-center'>
                                         <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
-                                         style={profileIconStyling} className="me-2"
+                                            alt="Profil image"
+                                            style={profileIconStyling} className="me-2"
                                             onClick={() => console.log("clicked profile")}
                                             role="button"
                                         />
@@ -151,33 +153,41 @@ export default function Feed() {
                                     {/* _______________ Comment Icon ______________________________________ */}
                                     <Link
                                         to={`/post/${post._id}`}
-                                        style={{ border: "none", background: "transparent" }}
                                         className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
                                     >
-                                        <img src={commentIcon} style={{ height: "15px", width: "15px" }} />
+                                        <img src={commentIcon} alt="Comment icon" style={{ height: "15px", width: "15px" }} />
                                         <p className='my-0 ms-1'>{`${post.commentIds.length} Comment${post.commentIds.length !== 1 ? "s" : ""}`}</p>
                                     </Link>
                                     {/* _______________ Like Icon ______________________________________ */}
                                     <button
                                         style={{ border: "none", background: "transparent" }}
                                         className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                                        onClick={()=>handleLikeClick(post)}
+                                        onClick={() => handleLikeClick(post)}
                                     >
-                                        <img src={checkIfUserLiked(post) ? likeIconFull : likeIconEmpty} style={{ height: "15px", width: "15px" }} />
+                                        <img src={checkIfUserLiked(post) ? likeIconFull : likeIconEmpty} alt="Like icon" style={{ height: "15px", width: "15px" }} />
                                         <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
                                     </button>
                                     {/* _______________ Edit Icon ______________________________________ */}
+                                    {/* _______________ ADD ALT PROP TO IMG !!!!!! ______________________________________ */}
                                     {
                                         checkUserAndCreator(post) &&
-                                        <Link
-                                            to={`/post/${post._id}`}
-                                            state={{editMode: true}}
-                                            style={{ border: "none", background: "transparent" }}
-                                            className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
-                                        >
-                                            <img src={editIcon} style={{ height: "15px", width: "15px" }} />
-                                            <p className='my-0 ms-1'>Edit</p>
-                                        </Link>
+                                        <>
+                                            <Link
+                                                to={`/post/${post._id}`}
+                                                state={{ editMode: true }}
+                                                className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                            >
+                                                <img src={editIcon} alt="Edit icon" style={{ height: "15px", width: "15px" }} />
+                                                <p className='my-0 ms-1'>Edit</p>
+                                            </Link>
+                                            <Link
+                                                to={`/post/${post._id}`}
+                                                className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                            >
+                                                <img src={deleteIcon} alt="Delete icon" style={{ height: "15px", width: "15px" }} />
+                                                <p className='my-0 ms-1'>Delete</p>
+                                            </Link>
+                                        </>
                                     }
                                 </div>
                             </div>
