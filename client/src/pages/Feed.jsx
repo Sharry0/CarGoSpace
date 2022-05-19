@@ -6,8 +6,8 @@ import likeIconEmpty from "../images/icons/like_icon.svg";
 import likeIconFull from "../images/icons/like_icon_full.svg"
 import editIcon from "../images/icons/edit_icon.svg";
 import { CookieContext } from '../context/userContext';
-import { useNavigate } from 'react-router-dom';
-import { getPosts } from '../API/apiRequests';
+import { useNavigate, Link } from 'react-router-dom';
+import { getPosts, likePost, unlikePost } from '../API/apiRequests';
 
 
 export default function Feed() {
@@ -15,13 +15,15 @@ export default function Feed() {
     const navigate = useNavigate();
 
     const [posts, setPosts] = useState(null);
+    const [runEffect, setRunEffect] = useState(false)
 
-    // ______________ Call API to get all Posts and save them in posts state _____________________________
+    // _________ Call API to get all Posts and save them in posts state ____________
     useEffect(() => {
         getPosts()
             .then(response => setPosts(response.data))
             .catch(err => console.log(err, "this a error"))
-    }, []);
+            setRunEffect(false)
+    }, [runEffect]);
 
     const handlePostClick = (id) => {
         navigate(`/post/${id}`)
@@ -29,10 +31,27 @@ export default function Feed() {
 
     // __________ check if current user id is in likes array from Post, __________
     // __________ return true if so and false if not _____________________________
-    const checkIfUserLiked = (post) =>{
+    const checkIfUserLiked = (post) => {
         return post.likersIds.some(element => element === cookie.id);
     }
     
+    // __________ depending on if current user has liked this post, _______________
+    // __________ run like API call or unlike API call on click of btn ____________
+    const handleLikeClick = (post) => {
+        if (checkIfUserLiked(post)) {
+            unlikePost({ userId: cookie.id, postId: post._id });
+        }
+        if (!checkIfUserLiked(post)) {
+            likePost({ userId: cookie.id, postId: post._id });
+        };
+        setRunEffect(true);
+    };
+
+    // __________ check if current user and post creator id are the same, _______
+    // __________ return a boolean ______________________________________________
+    const checkUserAndCreator = (post) => {
+        return post.creator._id === cookie.id
+    }
     // ___________________ styling ____________________________
     const profileIconStyling = {
         height: "35px",
@@ -40,7 +59,6 @@ export default function Feed() {
         borderRadius: "50%",
         objectFit: "cover"
     };
-
 
     return (
         <div className='container pt-5'>
@@ -89,7 +107,7 @@ export default function Feed() {
                     {/* _______________Create post______________________________________ */}
                     <div className='card p-3 d-flex flex-row mb-3 shadow'>
                         {/* _______________Profil picture icon______________________________________ */}
-                        <img src={emptyProfilImg} alt="" style={profileIconStyling} className="me-4" />
+                        <img src={emptyProfilImg} style={profileIconStyling} className="me-4" />
                         {/* _______________Create post input link______________________________________ */}
                         {/* ____________add a link to creat page to this input */}
                         <input
@@ -115,7 +133,7 @@ export default function Feed() {
                                     {/* _______________Post profile pic & name______________________________________ */}
                                     <div className='d-flex flex-row align-items-center'>
                                         <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
-                                            alt="" style={profileIconStyling} className="me-2"
+                                         style={profileIconStyling} className="me-2"
                                             onClick={() => console.log("clicked profile")}
                                             role="button"
                                         />
@@ -130,18 +148,37 @@ export default function Feed() {
                                 </div>
                                 {/* _______________Post footer______________________________________ */}
                                 <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row " style={{ fontSize: "0.8rem" }}>
-                                    <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={commentIcon} alt="" style={{ height: "15px", width: "15px" }} />
-                                        <p className='my-0 ms-1'>{`${post.commentIds.length} Comments`}</p>
-                                    </a>
-                                    <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={checkIfUserLiked(post) ? likeIconFull : likeIconEmpty} alt="" style={{ height: "15px", width: "15px" }} />
-                                        <p className='my-0 ms-1'>{`${post.likersIds.length} Likes`}</p>
-                                    </a>
-                                    <a href="/SOMEWHERE" role="button" className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                                        <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
-                                        <p className='my-0 ms-1'>Edit</p>
-                                    </a>
+                                    {/* _______________ Comment Icon ______________________________________ */}
+                                    <Link
+                                        to={`/post/${post._id}`}
+                                        style={{ border: "none", background: "transparent" }}
+                                        className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                    >
+                                        <img src={commentIcon} style={{ height: "15px", width: "15px" }} />
+                                        <p className='my-0 ms-1'>{`${post.commentIds.length} Comment${post.commentIds.length !== 1 ? "s" : ""}`}</p>
+                                    </Link>
+                                    {/* _______________ Like Icon ______________________________________ */}
+                                    <button
+                                        style={{ border: "none", background: "transparent" }}
+                                        className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                        onClick={()=>handleLikeClick(post)}
+                                    >
+                                        <img src={checkIfUserLiked(post) ? likeIconFull : likeIconEmpty} style={{ height: "15px", width: "15px" }} />
+                                        <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
+                                    </button>
+                                    {/* _______________ Edit Icon ______________________________________ */}
+                                    {
+                                        checkUserAndCreator(post) &&
+                                        <Link
+                                            to={`/post/${post._id}`}
+                                            state={{editMode: true}}
+                                            style={{ border: "none", background: "transparent" }}
+                                            className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
+                                        >
+                                            <img src={editIcon} style={{ height: "15px", width: "15px" }} />
+                                            <p className='my-0 ms-1'>Edit</p>
+                                        </Link>
+                                    }
                                 </div>
                             </div>
                         ))}

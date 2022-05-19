@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import useToggleState from "../hooks/useToggleState"
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import RegisterForm from './forms/RegisterForm';
 import LoginForm from './forms/LoginForm';
 import "../style/Register.css"

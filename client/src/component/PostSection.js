@@ -1,5 +1,6 @@
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 // ____________ Icon & images import _____________________
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
@@ -15,10 +16,15 @@ import { updatePost, likePost, unlikePost } from "../API/apiRequests";
 
 export default function PostSection({ post, setRunEffect }) {
     const { cookie } = useContext(CookieContext);
+    const location = useLocation();
 
     const [editMode, toggleEditMode] = useToggleState(false);
     const [updatedTitle, setUpdatedTitle, resetUpdatedTitle] = useInputState(post.title);
     const [updatedText, setUpdatedText, resetUpdatedText] = useInputState(post.text);
+
+    useEffect(()=>{
+        if(location.state && location.state.editMode !== editMode) toggleEditMode()
+    }, [location])
 
     // ________ on submit when in edit more, run updatePost API call ______________
     // ________ toggle out of edit mode and run useEffect to show updated post ____
@@ -33,7 +39,6 @@ export default function PostSection({ post, setRunEffect }) {
     // __________ return true if so and false if not _____________________________
     const hasLiked = post.likersIds.some(element => element === cookie.id);
 
-
     // __________ depending on if current user has liked this post, _______________
     // __________ run like API call or unlike API call on click of btn ____________
     const handleLikeClick = () => {
@@ -45,6 +50,12 @@ export default function PostSection({ post, setRunEffect }) {
         };
         setRunEffect(true);
     };
+
+    // ____ if User cancels editing process, reset inputs and turn of editmode _____
+    const cancelEditMode = (evt) =>{
+        evt.preventDefault();
+        toggleEditMode();
+    }
 
     // _____ check if post creator id and current user (cookie id) is the same  ______
     const showEditBtn = post.creator._id === cookie.id;
@@ -66,7 +77,7 @@ export default function PostSection({ post, setRunEffect }) {
                         {/* _____________  Profil pic section ______________________________________ */}
                         <div className='d-flex flex-row align-items-center mb-2'>
                             <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
-                                alt="" style={profileIconStyling} className="me-2"
+                             style={profileIconStyling} className="me-2"
                             />
                             <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">{post.creator.username}</h6>
                         </div>
@@ -77,7 +88,7 @@ export default function PostSection({ post, setRunEffect }) {
                     <div className="card-footer bg-secondary bg-opacity-25 d-flex flex-row" style={{ fontSize: "0.8rem" }}>
                         {/* _____________  Show how many comments this post has  ___________________________ */}
                         <div className='text-decoration-none text-muted d-flex flex-row align-items-center me-3' >
-                            <img src={commentIcon} alt="" style={{ height: "15px", width: "15px" }} />
+                            <img src={commentIcon} style={{ height: "15px", width: "15px" }} />
                             <p className='my-0 ms-1'>{`${post.commentIds.length} Comment${post.commentIds.length !== 1 ? "s" : ""}`}</p>
                         </div>
                         {/* _____________  Like button  ____________________________________________________ */}
@@ -87,7 +98,7 @@ export default function PostSection({ post, setRunEffect }) {
                             style={{ border: "none", background: "transparent" }}
                         >
                             <img src={hasLiked ? likeIconFull : likeIconEmpty}
-                                alt="" style={{ height: "15px", width: "15px" }}
+                             style={{ height: "15px", width: "15px" }}
                             />
                             <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
                         </button>
@@ -99,7 +110,7 @@ export default function PostSection({ post, setRunEffect }) {
                                 style={{ border: "none", background: "transparent" }}
                                 onClick={toggleEditMode}
                             >
-                                <img src={editIcon} alt="" style={{ height: "15px", width: "15px" }} />
+                                <img src={editIcon} style={{ height: "15px", width: "15px" }} />
                                 <p className='my-0 ms-1'>Edit</p>
                             </button>
                         }
@@ -113,7 +124,7 @@ export default function PostSection({ post, setRunEffect }) {
                             {/* _____________  Profil pic section __________________ */}
                             <div className='d-flex flex-row align-items-center mb-2'>
                                 <img src={post.creator.userImage ? post.creator.userImage : emptyProfilImg}
-                                    alt="" style={profileIconStyling} className="me-2"
+                                 style={profileIconStyling} className="me-2"
                                 />
                                 <h6 className="card-subtitle text-secondary text-opacity-75 mt-0">
                                     {post.creator.username}
@@ -152,6 +163,14 @@ export default function PostSection({ post, setRunEffect }) {
                                 style={{ backgroundColor: "rgb(215, 86, 0)", borderColor: "rgb(215, 86, 0)" }}
                             >
                                 <p className='my-0 ms-1'>Save</p>
+                            </button>
+                            <button
+                                className='d-flex flex-row align-items-center
+                                me-3 btn btn-sm btn-danger fw-bold'
+                                onClick={cancelEditMode}
+                                style={{ backgroundColor: "rgb(215, 86, 0)", borderColor: "rgb(215, 86, 0)" }}
+                            >
+                                <p className='my-0 ms-1'>Cancel</p>
                             </button>
                         </div>
                     </div>

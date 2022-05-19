@@ -60,7 +60,6 @@ exports.updatePost = async (req, res) => {
     if (foundPost.creator._id == currUserId) {
         const updatePost = await Post.findByIdAndUpdate(postId, { title: updatedTitle, text: updatedText });
         await updatePost.save();
-        console.log("____________line___________")
         res.send("update successful")
     } else {
         console.log("You are not the creator of this post")
