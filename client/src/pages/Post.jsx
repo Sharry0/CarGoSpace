@@ -20,11 +20,9 @@ export default function Post() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      console.log("in effect")
       await getPost(params.id)
       .then(response => {
         setPost(response.data);
-        // console.log("inside useEffect")
       })
       .catch(err => {
         console.log(err, "this a error");

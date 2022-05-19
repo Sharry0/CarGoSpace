@@ -157,18 +157,15 @@ export default function PostSection({ post, setRunEffect }) {
                             style={{ fontSize: "0.8rem" }}
                         >
                             <button
-                                className='d-flex flex-row align-items-center
-                                me-3 btn btn-sm btn-danger fw-bold'
+                                className='me-3 btn btn-sm btn-danger fw-bold'
                                 type="submit"
                                 style={{ backgroundColor: "rgb(215, 86, 0)", borderColor: "rgb(215, 86, 0)" }}
                             >
                                 <p className='my-0 ms-1'>Save</p>
                             </button>
                             <button
-                                className='d-flex flex-row align-items-center
-                                me-3 btn btn-sm btn-danger fw-bold'
+                                className='btn btn-sm btn-secondary fw-bold'
                                 onClick={cancelEditMode}
-                                style={{ backgroundColor: "rgb(215, 86, 0)", borderColor: "rgb(215, 86, 0)" }}
                             >
                                 <p className='my-0 ms-1'>Cancel</p>
                             </button>

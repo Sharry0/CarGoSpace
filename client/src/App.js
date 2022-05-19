@@ -24,7 +24,6 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: left footer card (about, poilcy,...), sticky top _____________________________
 // ______________ TODO: Profil editing page __________________________________________________________
 // ______________ TODO: Add creation date to posts ___________________________________________________
-// ______________ TODO: Edit button only for users own post visible __________________________________
 // ______________ TODO: wrapping isAuth around almost every path, looks stupid _______________________
 // ______________ TODO: add like, comment, edit functions ____________________________________________
 // ______________ TODO: comment submit with empty input error handler ________________________________
