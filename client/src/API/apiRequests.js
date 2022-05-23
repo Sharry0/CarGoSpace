@@ -75,4 +75,12 @@ export const unlikePost = (ids) => {
         })
 };
 
-
+export const deletePost = (postId) =>{
+    return axios.delete(`http://localhost:8080/post/delete/${postId}`, postId, { withCredentials: true })
+        .then((response) => {
+            return response
+        })
+        .catch((err) => {
+            throw "Couldn't delete this post"
+        })
+}

@@ -94,3 +94,8 @@ exports.unlikePost = async (req, res) => {
         res.send("Please try again later")
     }
 };
+
+exports.deletePost = async (req, res) =>{
+    console.log(req.params)
+    res.send("someting");
+};

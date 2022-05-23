@@ -27,7 +27,7 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: wrapping isAuth around almost every path, looks stupid _______________________
 // ______________ TODO: add like, comment, edit functions ____________________________________________
 // ______________ TODO: comment submit with empty input error handler ________________________________
-// ______________ TODO: api calls add async/await clean up ___________________________________________
+// ______________ TODO: api calls add async/await clean up / optional chaning ________________________
 // ______________ TODO: api in hook umwandeln ________________________________________________________
 // ______________ TODO: clean up code, APIs everywhere, console.log() ________________________________
 // ______________ TODO: Darkmode / lightmode _________________________________________________________

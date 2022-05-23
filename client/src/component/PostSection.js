@@ -15,7 +15,7 @@ import { CookieContext } from "../context/userContext";
 
 import DeletePopup from "./DeletePopup";
 
-import { updatePost, likePost, unlikePost } from "../API/apiRequests";
+import { updatePost, likePost, unlikePost, deletePost } from "../API/apiRequests";
 
 export default function PostSection({ post, setRunEffect }) {
     const { cookie } = useContext(CookieContext);
@@ -29,7 +29,7 @@ export default function PostSection({ post, setRunEffect }) {
     useEffect(() => {
         if (location.state && location.state.editMode !== editMode) toggleEditMode();
         console.log("fish effect")
-    })
+    });
 
     // ________ on submit when in edit more, run updatePost API call ______________
     // ________ toggle out of edit mode and run useEffect to show updated post ____
@@ -64,7 +64,10 @@ export default function PostSection({ post, setRunEffect }) {
 
     // ____ 
     const handleDeleteClick = (command) => {
-        if (command === "delete") console.log("pressed delete");
+        if(command === "delete") deletePost(post._id)
+        .then(response => {console.log(response)})
+        .catch(err => {console.log(err)})
+        if (command === "delete") console.log("pressed delete", post._id);
         if (command === "cancel") console.log("pressed cancel");
         if (deletePopup) toggleDeletePopup();
     };
@@ -138,7 +141,7 @@ export default function PostSection({ post, setRunEffect }) {
                                     onClick={toggleDeletePopup}
                                 >
                                     <img src={deleteIcon} style={{ height: "15px", width: "15px" }} alt="Edit icon" />
-                                    <p className='my-0 ms-1'>Edit</p>
+                                    <p className='my-0 ms-1'>Delete</p>
                                 </button>
                             </>
                         }
