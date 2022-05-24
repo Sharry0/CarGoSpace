@@ -28,7 +28,7 @@ export default function PostSection({ post, setRunEffect }) {
 
     useEffect(() => {
         if (location.state && location.state.editMode !== editMode) toggleEditMode();
-        console.log("fish effect")
+        console.log("postsection effect")
     });
 
     // ________ on submit when in edit more, run updatePost API call ______________
@@ -67,8 +67,6 @@ export default function PostSection({ post, setRunEffect }) {
         if(command === "delete") deletePost(post._id)
         .then(response => {console.log(response)})
         .catch(err => {console.log(err)})
-        if (command === "delete") console.log("pressed delete", post._id);
-        if (command === "cancel") console.log("pressed cancel");
         if (deletePopup) toggleDeletePopup();
     };
 
