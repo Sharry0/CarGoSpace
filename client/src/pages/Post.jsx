@@ -1,8 +1,6 @@
 // ____________ Framwork & library import ________________
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import useToggleState from '../hooks/useToggleState';
-
 
 import PostSection from '../component/PostSection';
 import CommentForm from './forms/CommentForm';

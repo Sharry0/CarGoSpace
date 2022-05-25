@@ -1,6 +1,6 @@
 
 import { useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // ____________ Icon & images import _____________________
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import commentIcon from "../images/icons/comment_icon.svg";
@@ -20,6 +20,7 @@ import { updatePost, likePost, unlikePost, deletePost } from "../API/apiRequests
 export default function PostSection({ post, setRunEffect }) {
     const { cookie } = useContext(CookieContext);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [editMode, toggleEditMode] = useToggleState(false);
     const [updatedTitle, setUpdatedTitle] = useInputState(post.title);
@@ -62,10 +63,11 @@ export default function PostSection({ post, setRunEffect }) {
         toggleEditMode();
     };
 
-    // ____ 
+    // ____ if delete on popup window is clicked, call deletePost API. ____________
+    // ____ on success redirect user to feed page. ________________________________
     const handleDeleteClick = (command) => {
         if(command === "delete") deletePost(post._id)
-        .then(response => {console.log(response)})
+        .then(response =>  navigate(`/feed`))
         .catch(err => {console.log(err)})
         if (deletePopup) toggleDeletePopup();
     };

@@ -1,7 +1,7 @@
 
 const Post = require("../models/postSchema");
 const User = require("../models/userSchema");
-const Comment = require("../models/commentSchema")
+const Comment = require("../models/commentSchema");
 
 exports.allPosts = async (req, res) => {
     // ______ error handling where? _________
@@ -108,5 +108,5 @@ exports.deletePost = async (req, res) => {
     await Post.findByIdAndDelete(postId);
     
 
-    res.send("someting");
+    res.send("Post was deleted");
 };

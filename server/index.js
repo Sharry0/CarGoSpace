@@ -9,14 +9,13 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const morgan = require("morgan");
-const User = require("./models/userSchema");
-const Post = require("./models/postSchema");
-const Comment = require("./models/commentSchema")
+
 const mongoose = require("mongoose");
 
 // ________________________routes____________________________________________
-const userRoutes = require("./routes/user");
-const postRoutes = require("./routes/post");
+const userRoutes = require("./routes/user.js");
+const postRoutes = require("./routes/post.js");
+const commentRoutes = require("./routes/comment.js");
 
 //__________________________DB connection____________________________________
 mongoose.connect(process.env.DB_URI)
@@ -38,38 +37,13 @@ app.use(cookieParser())
 
 
 app.get("/", (req, res) => {
-    res.send("welcome to port 8080")
+    res.send("welcome to the backend of CarGoSpace");
 });
 
 //__________________________ Routes ____________________________________
 app.use("/", userRoutes);
 app.use("/post", postRoutes);
-
-app.post("/comment/create", async (req, res) => {
-    const { email, comment, postId } = req.body;
-    const foundUser = await User.findOne({ email });
-    const foundPost = await Post.findById(postId);
-    try {
-        const newComment = new Comment({
-            postId: foundPost,
-            creator: foundUser,
-            comment
-        });
-    
-        foundPost.commentIds.push(newComment);
-        foundUser.commentIds.push(newComment);
-        
-        await foundPost.save();
-        await newComment.save();
-        res.status(200).send("new comment created");
-        
-    } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
-    };
-});
-
-
+app.use("/comment", commentRoutes);
 
 
 app.listen(8080, (req, res) => {
