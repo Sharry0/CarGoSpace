@@ -29,7 +29,7 @@ export default function PostSection({ post, setRunEffect }) {
 
     useEffect(() => {
         if (location.state && location.state.editMode !== editMode) toggleEditMode();
-        console.log("postsection effect")
+        console.log("post section effect")
     });
 
     // ________ on submit when in edit more, run updatePost API call ______________
