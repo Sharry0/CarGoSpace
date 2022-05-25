@@ -37,13 +37,7 @@ const userSchema = new Schema({
         required: true,
         enum: ["Female", "Male", "Other"]
     },
-    // maybe dont use crypto (leave out salt) and use bycrpt library
-    // salt: {
-    //     type: String,
-    //     required: true
-    // },
-    postIds: [{ type: Schema.Types.ObjectId, ref: "Post", required: true }],
-    commentIds: [{ type: Schema.Types.ObjectId, ref: "Comment", required: true }]
+    postIds: [{ type: Schema.Types.ObjectId, ref: "Post", required: true }]
 },
     { timestamps: true }
 );
