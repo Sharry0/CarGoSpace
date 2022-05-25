@@ -97,18 +97,15 @@ exports.unlikePost = async (req, res) => {
 };
 
 exports.deletePost = async (req, res) => {
-    console.log(req?.params?.postId)
     const { postId } = req.params;
-
-    // ___ delete the right comments out of UserSchema.commentIds array ____
-    // const deletePostComments = await Comment.deleteMany({ postId })
-    // .then(resp => console.log(resp))
-    // console.log(deletePostComments,"___delöt commöts")
-    // const deletePostInUserSchema = await User.findOneAndUpdate({ postIds: postId }, {
-    //     $pull: { postIds: postId }
-    // });
-    // const deletePost = await Post.findByIdAndDelete(postId);
-
+    // _____ delete all comments to this post _________
+    await Comment.deleteMany({ postId })
+    // _____ delete post id out of UserSchemas posts array  _________
+    await User.findOneAndUpdate({ postIds: postId }, {
+        $pull: { postIds: postId }
+    });
+    // _____ delete post that hast this post id  _________
+    await Post.findByIdAndDelete(postId);
     
 
     res.send("someting");
