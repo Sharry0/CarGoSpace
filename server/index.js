@@ -59,11 +59,8 @@ app.post("/comment/create", async (req, res) => {
         foundPost.commentIds.push(newComment);
         foundUser.commentIds.push(newComment);
         
-        // console.log("before saves")
-        await foundUser.save();
         await foundPost.save();
         await newComment.save();
-        // console.log(newComment)
         res.status(200).send("new comment created");
         
     } catch (error) {
