@@ -30,9 +30,11 @@ import { CookieProvider } from './context/userContext';
 // ______________ TODO: api in hook umwandeln ________________________________________________________
 // ______________ TODO: clean up code, APIs everywhere, console.log() ________________________________
 // ______________ TODO: Darkmode / lightmode _________________________________________________________
+// ______________ TODO: show current user profile img and name on create post page ___________________
+// ______________ TODO: move delete icon on comment all the way to the right _________________________
 
 function App() {
-  return <div className='mt-5'>
+  return <div>
 
     <CookieProvider>
       {/* _______________ Navbar ______________________________________ */}

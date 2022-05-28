@@ -19,7 +19,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid ">
 
                 {/* _________ Navbar CarGoSpace Icon (Link to homepage if clicked) ________________________ */}

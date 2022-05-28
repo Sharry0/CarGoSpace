@@ -66,7 +66,7 @@ export default function Feed() {
             <main className='d-flex justify-content-center'>
                 {/* _______________Sidebar content______________________________________ */}
                 {/* _______________make sticky top______________________________________ */}
-                <div className="card col-2 shadow" style={{ fontSize: "0.8rem", height: "200px" }}>
+                <div className="card col-2 shadow sticky-top" style={{ fontSize: "0.8rem", height: "200px"}}>
                     <div
                         className="card-body d-flex flex-column justify-content-between"
                     >
