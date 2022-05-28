@@ -23,7 +23,7 @@ export default function Navbar() {
             <div className="container-fluid ">
 
                 {/* _________ Navbar CarGoSpace Icon (Link to homepage if clicked) ________________________ */}
-                <Link className="navbar-brand" to="/">
+                <Link className="navbar-brand" to={isLogged ? "/feed": "/"}>
                     <img style={{ height: "40px" }} src={smLogo} alt="small Logo" />
                 </Link>
 

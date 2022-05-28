@@ -91,7 +91,7 @@ export default function PostSection({ post, setRunEffect }) {
             }
             {post &&
                 !editMode ?
-                <div className="card">
+                <div className="card shadow">
                     <div className="card-body">
                         {/* _____________  Profil pic section ______________________________________ */}
                         <div className='d-flex flex-row align-items-center mb-2'>

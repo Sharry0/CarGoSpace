@@ -84,7 +84,7 @@ export default function NewPost() {
             </div>
             {/* ________ Submit & Discard Buttons ______________________________________________________ */}
             <input type="submit" className="btn btn-danger me-4" style={styling} value="Submit" />
-            <input type="button" className="btn btn-secondary" value="Discard" onClick={handleDiscard} />
+            <input type="button" className="btn btn-secondary" value="Cancel" onClick={handleDiscard} />
           </div>
         </div>
       </form>

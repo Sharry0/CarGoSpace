@@ -3,8 +3,9 @@ import { useContext } from "react";
 import emptyProfilImg from "../images/icons/empty_profil_img.svg";
 import deleteIcon from "../images/icons/delete_icon.svg"
 import { CookieContext } from "../context/userContext";
+import { deleteComment } from "../API/apiRequests";
 
-export default function CommentSection({ comments }) {
+export default function CommentSection({ comments, setRunEffect }) {
 
   const { cookie } = useContext(CookieContext);
 
@@ -15,11 +16,12 @@ export default function CommentSection({ comments }) {
 
   const checkCommentCreatorIsCurrentUser = (creatorId) => {
     return creatorId === cookie.id
-  }
+  };
 
-  const handleDeleteCommentClick = () => {
-    console.log("delete comment click")
-  }
+  const handleDeleteCommentClick = (commentId) => {
+    deleteComment(commentId);
+    setRunEffect();
+  };
 
   // ___________________ styling ____________________________
   const profileIconStyling = {
@@ -36,7 +38,7 @@ export default function CommentSection({ comments }) {
           <>
             {
               comments.map(comment => (
-                <div className="card mb-3" key={comment._id}>
+                <div className="card mb-3 shadow" key={comment._id}>
                   {/* _____________  Profil pic section __________________ */}
                   <div className="card-body">
                     <div>
@@ -52,7 +54,7 @@ export default function CommentSection({ comments }) {
                           <button
                             className='text-decoration-none text-muted d-flex flex-row align-items-center me-3'
                             style={{ border: "none", background: "transparent" }}
-                            onClick={handleDeleteCommentClick}
+                            onClick={()=>handleDeleteCommentClick(comment._id)}
                           >
                             <img src={deleteIcon} style={{ height: "15px", width: "15px" }} alt="Edit icon" />
                           </button>

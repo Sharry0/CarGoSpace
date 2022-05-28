@@ -48,7 +48,7 @@ export default function Post() {
 
             {/* _____________ see all comments section __________________ */}
             <div className='col-4'>
-              <CommentSection comments={post.commentIds} />
+              <CommentSection comments={post.commentIds} setRunEffect={setRunEffect} />
             </div>
           </div>
           : <h2>Sorry we couldn't find this post</h2>

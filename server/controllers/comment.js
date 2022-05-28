@@ -28,5 +28,11 @@ exports.createComment = async (req, res) => {
 };
 
 exports.deleteComment = async (req, res) => {
-    console.log(req.params)
+    const { commentId } = req.params;
+    await Post.findOneAndUpdate({ commentIds: commentId }, {
+        $pull: { commentIds: commentId }
+    });
+    await Comment.findByIdAndDelete(commentId);
+
+    res.send("comment deleted")
 }

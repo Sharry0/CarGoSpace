@@ -22,7 +22,7 @@ export default function Register() {
         borderBottomColor: "rgb(248, 249, 250)"
     };
 
-    return <div className='container pt-5 '>
+    return <div className='container pt-5'>
         <div className="card bg-light text-center mt-5 col-6 offset-3 shadow">
             <div className="card-header">
                 {/* _______________Register & Login Tabs______________________________________ */}

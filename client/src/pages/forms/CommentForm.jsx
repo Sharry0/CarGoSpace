@@ -23,7 +23,7 @@ export default function CommentForm({ setRunEffect }) {
 
     return (
         <form onSubmit={handleSubmit} className="mt-4">
-            <div className="form-floating">
+            <div className="form-floating shadow">
                 <textarea
                     className="form-control"
                     placeholder="Leave a comment here"

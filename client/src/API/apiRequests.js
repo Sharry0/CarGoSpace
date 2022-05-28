@@ -84,13 +84,14 @@ export const deletePost = (postId) =>{
             throw "Couldn't delete this post"
         })
 };
+
 export const deleteComment = (commentId) =>{
     return axios.delete(`http://localhost:8080/comment/delete/${commentId}`, commentId, { withCredentials: true })
         .then((response) => {
             return response
         })
         .catch((err) => {
-            throw "Couldn't delete this post"
+            throw "Couldn't delete this comment"
         })
 };
 
