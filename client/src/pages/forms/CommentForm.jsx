@@ -11,6 +11,9 @@ export default function CommentForm({ setRunEffect }) {
 
     const [comment, setComment, resetComment] = useInputState("");
 
+    const commentHasValues = /[A-Za-z0-9]/.test(comment);
+    
+
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         await axios.post("http://localhost:8080/comment/create",
@@ -38,7 +41,7 @@ export default function CommentForm({ setRunEffect }) {
 
             <button
                 type="submit"
-                className="btn btn-danger fw-bold mt-2"
+                className={`btn btn-danger fw-bold mt-2 ${!commentHasValues && "disabled"}`}
                 style={{ backgroundColor: "rgb(215, 86, 0)", borderColor: "rgb(215, 86, 0)" }}
             >
                 Submit
