@@ -22,7 +22,7 @@ export default function CommentForm({ setRunEffect }) {
         );
         setRunEffect(true);
         resetComment();
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit} className="mt-4">

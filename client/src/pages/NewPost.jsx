@@ -43,6 +43,10 @@ export default function NewPost() {
     navigate("/feed")
   };
 
+  // _______ check if title & textarea have A-Z a-z or 0-9 as values, if so return true ________________
+  const titleHasValues = /[A-Za-z0-9]/.test(title);
+  const textareaHasValues = /[A-Za-z0-9]/.test(textarea);
+
   //________ button styling ____________________________________________________________________________
   const styling = {
     backgroundColor: "rgb(215, 86, 0)",
@@ -53,7 +57,7 @@ export default function NewPost() {
     <div className='container pt-5 col-5'>
       <h1 className="fw-bold" style={{ color: "rgb(33, 46, 68" }}>New post</h1>
 
-      {/* ________ Create a new post Form _____________________________________________________________ */}
+      {/* ________ Create a new post Form _______________________________________________________ */}
       <form onSubmit={handleSubmit} >
         <div className="card mt-4 shadow">
           <div className="card-header d-flex align-items-center">
@@ -61,7 +65,7 @@ export default function NewPost() {
             <p className='mb-0  text-dark text-opacity-75'>Profile</p>
           </div>
           <div className="card-body">
-            {/* ________ newPost Title input  _____________________________________________________________ */}
+            {/* ________ newPost Title input  __________________________________________________ */}
             <div className='mb-3'>
               <input
                 type="text"
@@ -72,7 +76,7 @@ export default function NewPost() {
                 onChange={handleTitle}
               />
             </div>
-            {/* ________ newPost Textarea input ___________________________________________________________ */}
+            {/* ________ newPost Textarea input ________________________________________________ */}
             <div className="mb-3">
               <textarea
                 className="form-control text-dark text-opacity-75"
@@ -82,9 +86,18 @@ export default function NewPost() {
                 rows="4"
               ></textarea>
             </div>
-            {/* ________ Submit & Discard Buttons ______________________________________________________ */}
-            <input type="submit" className="btn btn-danger me-4" style={styling} value="Submit" />
-            <input type="button" className="btn btn-secondary" value="Cancel" onClick={handleDiscard} />
+            {/* ________ Submit & Discard Buttons ___________________________________________ */}
+            <input type="submit"
+              className="btn btn-danger me-4"
+              disabled={!titleHasValues || !textareaHasValues}
+              style={styling}
+              value="Submit"
+            />
+            <input type="button"
+              className="btn btn-secondary"
+              value="Cancel"
+              onClick={handleDiscard}
+            />
           </div>
         </div>
       </form>
