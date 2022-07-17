@@ -168,7 +168,6 @@ export default function Feed() {
                                         <p className='my-0 ms-1'>{`${post.likersIds.length} Like${post.likersIds.length !== 1 ? "s" : ""}`}</p>
                                     </button>
                                     {/* _______________ Edit Icon ______________________________________ */}
-                                    {/* _______________ ADD ALT PROP TO IMG !!!!!! ______________________________________ */}
                                     {
                                         checkUserAndCreator(post) &&
                                         <>
