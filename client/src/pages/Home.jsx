@@ -18,15 +18,15 @@ export default function Home() {
     return <>
         
         <div className='home'>
-            <main className='d-flex flex-xl-row flex-md-column align-items-center justify-content-md-evenly vh-100 mx-5 main '>
-                <div className='col-xl-6 ps-5'>
+            <main className='d-flex flex-xl-row flex-column align-items-center justify-content-center vh-100 mx-5 main '>
+                <div className='col-xl-6 ps-5 mb-5 '>
                     <h1 id='title'>We love cars.</h1>
                     <h2 id='subtitle'>Social Network for <br /> Car enthusiasts.</h2>
                     <p id='subtext'>A place where you can connect with new people <br /> and share you stories, experience and <br /> love for cars.</p>
-                    <Link className='button' to="/register" state={{ register: true }} style={styling} >Join the Family</Link>
+                    <Link className='joinButton' to="/register" state={{ register: true }} style={styling} >Join the Family</Link>
                 </div>
                 
-                <img className='col-xl-6 col-md-10 logo pe-5' src={logo} alt="CarGoSpace Logo" />
+                <img className='col-lg-6  col-md-8 logo pe-5' src={logo} alt="CarGoSpace Logo" />
 
             </main>
         </div>
