@@ -19,7 +19,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-sm sticky-top navbar-light bg-light">
             <div className="container-fluid ">
 
                 {/* _________ Navbar CarGoSpace Icon (Link to homepage if clicked) ________________________ */}
@@ -42,7 +42,7 @@ export default function Navbar() {
                 </button>
 
                 {/* _________ show Navlinks depending on if user is logged in ______________________________ */}
-                <div className="collapse navbar-collapse d-flex flex-row-reverse " id="navbarNavAltMarkup">
+                <div className="collapse navbar-collapse  " id="navbarNavAltMarkup">
                     <div className="navbar-nav ">
                         {
                             isLogged ?

@@ -2,7 +2,7 @@
     overflow: hidden;
     max-height: calc(100vh - 66px);
     max-width: 100vw;
-    background: url(../images/background_curve.svg) no-repeat ;
+    background: url(../images/background_curve.svg) no-repeat;
     background-size: cover;
     background-position: 30vw;
 }
@@ -33,7 +33,7 @@
 }
 
 
-.background{
+.background {
     width: 100vw;
     height: 100%;
     position: absolute;
@@ -53,4 +53,26 @@
     right: 0;
     object-fit: fill;
     /* transform: translate(500px); */
+}
+
+@media (width < 1200px) {
+    #title {
+        font-size: 3rem;
+    }
+
+    #subtitle {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    #subtext {
+        font-size: 1.2rem;
+        margin-bottom: 5rem;
+    }
+
+    /* .main {
+        flex-direction: column!important;
+        justify-content: center;
+        border: 2px solid red;
+    } */
 }

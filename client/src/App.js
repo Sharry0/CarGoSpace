@@ -1,6 +1,5 @@
 
 //__________________________ Stylesheets ______________________________________________
-import './App.css'; // currently empty___________________________
 import 'react-toastify/dist/ReactToastify.css';
 //__________________________ Components ______________________________________________
 import Navbar from "./component/Navbar";
