@@ -63,10 +63,10 @@ export default function Feed() {
 
     return (
         <div className='container pt-5'>
-            <main className='d-flex justify-content-center'>
+            <main className='d-flex justify-content-center flex-xl-row flex-column'>
                 {/* _______________Sidebar content______________________________________ */}
                 {/* _______________make sticky top______________________________________ */}
-                <div className="card col-2 shadow " style={{ fontSize: "0.8rem", height: "200px"}}>
+                <div className="card col-xl-2 mb-5 shadow" style={{ fontSize: "0.8rem", maxHeight: "180px"}}>
                     <div
                         className="card-body d-flex flex-column justify-content-between"
                     >
@@ -81,7 +81,7 @@ export default function Feed() {
                             
                             <a
                                 href="/policies"
-                                className="card-link m-0 text-reset text-decoration-none"
+                                className="card-link m-0 mb-3 text-reset text-decoration-none"
                             >
                                 Policies
                             </a>
@@ -99,7 +99,7 @@ export default function Feed() {
                     </div>
                 </div>
                 {/* _______________Create post & show feed content______________________________________ */}
-                <div className='col-6 mx-5'>
+                <div className='col-xl-6 mx-xl-5'>
                     {/* _______________Create post______________________________________ */}
                     <div className='card p-3 d-flex flex-row mb-3 shadow'>
                         {/* _______________Profil picture icon______________________________________ */}
