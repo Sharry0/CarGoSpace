@@ -21,7 +21,7 @@ Functions:
 - View post from other accounts 
 - Like & comment posts
 - Create your own posts & edit them
-
+- Delete your own posts & comments
 
 
 
