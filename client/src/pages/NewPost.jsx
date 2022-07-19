@@ -54,7 +54,7 @@ export default function NewPost() {
   }
 
   return (
-    <div className='container pt-5 col-5'>
+    <div className='container pt-5 col-xxl-5 col-lg-6'>
       <h1 className="fw-bold" style={{ color: "rgb(33, 46, 68" }}>New post</h1>
 
       {/* ________ Create a new post Form _______________________________________________________ */}
