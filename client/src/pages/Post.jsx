@@ -35,9 +35,9 @@ export default function Post() {
     <div className='container pt-5'>
       {
         post
-          ? <div className='d-flex '>
+          ? <div className='d-flex flex-column flex-lg-row'>
             {/* _____________ See main post & create comment section __________________ */}
-            <div className='col-7 me-4'>
+            <div className='col-lg-7 me-lg-4 mb-5'>
               
               {/* _____________  Post section __________________ */}
               <PostSection post={post} setRunEffect={setRunEffect}/>
@@ -47,7 +47,7 @@ export default function Post() {
             </div>
 
             {/* _____________ see all comments section __________________ */}
-            <div className='col-4'>
+            <div className='col-lg-4'>
               <CommentSection comments={post.commentIds} setRunEffect={setRunEffect} />
             </div>
           </div>
