@@ -250,10 +250,10 @@ export default function RegisterForm() {
 
                 </div>}
                 {/* _______________Birthday input__________________________________________________________________________ */}
-                <div className="row mb-3">
+                <div className="row my-3">
                     <p className='m-0 ms-2 text-start text-black-50 fw-bold smallText' >Birthday</p>
                     {/* _______________Month selection__________________________________________________________________________ */}
-                    <div className="col-4">
+                    <div className="col-sm-4 mb-2">
                         <select
                             className="form-select text-muted form-select-sm"
                             value={month}
@@ -266,7 +266,7 @@ export default function RegisterForm() {
                         </select>
                     </div>
                     {/* _______________Day selection__________________________________________________________________________ */}
-                    <div className="col-4">
+                    <div className="col-sm-4 mb-2">
                         <select
                             className="form-select text-muted form-select-sm"
                             value={day}
@@ -279,7 +279,7 @@ export default function RegisterForm() {
                         </select>
                     </div>
                     {/* _______________Year selection__________________________________________________________________________ */}
-                    <div className="col-4">
+                    <div className="col-sm-4">
                         <select
                             className="form-select text-muted form-select-sm"
                             value={year} onChange={handleYear}
@@ -293,7 +293,7 @@ export default function RegisterForm() {
                 </div>
                 {/* _______________Gender selection__________________________________________________________________________ */}
                 <p className='m-0  ms-2 text-start text-black-50 fw-bold smallText'>Gender</p>
-                <div className="col-4 pe-3 mb-3">
+                <div className="col-sm-4 pe-sm-3 mb-3">
                     <select
                         className="form-select text-muted form-select-sm"
                         value={gender}

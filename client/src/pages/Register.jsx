@@ -23,7 +23,7 @@ export default function Register() {
     };
 
     return <div className='container pt-5'>
-        <div className="card bg-light text-center mt-5 col-6 offset-3 shadow">
+        <div className="card bg-light text-center mt-5 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-10 offset-1 shadow">
             <div className="card-header">
                 {/* _______________Register & Login Tabs______________________________________ */}
                 <ul className="nav nav-tabs card-header-tabs">
