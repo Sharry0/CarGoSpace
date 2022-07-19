@@ -73,14 +73,14 @@ export default function Feed() {
                         {/* _______________Links______________________________________ */}
                         <div className='d-flex flex-column'>
                             <a
-                                href="/SOMEWHERE"
+                                href="/about"
                                 className="card-link text-reset text-decoration-none"
                             >
                                 About
                             </a>
                             
                             <a
-                                href="/SOMEWHERE"
+                                href="/policies"
                                 className="card-link m-0 text-reset text-decoration-none"
                             >
                                 Policies

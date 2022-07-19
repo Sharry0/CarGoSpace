@@ -10,6 +10,8 @@ import Register from "./pages/Register"
 import Feed from './pages/Feed';
 import NewPost from './pages/NewPost';
 import Post from './pages/Post';
+import About from './pages/About';
+import Policies from './pages/Policies';
 //__________________________ Package & API ______________________________________________
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
@@ -45,6 +47,8 @@ function App() {
         <Route path="/feed" element={<IsAuth> <Feed /> </IsAuth>} />
         <Route path="/new" element={<IsAuth> <NewPost /> </IsAuth>} />
         <Route path="/post/:id" element={<IsAuth> <Post /> </IsAuth>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/policies" element={<Policies />} />
 
         <Route path="/" element={<Home />} />
       </Routes>
