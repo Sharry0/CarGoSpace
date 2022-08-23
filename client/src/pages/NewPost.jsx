@@ -12,7 +12,7 @@ export default function NewPost() {
   const navigate = useNavigate()
   const [title, handleTitle, resetTitle] = useInputState("");
   const [textarea, handleTextarea, resetTextarea] = useInputState("");
-  console.log(cookie)
+
   //_______ on Submit create the new post & on Discard clear all inputs and redirect to feed page ______
   const handleSubmit = (evt) => {
     evt.preventDefault();
