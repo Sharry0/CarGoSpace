@@ -12,7 +12,7 @@ export default function NewPost() {
   const navigate = useNavigate()
   const [title, handleTitle, resetTitle] = useInputState("");
   const [textarea, handleTextarea, resetTextarea] = useInputState("");
-
+  console.log(cookie)
   //_______ on Submit create the new post & on Discard clear all inputs and redirect to feed page ______
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -61,8 +61,8 @@ export default function NewPost() {
       <form onSubmit={handleSubmit} >
         <div className="card mt-4 shadow">
           <div className="card-header d-flex align-items-center">
-            <img src={emptyProfilImg} alt="Profile pic" className='me-2' style={{ height: "35px" }} />
-            <p className='mb-0  text-dark text-opacity-75'>Profile</p>
+            <img src={cookie.userImage ? cookie.userImage : emptyProfilImg} alt="Profile pic" className='me-2' style={{ height: "35px", width: "35px", borderRadius: "50%", objectFit: "cover" }} />
+            <p className='mb-0  text-dark text-opacity-75'>{cookie.username}</p>
           </div>
           <div className="card-body">
             {/* ________ newPost Title input  __________________________________________________ */}
