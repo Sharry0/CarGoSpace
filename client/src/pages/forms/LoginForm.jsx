@@ -39,7 +39,7 @@ export default function LoginForm() {
     //_______________handle form submit______________________________________
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        axios.post("http://localhost:8080/login", { email, pw, rememberMe }, { withCredentials: true })
+        axios.post("https://cgs-server.up.railway.app/login", { email, pw, rememberMe }, { withCredentials: true })
             .then(function (response) {
                 toast.success(' Wow so easy! 🚘', {
                     position: "top-center",
@@ -50,7 +50,7 @@ export default function LoginForm() {
                     draggable: true,
                     progress: undefined,
                 });
-                setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 2000);
+                setTimeout(() => { window.location.href = "https://cargospace.netlify.app/feed" }, 2000);
             })
             .catch(function (error) {
                 toast.error(error.response.data, {

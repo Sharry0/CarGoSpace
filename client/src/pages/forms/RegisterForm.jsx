@@ -131,7 +131,7 @@ export default function RegisterForm() {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         if (hasUppercase && hasLowercase && hasSymbol && hasNumber && hasEnoughCharacters) {
-            axios.post("http://localhost:8080/register", {
+            axios.post("https://cgs-server.up.railway.app/register", {
                 username,
                 email,
                 pw,
@@ -152,7 +152,7 @@ export default function RegisterForm() {
                         draggable: true,
                         progress: undefined,
                     });
-                    setTimeout(() => { window.location.href = "http://localhost:3000/feed" }, 2500);
+                    setTimeout(() => { window.location.href = "https://cargospace.netlify.app/feed" }, 2500);
                 })
                 .catch(function (error) {
                     toast.error(error.response.data, {

@@ -16,7 +16,7 @@ export default function CommentForm({ setRunEffect }) {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        await axios.post("http://localhost:8080/comment/create",
+        await axios.post("https://cgs-server.up.railway.app/comment/create",
             { email: cookie.email, comment, postId: params.id },
             { withCredentials: true }
         );

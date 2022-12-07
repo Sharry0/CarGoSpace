@@ -17,7 +17,7 @@ export default function NewPost() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const newPost = { title, textarea, email: cookie.email }
-    axios.post("http://localhost:8080/post/create", newPost)
+    axios.post("https://cgs-server.up.railway.app/post/create", newPost)
       .then(response => {
         resetTitle();
         resetTextarea();
