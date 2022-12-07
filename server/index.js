@@ -46,6 +46,6 @@ app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
 
-app.listen(8080, (req, res) => {
+app.listen( process.env.PORT || 8080, (req, res) => {
     console.log("listening on port 8080");
 });
