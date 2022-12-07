@@ -1,9 +1,12 @@
 
 import axios from "axios";
 
+// const server = "http://localhost:8080/";
+const server = "https://cgs-server.up.railway.app/";
+
 // ________ get cookies from browser _________________________________________________________
 export const getCookie = () => {
-    return axios.get("http://localhost:8080/getCookie", { withCredentials: true })
+    return axios.get(`${server}getCookie`, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -14,7 +17,7 @@ export const getCookie = () => {
 
 // ________ logout the user _________________________________________________________________
 export const logout = () => {
-    return axios.get("http://localhost:8080/logout", { withCredentials: true })
+    return axios.get(`${server}logout`, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -25,7 +28,7 @@ export const logout = () => {
 
 // ________ get all Posts for /feed ________________________________________________________
 export const getPosts = () => {
-    return axios.get("http://localhost:8080/post", { withCredentials: true })
+    return axios.get(`${server}post`, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -36,7 +39,7 @@ export const getPosts = () => {
 
 // ________ get single Post with id for /post/:id __________________________________________
 export const getPost = (id) => {
-    return axios.get(`http://localhost:8080/post/${id}`, { withCredentials: true })
+    return axios.get(`${server}post/${id}`, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -46,7 +49,7 @@ export const getPost = (id) => {
 };
 
 export const updatePost = (updatedPost) => {
-    return axios.patch(`http://localhost:8080/post/update`, updatedPost, { withCredentials: true })
+    return axios.patch(`${server}post/update`, updatedPost, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -56,7 +59,7 @@ export const updatePost = (updatedPost) => {
 };
 
 export const likePost = (ids) => {
-    return axios.patch(`http://localhost:8080/post/like`, ids, { withCredentials: true })
+    return axios.patch(`${server}post/like`, ids, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -66,7 +69,7 @@ export const likePost = (ids) => {
 };
 
 export const unlikePost = (ids) => {
-    return axios.patch(`http://localhost:8080/post/unlike`, ids, { withCredentials: true })
+    return axios.patch(`${server}post/unlike`, ids, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -76,7 +79,7 @@ export const unlikePost = (ids) => {
 };
 
 export const deletePost = (postId) =>{
-    return axios.delete(`http://localhost:8080/post/delete/${postId}`, postId, { withCredentials: true })
+    return axios.delete(`${server}post/delete/${postId}`, postId, { withCredentials: true })
         .then((response) => {
             return response
         })
@@ -86,7 +89,7 @@ export const deletePost = (postId) =>{
 };
 
 export const deleteComment = (commentId) =>{
-    return axios.delete(`http://localhost:8080/comment/delete/${commentId}`, commentId, { withCredentials: true })
+    return axios.delete(`${server}comment/delete/${commentId}`, commentId, { withCredentials: true })
         .then((response) => {
             return response
         })
