@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
             res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true });
             res.send("ypu made it");
         } else {
-            res.clearCookie("jwt");
+            res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
             res.status(418).send("wrong car, please check if you have the right key 🔑")
         }
     } else {
@@ -78,6 +78,6 @@ exports.getCookie = (req, res) => {
 
 //__________________________ Logout logic _______________________________________________________________
 exports.logout = (req, res) => {
-    res.clearCookie("jwt");
+    res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
     res.send("Logout successful")
 };
