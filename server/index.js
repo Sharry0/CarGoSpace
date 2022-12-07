@@ -23,7 +23,7 @@ mongoose.connect(process.env.DB_URI)
     .catch(err => console.log("CONNECTION ERROR DB", err));
 
 const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:8080"],
+    origin: ["http://localhost:3000", "http://localhost:8080", "https://cargospace.netlify.app/", "https://cgs-server.up.railway.app/"],
     optionsSuccessStatus: 200,
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"]
