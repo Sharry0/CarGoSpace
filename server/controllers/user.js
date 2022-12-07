@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
         if (/[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw) && pw.length >= 8 && /[\!\?\$\+\_\-]/.test(pw)) {
             //___ create token/cookie 🍪 ___
             const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1h" });
-            res.cookie("jwt", token, { httpOnly: true, sameSite: "None" });
+            res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true });
             //___ create & save new user ___
             const hashedPassword = await bcrypt.hash(pw, 13);
             const newUser = new User({ username, email, hashedPassword, birthday, gender });
@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
                     process.env.JWT_SECRET,
                     { expiresIn: tokenExpire }
                 );
-            res.cookie("jwt", token, { httpOnly: true, sameSite: "None" });
+            res.cookie("jwt", token, { httpOnly: true, sameSite: "None", secure: true });
             res.send("ypu made it");
         } else {
             res.clearCookie("jwt");
