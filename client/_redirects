@@ -1,6 +1,6 @@
 
-/about  /about
+
 
 /src/API/*  https://cargospace.netlify.app  200
 
-
+/*    /index.html    200
